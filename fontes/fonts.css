@@ -1,0 +1,13 @@
+/* fonts.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+  --font-poppins: 'Poppins', sans-serif;
+  --font-pacifico: 'Pacifico', cursive;
+
+  --color-primary: #7b2cbf;
+  --color-secondary: #e0aaff;
+  --color-bg: #f8f0fb;
+  --color-text: #2c2c2c;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Profissionais</title>
+    <link rel="stylesheet" href="gp.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1 class="title">Beleza Suave</h1>
+    <h3>Profissionais</h3>
+
+    <div class="profissional">
+        <img src="assets/cabeleleiro.jpeg" alt="Celso Portiolli">
+        <h4 class="servicos">Luzes, hidratação, corte feminino</h4>
+        <h5 class="nosalaodesde">No salão desde: Jan/2022</h5>
+        <h5 class="avaliacaomedia">Avalição Média: 4.9</h5>
+        
+        <h5>Status:</h5> 
+        <select name="Status" id="status">
+            <option value="Disponivel">Disponivel</option>
+            <option value="Férias">Férias</option>
+        </select>
+
+        <h5>Horário:</h5>
+        <label for="hinicio">Início:</label>
+        <input type="time" id="inicio" name="inicio" min="00:00" max="23:59">
+
+        <label for="hfim">Fim:</label>
+        <input type="time" id="fim" name="fim" min="00:00" max="23:59">
+
+        <button class="salvaralteracao">Salvar</button>
+        </div>
+</body>
+</html>
