@@ -5,19 +5,23 @@
   }
   
   body {
-    font-family: sans-serif;
-    background: linear-gradient(to bottom, #fdfbfb, #ebedee);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: var(--font-poppins);
+    background:url('../../assets/homeimg.png'), var(--color-bg);
+    background-position: center;
+  font-family: var(--font-poppins);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
   }
   
-  .container {
-    width: 100%;
-    padding: 2rem 1.5rem;
-    max-width: 480px;
+  .login-container {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
   }
   
   .form {
@@ -64,20 +68,21 @@
   }
   
   button {
-    width: 100%;
-    padding: 1rem;
-    background-color: #8e44ad;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #732d91;
-  }
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #675679;
+}
+
   
   .footer {
     text-align: center;

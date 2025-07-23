@@ -1,0 +1,172 @@
+:root {
+    --font-poppins: 'Poppins', sans-serif;
+    --font-pacifico: 'Pacifico', cursive;
+  
+    --color-primary: #7b2cbf;
+    --color-secondary: #e0aaff;
+    --color-bg: #f8f0fb;
+    --color-text: #2c2c2c;
+  }
+  
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-poppins);
+    /* Adiciona espaço embaixo para a barra de navegação */
+    padding-bottom: 80px; 
+  }
+  
+  /* Header Styles */
+  .main-header {
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      gap: 1rem; /* Adiciona um espaço entre os itens */
+  }
+  
+  /* Tornando a foto de perfil um botão funcional */
+  .profile-pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      padding: 0;
+      border: 2px solid var(--color-secondary);
+      background-color: #fff;
+      cursor: pointer;
+      transition: border-color 0.2s;
+  }
+  
+  .profile-pic:hover {
+      border-color: var(--color-primary);
+  }
+  
+  .person-circle {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      color: var(--color-primary);
+  }
+  
+  .search-bar-container {
+      position: relative;
+      flex-grow: 1;
+  }
+  
+  .search-input {
+      padding-left: 2.5rem;
+      border-radius: 20px;
+      background-color: var(--color-bg);
+      border-color: var(--color-secondary);
+  }
+  
+  .search-input:focus {
+      background-color: #fff;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 0.25rem var(--color-secondary);
+  }
+  
+  .search-icon {
+      position: absolute;
+      left: 0.9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--color-text);
+      opacity: 0.6;
+  }
+  /* Fim do Header Styles */
+  
+  .screen-section {
+      margin-top: 2rem;
+  }
+  
+  .card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: transform 0.2s;
+  }
+  .btn-primary{
+    background-color: var(--color-primary) !important; 
+  }
+  
+  .card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+  }
+  
+  .card-title {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+  
+  /* Sidebar (Offcanvas) Styles */
+  .offcanvas {
+      background-color: var(--color-bg);
+  }
+  
+  .offcanvas-header {
+      border-bottom: 1px solid var(--color-secondary);
+  }
+  
+  .offcanvas-title {
+      font-family: var(--font-pacifico);
+      color: var(--color-primary);
+  }
+  
+  .offcanvas-body .nav-link {
+      color: var(--color-text);
+      font-size: 1.1rem;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+  }
+  
+  .offcanvas-body .nav-link.active,
+  .offcanvas-body .nav-link:hover {
+      background-color: var(--color-secondary);
+      color: var(--color-primary);
+  }
+  
+  /* Bottom Navigation Bar Styles */
+  .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: #ffffff;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+  }
+  
+  .bottom-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: var(--color-text);
+      flex-grow: 1;
+  }
+  
+  .bottom-nav-item i {
+      font-size: 1.5rem;
+  }
+  
+  .bottom-nav-item span {
+      font-size: 0.75rem;
+  }
+  
+  .bottom-nav-item.active {
+      color: var(--color-primary);
+  }

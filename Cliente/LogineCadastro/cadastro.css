@@ -27,7 +27,7 @@ body {
 
 h1 {
   font-family: var(--font-pacifico);
-  color: var(--color-primary);
+  color: var(--color-text);
   text-align: center;
   margin-bottom: 1rem;
 }
@@ -39,6 +39,7 @@ form {
 }
 
 label {
+  padding-right: 30%;
   font-weight: 600;
   color: var(--color-text);
 }
@@ -49,11 +50,12 @@ input {
   border: 1px solid #ccc;
   font-size: 1rem;
   transition: border 0.3s ease;
+  width: 100%;
 }
 
 button {
   padding: 0.75rem;
-  background-color: #732d91;;
+  background-color: var(--color-primary);
   color: white;
   border: none;
   font-weight: 600;
