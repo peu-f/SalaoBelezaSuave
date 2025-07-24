@@ -1,0 +1,275 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f0fb;
+    display: flex;
+    flex-direction: column; /* Alterado para column para que o header/footer fiquem no topo/base */
+    align-items: center; /* Centraliza o conteúdo horizontalmente */
+    min-height: 100vh;
+    color: #2c3e50;
+}
+
+/* Removido o .mobile-container, e seus estilos foram redistribuídos */
+
+.app-header {
+    width: 100%; /* Ocupa toda a largura */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px 20px 15px;
+    background-color: #f8f0fb;
+    color: #2c3e50;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.05);
+}
+
+.app-header .back-button {
+    position: absolute;
+    left: 20px;
+    top: 25px;
+    font-size: 2.5em;
+    color: #2c3e50;
+    text-decoration: none;
+    line-height: 1;
+}
+
+.app-header h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5em;
+    margin-bottom: 5px;
+    margin-top: 0;
+}
+
+.app-header h2 {
+    font-size: 1.1em;
+    font-weight: normal;
+    color: #2c3e50; /* Usando a cor definida diretamente */
+    margin-top: 0;
+}
+
+/* Novo wrapper para centralizar o conteúdo principal em telas maiores */
+.content-wrapper {
+    width: 100%; /* Por padrão, ocupa 100% da largura em mobile */
+    max-width: 600px; /* Largura máxima para desktops, para não esticar demais */
+    margin: 0 auto; /* Centraliza o wrapper */
+    padding: 20px; /* Adiciona um padding para as bordas em telas maiores */
+    box-sizing: border-box; /* Garante que o padding não aumente a largura total */
+}
+
+/* Service Details */
+.service-details {
+    background-color: rgb(242, 219, 255);
+    margin-bottom: 20px; /* Ajuste para não ter margin nas laterais aqui */
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.service-image-container {
+    
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.service-image-container img {
+    border-radius: 6px;
+    display: block;
+    margin: auto;
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.service-info {
+    padding: 15px;
+}
+
+.service-info h3 {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.service-info p {
+    font-size: 0.9em;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.price-duration {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.price {
+    font-size: 1.2em;
+    color: #8e44ad;
+}
+
+.duration {
+    font-size: 1em;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+}
+
+.duration .icon {
+    margin-right: 5px;
+    font-size: 1.2em;
+}
+
+/* Reviews Section */
+.reviews-section {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 15px;
+    text-align: center;
+    max-width: 100%;
+}
+
+.review-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reviewer-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+.reviewer-info .profile-icon { 
+    width: 40px; 
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+    object-fit: cover;
+    border: 2px solid #8e44ad; 
+}
+
+.review-text {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.review-text p {
+    flex-grow: 1;
+    text-align: center;
+    font-style: italic;
+    color: #555;
+    margin: 0;
+}
+
+.review-text .prev-review,
+.review-text .next-review {
+    font-size: 2em;
+    color: #8e44ad;
+    text-decoration: none;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.stars {
+    color: #ffd700;
+    font-size: 1.5em;
+}
+
+.stars .star {
+    margin: 0 2px;
+}
+
+/* Footer Button */
+.app-footer {
+    width: 100%; /* Ocupa toda a largura */
+    padding: 20px;
+    text-align: center;
+    background-color: #f8f0fb;
+    margin-top: auto;
+}
+
+.schedule-button {
+    background-color: #8e44ad;
+    color: #fff;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
+    width: 80%;
+    max-width: 300px;
+}
+
+.schedule-button:hover {
+    background-color: #6a0dad;
+}
+
+/* --- Media Queries para responsividade --- */
+
+/* Ajustes para telas maiores que mobile (e.g., tablets e desktops) */
+@media (min-width: 576px) { /* Ponto de quebra comum para tablets pequenos */
+    .app-header {
+        padding-top: 30px;
+        padding-bottom: 20px;
+    }
+
+    .app-header h1 {
+        font-size: 3em;
+    }
+
+    .app-header h2 {
+        font-size: 1.3em;
+    }
+
+    .service-details,
+    .reviews-section {
+        margin: 0 auto 20px auto; /* Centraliza e mantém espaçamento vertical */
+        max-width: 500px; /* Limita a largura dos cards para melhor leitura */
+    }
+
+    .schedule-button {
+        padding: 18px 50px; /* Botão maior em telas maiores */
+        font-size: 1.3em;
+    }
+}
+
+@media (min-width: 768px) { /* Ponto de quebra comum para tablets maiores e desktops */
+    .content-wrapper {
+        padding: 30px; /* Aumenta o padding lateral */
+        max-width: 700px; /* Aumenta a largura máxima do conteúdo */
+    }
+
+    .service-details,
+    .reviews-section {
+        max-width: none; /* Permite que eles se adaptem à largura do content-wrapper */
+    }
+
+    .service-image-container {
+        height: 250px; /* Imagem um pouco maior em telas maiores */
+    }
+
+    .app-header .back-button {
+        font-size: 3em;
+    }
+}
+
+@media (min-width: 992px) { /* Ponto de quebra comum para desktops */
+    .content-wrapper {
+        max-width: 800px; /* Aumenta ainda mais a largura máxima do conteúdo */
+    }
+}

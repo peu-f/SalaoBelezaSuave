@@ -1,0 +1,258 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #6a0dad; /* Um tom de roxo para botões, etc. */
+    --secondary-color: #f8f0fb;
+    --card-background: #fff8f0; /* Um off-white/creme para o cartão do formulário */
+    --text-color: #333; /* Cor do texto padrão */
+    --label-color: #555; /* Cor para labels */
+    --border-color: #ccc; /* Cor de borda para inputs */
+    --shadow-color: rgba(0, 0, 0, 0.1); /* Sombra leve */
+}
+
+body {
+    background-color: var(--secondary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Garante que o corpo ocupa toda a altura da viewport */
+    margin: 0;
+    overflow-x: hidden; /* Evita rolagem horizontal */
+}
+
+.container {
+    width: 100%;
+    max-width: 400px; /* Largura máxima para simular um celular */
+    background-color: #fff; /* Fundo do "aparelho" */
+    border-radius: 20px;
+    box-shadow: 0 0 20px var(--shadow-color);
+    overflow: hidden; /* Garante que nada transborde das bordas arredondadas */
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Ocupa toda a altura da viewport no celular */
+    max-height: 800px; /* Altura máxima para o "aparelho" */
+}
+
+/* Estilos do Cabeçalho */
+.header {
+    background-color: var(--secondary-color); /* Mesma cor de fundo do body */
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-color);
+    position: relative;
+    z-index: 10; /* Para garantir que fique acima de outros elementos se houver sobreposição */
+    border-bottom: 1px solid rgba(0,0,0,0.05); /* Uma linha sutil no cabeçalho */
+}
+
+.header-left, .header-right {
+    width: 40px; /* Para alinhar bem os elementos */
+    text-align: center;
+}
+
+.header-left i {
+    font-size: 28px;
+    color: var(--label-color);
+}
+
+.header-center {
+    flex-grow: 1; /* Ocupa o espaço restante */
+    text-align: center;
+}
+
+.logo {
+    font-family: 'Pacifico', cursive; 
+    font-size: 36px;
+    font-weight: normal;
+    color: var(--primary-color); /* A cor roxa para o logo */
+    margin: 0;
+}
+
+/* Conteúdo Principal */
+.main-content {
+    flex-grow: 1; /* Permite que o conteúdo principal ocupe o espaço restante */
+    padding: 20px;
+    overflow-y: auto; /* Permite rolagem se o conteúdo for muito longo */
+    background-color: var(--secondary-color); /* Mesma cor de fundo do container */
+}
+
+.page-title {
+    font-size: 22px;
+    color: var(--text-color);
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Cartão do Formulário */
+.form-card {
+    background-color: var(--card-background);
+    border-radius: 15px;
+    padding: 25px 20px;
+    box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--label-color);
+    font-size: 15px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"], /* Caso você adicione um email depois */
+.form-group input[type="password"] { /* Caso você adicione uma senha depois */
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 16px;
+    color: var(--text-color);
+    background-color: #fff; /* Fundo branco para os inputs */
+}
+
+.form-group input::placeholder {
+    color: #a0a0a0;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(106, 13, 173, 0.2); /* Sombra leve ao focar */
+}
+
+/* Estilos para o campo de upload de foto */
+.file-upload-group {
+    margin-bottom: 30px; /* Mais espaço para o upload */
+}
+
+.file-upload-box {
+    border: 1px dashed var(--border-color); /* Borda tracejada */
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px; /* Altura mínima para a caixa de upload */
+}
+
+.hidden-input {
+    display: none; /* Esconde o input file padrão */
+}
+
+.upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    color: var(--label-color);
+}
+
+.upload-label i {
+    font-size: 40px;
+    color: var(--primary-color);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.upload-label span {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.image-preview {
+    max-width: 100%;
+    max-height: 100px; /* Ajuste conforme necessário */
+    border-radius: 5px;
+    margin-top: 15px;
+    object-fit: contain; /* Garante que a imagem se ajuste sem cortar */
+    border: 1px solid var(--border-color);
+    display: block; /* Para ocupar sua própria linha */
+}
+
+/* Botão de Envio */
+.btn-submit {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 10px rgba(106, 13, 173, 0.3);
+}
+
+.btn-submit:hover {
+    background-color: #5a0a9a; /* Um roxo um pouco mais escuro ao passar o mouse */
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--color-text);
+    flex-grow: 1;
+}
+
+.bottom-nav-item i {
+    font-size: 1.5rem;
+}
+
+.bottom-nav-item span {
+    font-size: 0.75rem;
+}
+
+.bottom-nav-item.active {
+    color: var(--color-primary);
+}
+
+/* Ajustes Responsivos (Media Queries) */
+@media (max-width: 768px) {
+    .container {
+        border-radius: 0; /* Remove bordas arredondadas em telas menores */
+        box-shadow: none; /* Remove sombra em telas menores */
+        height: 100vh; /* Ocupa toda a altura da tela */
+        max-height: unset; /* Remove altura máxima em telas menores */
+    }
+
+    body {
+        align-items: flex-start; /* Alinha no topo em telas menores */
+        /* background-color: #fff; /* Opcional: mude o fundo para branco em mobile */
+    }
+}
+
+/* Importar a fonte 'Dancing Script' do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');

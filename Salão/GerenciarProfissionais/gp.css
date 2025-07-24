@@ -1,0 +1,128 @@
+body {
+    background-color: #fadadd;
+    font-family: 'poppins';
+    display: grid;
+    place-items: center;
+}
+
+.title {
+    font-family: 'Pacifico', cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.subtitle {
+    font-weight: normal;
+    display: flex;
+    justify-content: center;
+}
+
+.person-circle {
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 0 auto;
+}
+
+.profissional-container {
+    background-color: #fdf6ec;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 300px;
+    height: 600px;
+    padding: 20px;
+}
+
+.nomeprofissional {
+    text-align: center;
+    font-weight: normal;
+    margin-top: 0px;
+    color: #2c3e50;
+}
+
+.servicos {
+    text-align: center;
+    font-weight: normal;
+    margin-top: -15px;
+    color: #2c3e50;
+}
+
+.nosalaodesde {
+    font-weight: normal;
+}
+
+.avaliacaomedia {
+    font-weight: normal;
+    margin-top: -15px;
+}
+
+.star {
+    width: 10px;
+    height: 10px;
+    display: flex;
+    margin-top: -38px;
+    margin-left: 130px;
+}
+
+.selectstatus {
+    border-radius: 5px;
+    appearance: none;
+    padding: 2px 105px;
+    background-color: #fdf6ec;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.divselectstatus {
+    display: flex;
+    margin-top: 50px;
+}
+
+.Horario {
+    font-size: 16px;
+}
+
+.timeinicio {
+    border-radius: 5px;
+    appearance: none;
+    padding: 2px 5px;
+    background-color: #fdf6ec;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); 
+    border-width: 1px;
+}
+
+.timefim {
+    border-radius: 5px;
+    appearance: none;
+    padding: 2px 5px;
+    background-color: #fdf6ec;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); 
+    border-width: 1px;
+}
+
+.inicioefim {
+    display: flex;
+    margin-top: -15px;
+    gap: 10px;
+}
+
+.salvaralteracao {
+    background-color: #8e44ad;
+    color: #fdf6ec;
+    border-radius: 5px;
+    padding: 10px 20px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 120px;
+    font-size: 18px;
+    border: none;
+    font-family: 'Poppins';
+    cursor: pointer;
+}
+
+.labelstatus {
+    font-weight: bold;
+}

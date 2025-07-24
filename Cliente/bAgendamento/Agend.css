@@ -1,0 +1,395 @@
+/* Color Palette (mantido) */
+:root {
+    --primary-background: #f8f0fb;
+    --primary-button: #7b2cbf;
+    --secondary-background: #e0aaff;
+    --main-text-icons: #2c3e50;
+    --success-confirmations: #a3e4d7;
+    --white: #ffffff;
+    --light-gray: #f0f0f0;
+    --dark-gray: #666; /* For secondary text/placeholders */
+    --card-border: #dcdcdc; /* Adicionado para consistência */
+    --dark-gray-text: #555; /* Cor para textos secundários, como duração */
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--primary-background);
+    display: flex;
+    flex-direction: column; /* Organiza os elementos verticalmente */
+    min-height: 100vh;
+    color: var(--main-text-icons);
+    padding-bottom: 70px; /* Espaço para a barra de navegação inferior */
+}
+
+/* Removido o .mobile-container e seus estilos */
+
+/* App Header */
+.app-header {
+    width: 100%; /* Ocupa toda a largura */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px 20px 15px;
+    background-color: var(--primary-background);
+    color: var(--main-text-icons);
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Ajustei para ter sombra leve */
+}
+
+.app-header .back-button {
+    position: absolute;
+    left: 20px;
+    top: 25px;
+    font-size: 2.5em;
+    color: var(--main-text-icons);
+    text-decoration: none;
+    line-height: 1;
+}
+
+.app-header .user-icon { /* Ícone de perfil no header */
+    position: absolute; /* Mantém a posição absoluta para o ícone de usuário */
+    left: 25px; /* Ajuste a posição conforme necessário */
+    top: 30px; /* Ajuste a posição conforme necessário */
+    width: 40px; /* Tamanho do ícone de perfil */
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--secondary-background); /* Adicionei uma borda para destacá-lo */
+}
+
+
+.app-header h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5em;
+    margin-bottom: 5px;
+    margin-top: 0;
+}
+
+.app-header h2 {
+    font-size: 1.1em;
+    font-weight: normal;
+    color: var(--main-text-icons);
+    margin-top: 0;
+}
+
+.profile-pic {
+    position:fixed;
+    padding: 10px;
+    height: 40px;
+    left: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    padding: 0;
+    border: 2px solid #e0aaff;
+    background-color: #fff;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.profile-pic:hover {
+    border-color: #7b2cbf;
+}
+
+.person-circle {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    color: #7b2cbf;
+}
+
+/* Main Content Area */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* overflow-y: auto; Removido, pois o scroll será do body */
+    padding-bottom: 20px; /* Adicionado padding inferior para evitar sobreposição do nav */
+    max-width: 600px; /* Limita a largura máxima do conteúdo principal */
+    margin: 0 auto; /* Centraliza o conteúdo principal */
+}
+
+/* Selected Service Section */
+.selected-service-section {
+    border-radius: 15px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.selected-service-section .label {
+    font-size: 0.9em;
+    color: var(--main-text-icons);
+    margin-bottom: 10px;
+    font-weight: 600;
+    padding-left: 5px;
+}
+
+.service-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%; 
+    background-color: var(--secondary-background);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--card-border);
+}
+
+.service-image-container {
+    width: 90px;
+    height: 90px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.service-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.service-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.service-info h3 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    color: var(--main-text-icons);
+    font-weight: 700;
+}
+
+.service-info p {
+    font-size: 0.9em;
+    color: var(--dark-gray-text);
+    margin-bottom: 3px;
+}
+
+.service-info .price {
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--primary-button);
+}
+
+/* Appointment Details Section */
+.appointment-details-section {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 0 5px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 0.95em;
+    font-weight: 600;
+    color: var(--main-text-icons);
+}
+
+.input-with-icon {
+    position: relative;
+    width: 100%;
+}
+
+.input-with-icon input.form-control,
+.input-with-icon select.form-select { /* Ajuste para as classes do Bootstrap */
+    width: calc(100% - 30px); /* Ajuste para ocupar 100% do pai, menos padding do ícone */
+    padding: 12px 15px;
+    padding-right: 40px;
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombra mais sutil */
+    background-color: var(--white); /* Cor de fundo branca para inputs/selects */
+    color: var(--main-text-icons);
+}
+
+/* Cor do texto do placeholder (opcional, pode ajustar) */
+.input-with-icon input.form-control::placeholder,
+.input-with-icon select.form-select option[value=""] {
+    color: var(--dark-gray);
+}
+
+.input-with-icon .icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--dark-gray); /* Cor do ícone */
+    pointer-events: none;
+    font-size: 1.1em;
+}
+
+/* Confirm Button */
+.confirm-button-container {
+    text-align: center;
+    padding: 20px 0; /* Ajustado padding */
+    margin-top: auto; /* Empurra o botão para o fundo */
+}
+
+.confirm-button {
+    background-color: var(--primary-button);
+    color: var(--white);
+    padding: 15px 50px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2em;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 80%;
+    max-width: 300px;
+}
+
+.confirm-button:hover {
+    background-color: #6a0dad;
+    transform: translateY(-2px);
+}
+
+.confirm-button:active {
+    transform: translateY(0);
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+    position: fixed; /* Fixa a barra de navegação no final da tela */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px; /* Ajuste a altura conforme necessário */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px 0;
+    background-color: var(--white);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    z-index: 1000; /* Garante que fique acima de outros elementos */
+}
+
+.bottom-nav .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none; /* Remove sublinhado */
+    color: var(--main-text-icons);
+    flex-grow: 1;
+    padding: 5px; /* Adiciona um pouco de padding para área de clique */
+    transition: color 0.3s ease;
+}
+
+.bottom-nav .nav-item i {
+    font-size: 1.6em;
+    margin-bottom: 4px; /* Espaço entre ícone e texto */
+}
+
+.bottom-nav .nav-item span {
+    font-size: 0.8em;
+    font-weight: 500;
+}
+
+.bottom-nav .nav-item.active {
+    color: var(--primary-button); /* Cor do item ativo */
+}
+
+.bottom-nav .nav-item:hover {
+    color: var(--primary-button); /* Cor do hover */
+}
+
+/* --- Media Queries para responsividade --- */
+
+/* Ajustes para telas maiores que mobile (e.g., tablets e desktops) */
+@media (min-width: 576px) { /* Ponto de quebra para tablets pequenos */
+    .app-header {
+        padding-top: 30px;
+        padding-bottom: 20px;
+    }
+
+    .app-header h1 {
+        font-size: 3em;
+    }
+
+    .app-header h2 {
+        font-size: 1.3em;
+    }
+
+    .app-header .user-icon {
+        left: 40px; /* Ajuste a posição do ícone em telas maiores */
+        top: 35px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .back-button {
+        font-size: 3em;
+    }
+
+    .main-content {
+        padding: 30px;
+        max-width: 700px; /* Aumenta a largura máxima para tablets */
+    }
+
+    .service-card {
+        padding: 20px;
+    }
+
+    .service-image-container {
+        width: 120px;
+        height: 120px;
+    }
+
+    .service-info h3 {
+        font-size: 1.4em;
+    }
+
+    .service-info p, .service-info .price {
+        font-size: 1em;
+    }
+
+    .confirm-button {
+        padding: 18px 60px;
+        font-size: 1.3em;
+    }
+
+    .bottom-nav {
+        height: 80px; /* Altura maior para a barra de navegação em telas maiores */
+    }
+
+    .bottom-nav .nav-item i {
+        font-size: 1.8em;
+    }
+
+    .bottom-nav .nav-item span {
+        font-size: 0.9em;
+    }
+}
+
+@media (min-width: 768px) { /* Ponto de quebra para desktops */
+    .main-content {
+        max-width: 800px; /* Aumenta a largura máxima para desktops */
+    }
+}
