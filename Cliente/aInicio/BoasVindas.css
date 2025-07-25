@@ -69,6 +69,13 @@
     border-radius: 6px;
     border: 1px solid #ccc;
   }
+  .img{
+    width: 50%;
+    max-height: 30%;
+  }
+  img{
+    width: 100%;
+  }
   
   @media (max-width: 500px) {
     .title {

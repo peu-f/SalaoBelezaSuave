@@ -2,7 +2,7 @@
 :root {
     --primary-background: #f8f0fb;
     --primary-button: #7b2cbf;
-    --secondary-background: #e0aaff;
+    --secondary-background: #ffffff;
     --main-text-icons: #2c3e50;
     --success-confirmations: #a3e4d7;
     --white: #ffffff;
@@ -13,6 +13,7 @@
 }
 
 body {
+    justify-content: center;
     margin: 0;
     font-family: 'Poppins', sans-serif;
     background-color: var(--primary-background);
@@ -74,30 +75,135 @@ body {
     margin-top: 0;
 }
 
+.custom-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px; /* Largura da sua sidebar */
+    height: 100vh;
+    background-color: var(--secondary-background); /* Cor de fundo da sidebar */
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    transform: translateX(-100%); /* Esconde a sidebar inicialmente */
+    transition: transform 0.3s ease-out; /* Animação ao abrir/fechar */
+    z-index: 1050; /* Z-index alto para ficar acima de outros elementos */
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-sidebar.show {
+    transform: translateX(0); /* Mostra a sidebar */
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    font-size: 1.5em;
+    color: var(--main-text-icons);
+}
+
+.close-sidebar-button {
+    background: none;
+    border: none;
+    font-size: 1.8em;
+    cursor: pointer;
+    color: var(--main-text-icons);
+    display: flex; /* Para alinhar o SVG */
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.close-sidebar-button:hover {
+    color: var(--primary-button);
+}
+
+.sidebar-body {
+    flex-grow: 1; /* Ocupa o espaço restante */
+    padding: 20px 0; /* Padding lateral zero, listas com padding */
+}
+
+.sidebar-body ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-body li {
+    margin-bottom: 5px;
+}
+
+.sidebar-link {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: var(--main-text-icons);
+    font-size: 1.1em;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-link:hover {
+    background-color: var(--light-gray);
+    color: var(--primary-button);
+}
+
+/* Overlay para escurecer o fundo */
+.custom-sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Cor escura semi-transparente */
+    opacity: 0; /* Começa invisível */
+    visibility: hidden; /* Garante que não interfira com cliques */
+    transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+    z-index: 1040; /* Z-index menor que a sidebar */
+}
+
+.custom-sidebar-overlay.show {
+    opacity: 1; /* Fica visível */
+    visibility: visible; /* Fica clicável */
+}
+
+/* Ajustes para o profile-pic que agora aciona a sidebar */
 .profile-pic {
-    position:fixed;
-    padding: 10px;
+    /* Mantenha seus estilos existentes para .profile-pic,
+       mas remova data-bs-toggle e data-bs-target do HTML se ainda estiverem lá */
+    /* Exemplo: */
+    position: absolute;
+    padding: 0; /* Ajuste para SVG interno */
     height: 40px;
-    left: 70px;
+    width: 40px;
+    left: 20px;
+    top: 25px;
     border-radius: 50%;
     overflow: hidden;
-    flex-shrink: 0;
-    padding: 0;
-    border: 2px solid #e0aaff;
-    background-color: #fff;
+    border: 2px solid var(--primary-button);
+    background-color: var(--white);
     cursor: pointer;
     transition: border-color 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1; /* Garante que o botão esteja visível e clicável */
 }
 
 .profile-pic:hover {
-    border-color: #7b2cbf;
+    border-color: #6a0cad;
 }
 
 .person-circle {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    color: #7b2cbf;
+    color: var(--primary-button);
 }
 
 /* Main Content Area */
@@ -107,7 +213,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    /* overflow-y: auto; Removido, pois o scroll será do body */
     padding-bottom: 20px; /* Adicionado padding inferior para evitar sobreposição do nav */
     max-width: 600px; /* Limita a largura máxima do conteúdo principal */
     margin: 0 auto; /* Centraliza o conteúdo principal */

@@ -1,0 +1,369 @@
+/* Color Palette (mantido) */
+:root {
+    --primary-background: #f8f0fb;
+    --primary-button: #7b2cbf;
+    --secondary-background: rgb(255, 255, 255);
+    --main-text-icons: #2c3e50;
+    --success-confirmations: #a3e4d7;
+    --light-gray: #f0f0f0;
+    --dark-gray: #666; /* For secondary text/placeholders */
+    --card-border: #dcdcdc; /* Adicionado para consistência */
+    --dark-gray-text: #555; /* Cor para textos secundários, como duração */
+    --white: #ffffff; /* Certifique-se que --white está definido, se usar no HTML */
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--primary-background);
+    display: flex;
+    flex-direction: column; /* Organiza os elementos verticalmente */
+    min-height: 100vh;
+    color: var(--main-text-icons);
+    padding-bottom: 70px; /* Espaço para a barra de navegação inferior */
+}
+
+/* App Header */
+.app-header {
+    width: 100%; /* Ocupa toda a largura */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px 20px 15px;
+    background-color: var(--primary-background);
+    color: var(--main-text-icons);
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Ajustei para ter sombra leve */
+}
+
+/* Removido .app-header .back-button pois não está no HTML atual */
+/* Removido .app-header .user-icon pois o .profile-pic o substitui */
+
+.app-header h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5em;
+    margin-bottom: 5px;
+    margin-top: 0;
+}
+
+.app-header h2 {
+    font-size: 1.1em;
+    font-weight: normal;
+    color: var(--main-text-icons);
+    margin-top: 0;
+}
+
+.profile-pic {
+    position: absolute; /* Alterado de fixed para absolute para ser relativo ao header */
+    padding: 10px; /* Isso parece ser um padding interno ao botão. Se for para afastar da borda, use margin ou top/left */
+    height: 40px;
+    width: 40px; /* Adicionado largura para consistência */
+    left: 20px; /* Ajuste para a esquerda do header */
+    top: 25px; /* Ajuste para o topo do header */
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    padding: 0;
+    border: 2px solid var(--primary-button); /* Usando variável para a cor da borda */
+    background-color: var(--white);
+    cursor: pointer;
+    transition: border-color 0.2s;
+    display: flex; /* Para centralizar o SVG */
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-pic:hover {
+    border-color: #6a0cad; /* Um tom ligeiramente mais escuro para hover */
+}
+
+.person-circle {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    color: var(--primary-button); /* Usando variável para a cor do ícone */
+}
+
+.main-content {
+    flex-grow: 1; 
+    width: 100%;
+    max-width: 600px; 
+    margin: 20px auto 0; 
+    padding: 0 20px; 
+    box-sizing: border-box; 
+}
+
+.tabs-container {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    position: relative;
+    background-color: var(--secondary-background); /* Adicionei aqui para a base do container */
+}
+
+.tab-buttons {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--light-gray);
+    position: relative;
+    background-color: var(--secondary-background); /* Fundo dos botões das abas */
+}
+
+.tab-button {
+    background: none;
+    border: none;
+    font-size: 1em;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: var(--dark-gray);
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.tab-button.active {
+    color: var(--primary-button);
+}
+
+.tab-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background-color: var(--primary-button);
+    width: 50%;
+    transition: transform 0.3s ease;
+}
+
+.tab-content-wrapper {
+    overflow: hidden;
+}
+
+.tab-content-container {
+    display: flex;
+    width: 200%;
+    transition: transform 0.3s ease;
+}
+
+.tab-pane {
+    width: 50%;
+    flex-shrink: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    min-height: 200px; /* Apenas para visualização, remova em produção */
+    background-color: var(--secondary-background); /* Fundo dos painéis de conteúdo */
+}
+
+.appointment-card {
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--card-border);
+}
+
+.model-image {
+    width: 90px;
+    height: 90px;
+    border-radius: 3%;
+    object-fit: cover;
+}
+
+.details h3 {
+    margin: 0 0 5px;
+    color: var(--main-text-icons);
+    font-size: 1.1em;
+}
+
+.details p {
+    margin: 0 0 3px;
+    font-size: 0.9em;
+    color: var(--dark-gray-text);
+}
+
+.actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.actions button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: 600;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Mantendo os estilos específicos para .cancel, .reschedule, .evaluate
+   Mas você pode querer integrar classes do Bootstrap como btn-light, btn-primary, etc. */
+.actions .cancel {
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+}
+
+.actions .cancel:hover {
+    background-color: #e0e0e0;
+}
+
+.actions .reschedule, .actions .evaluate {
+    background-color: var(--primary-button);
+    color: var(--white); /* Use a variável --white */
+}
+
+.actions .reschedule:hover, .actions .evaluate:hover {
+    background-color: #6a0cad;
+}
+
+/* --- ESTILOS DO COMPONENTE DE AVALIAÇÃO POR ESTRELAS NO MODAL (ADICIONE ISSO) --- */
+.rating {
+    font-size: 2em; /* Tamanho das estrelas */
+    color: #ccc; /* Cor das estrelas não selecionadas */
+    cursor: pointer;
+    display: flex; /* Para alinhar as estrelas */
+    justify-content: center; /* Centraliza as estrelas */
+    gap: 5px; /* Espaçamento entre as estrelas */
+}
+
+.rating .star {
+    transition: color 0.2s ease;
+}
+
+.rating .star.selected,
+.rating .star:hover,
+.rating .star.selected ~ .star:hover {
+    color: gold; /* Cor das estrelas selecionadas/hover */
+}
+/* Estilo para garantir que as estrelas à direita da hover não fiquem douradas */
+.rating .star:not(.selected):hover ~ .star {
+    color: #ccc;
+}
+
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px 0;
+    background-color: var(--white);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+}
+
+.bottom-nav .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--main-text-icons);
+    flex-grow: 1;
+    padding: 5px;
+    transition: color 0.3s ease;
+}
+
+.bottom-nav .nav-item i {
+    font-size: 1.6em;
+    margin-bottom: 4px;
+}
+
+.bottom-nav .nav-item span {
+    font-size: 0.8em;
+    font-weight: 500;
+}
+
+.bottom-nav .nav-item.active {
+    color: var(--primary-button);
+}
+
+.bottom-nav .nav-item:hover {
+    color: var(--primary-button);
+}
+
+/* --- Media Queries para responsividade --- */
+
+@media (min-width: 576px) {
+    .app-header {
+        padding-top: 30px;
+        padding-bottom: 20px;
+    }
+
+    .app-header h1 {
+        font-size: 3em;
+    }
+
+    .app-header h2 {
+        font-size: 1.3em;
+    }
+
+    .profile-pic { /* Ajuste para telas maiores */
+        left: 40px;
+        top: 35px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .main-content {
+        padding: 30px;
+        max-width: 700px;
+    }
+
+    .tab-buttons {
+        padding: 20px 0;
+    }
+    .tab-button {
+        font-size: 1.1em;
+        padding: 15px 25px;
+    }
+    .tab-pane {
+        padding: 30px;
+    }
+    .appointment-card {
+        padding: 20px;
+    }
+    .model-image {
+        width: 100px;
+        height: 100px;
+    }
+    .details h3 {
+        font-size: 1.3em;
+    }
+    .details p {
+        font-size: 1em;
+    }
+
+    .bottom-nav {
+        height: 80px;
+    }
+    .bottom-nav .nav-item i {
+        font-size: 1.8em;
+    }
+    .bottom-nav .nav-item span {
+        font-size: 0.9em;
+    }
+}
+
+@media (min-width: 768px) {
+    .main-content {
+        max-width: 800px;
+    }
+}

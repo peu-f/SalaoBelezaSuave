@@ -7,8 +7,8 @@
 :root {
     --primary-color: #6a0dad; /* Um tom de roxo para botões, etc. */
     --secondary-color: #f8f0fb;
-    --card-background: #fff8f0; /* Um off-white/creme para o cartão do formulário */
-    --text-color: #333; /* Cor do texto padrão */
+    --card-background: #fdfdfd; /* Um off-white/creme para o cartão do formulário */
+    --text-color: #2c3e50; /* Cor do texto padrão */
     --label-color: #555; /* Cor para labels */
     --border-color: #ccc; /* Cor de borda para inputs */
     --shadow-color: rgba(0, 0, 0, 0.1); /* Sombra leve */
@@ -17,6 +17,7 @@
 body {
     background-color: var(--secondary-color);
     display: flex;
+    font-family: 'Poppins';
     justify-content: center;
     align-items: center;
     min-height: 100vh; /* Garante que o corpo ocupa toda a altura da viewport */
@@ -25,11 +26,10 @@ body {
 }
 
 .container {
-    width: 100%;
-    max-width: 400px; /* Largura máxima para simular um celular */
+    width: 100%; /* Largura máxima para simular um celular */
     background-color: #fff; /* Fundo do "aparelho" */
     border-radius: 20px;
-    box-shadow: 0 0 20px var(--shadow-color);
+    
     overflow: hidden; /* Garante que nada transborde das bordas arredondadas */
     display: flex;
     flex-direction: column;
@@ -46,8 +46,7 @@ body {
     align-items: center;
     color: var(--text-color);
     position: relative;
-    z-index: 10; /* Para garantir que fique acima de outros elementos se houver sobreposição */
-    border-bottom: 1px solid rgba(0,0,0,0.05); /* Uma linha sutil no cabeçalho */
+    z-index: 10; /* Para garantir que fique acima de outros elementos se houver sobreposição */ /* Uma linha sutil no cabeçalho */
 }
 
 .header-left, .header-right {
@@ -69,7 +68,7 @@ body {
     font-family: 'Pacifico', cursive; 
     font-size: 36px;
     font-weight: normal;
-    color: var(--primary-color); /* A cor roxa para o logo */
+    color: var(--text-color); /* A cor roxa para o logo */
     margin: 0;
 }
 
@@ -91,10 +90,7 @@ body {
 
 /* Cartão do Formulário */
 .form-card {
-    background-color: var(--card-background);
-    border-radius: 15px;
     padding: 25px 20px;
-    box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 .form-group {
@@ -201,42 +197,6 @@ body {
 
 .btn-submit:hover {
     background-color: #5a0a9a; /* Um roxo um pouco mais escuro ao passar o mouse */
-}
-
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    background-color: #ffffff;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
-.bottom-nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: var(--color-text);
-    flex-grow: 1;
-}
-
-.bottom-nav-item i {
-    font-size: 1.5rem;
-}
-
-.bottom-nav-item span {
-    font-size: 0.75rem;
-}
-
-.bottom-nav-item.active {
-    color: var(--color-primary);
 }
 
 /* Ajustes Responsivos (Media Queries) */

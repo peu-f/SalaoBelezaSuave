@@ -58,10 +58,9 @@ body {
 
 /* Service Details */
 .service-details {
-    background-color: rgb(242, 219, 255);
+    background-color: var(--color-bg);
     margin-bottom: 20px; /* Ajuste para não ter margin nas laterais aqui */
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     overflow: hidden;
 }
 
@@ -110,7 +109,7 @@ body {
 
 .price {
     font-size: 1.2em;
-    color: #8e44ad;
+    color: #2c3e50;
 }
 
 .duration {

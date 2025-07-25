@@ -7,12 +7,14 @@
   body {
     background:url('../../assets/homeimg.png'), var(--color-bg);
     background-position: center;
+    color: var(--color-text);
   font-family: var(--font-poppins);
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
   padding: 2rem;
+  flex-direction: column;
   }
   
   .login-container {
@@ -99,6 +101,15 @@ button:hover {
   
   .footer a:hover {
     text-decoration: underline;
+  }
+  .Titulo{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    padding: 3%;
+    font-family: 'pacifico';
+
   }
   
   /* Responsivo até o talo */
