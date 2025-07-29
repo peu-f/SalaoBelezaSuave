@@ -63,12 +63,6 @@
       border-color: var(--color-secondary);
   }
   
-  .search-input:focus {
-      background-color: #fff;
-      border-color: var(--color-primary);
-      box-shadow: 0 0 0 0.25rem var(--color-secondary);
-  }
-  
   .search-icon {
       position: absolute;
       left: 0.9rem;
@@ -172,7 +166,8 @@
   }
 
   .slider {
-    margin: 100px auto 0 auto;
+    margin: 10% auto 0 auto;
+    margin-top: 0%;
     width: 100%;
     max-width: 800px;
     height: auto;
@@ -195,6 +190,7 @@
   .slide {
     width: 25%;
     position: relative;
+  
   }
   
   .slide img {
