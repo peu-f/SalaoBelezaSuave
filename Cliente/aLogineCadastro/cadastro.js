@@ -8,6 +8,7 @@ function validarForm() {
 
     const nome = document.getElementById('nome').value.trim();
     const email = document.getElementById('email').value;
+    const telefone = document.getElementById('telefone').value;
     const senha = document.getElementById('senha').value;
     const confirmarSenha = document.getElementById('confirm').value;
 
@@ -15,9 +16,14 @@ function validarForm() {
       alert("Preencha todos os dados corretamente e verifique se as senhas coincidem");
       return;
     }
-
     alert("Usuário cadastrado com sucesso!");
-    const usuario = { nome, email, senha };
+    const usuario = { 
+      nome,
+      email,
+      telefone,
+      senha,
+      tipoConta: 'cliente'
+    };
 
     localStorage.setItem('usuarioCadastrado', JSON.stringify(usuario));
     window.location.href = "../aHome/home.html";
@@ -42,8 +48,3 @@ function mascararTelefone(input) {
 
   input.value = value;
 }
-
-let novoUsuario = {
-      nome, email, senha
-    };
-    

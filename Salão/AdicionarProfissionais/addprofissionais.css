@@ -1,218 +1,252 @@
+/* === RESET E VARIÁVEIS === */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-:root {
-    --primary-color: #6a0dad; /* Um tom de roxo para botões, etc. */
-    --secondary-color: #f8f0fb;
-    --card-background: #fdfdfd; /* Um off-white/creme para o cartão do formulário */
-    --text-color: #2c3e50; /* Cor do texto padrão */
-    --label-color: #555; /* Cor para labels */
-    --border-color: #ccc; /* Cor de borda para inputs */
-    --shadow-color: rgba(0, 0, 0, 0.1); /* Sombra leve */
-}
-
+/* === LAYOUT GERAL === */
 body {
-    background-color: var(--secondary-color);
-    display: flex;
-    font-family: 'Poppins';
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Garante que o corpo ocupa toda a altura da viewport */
-    margin: 0;
-    overflow-x: hidden; /* Evita rolagem horizontal */
+  background-color: var(--color-bg);
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .container {
-    width: 100%; /* Largura máxima para simular um celular */
-    background-color: #fff; /* Fundo do "aparelho" */
-    border-radius: 20px;
-    
-    overflow: hidden; /* Garante que nada transborde das bordas arredondadas */
-    display: flex;
-    flex-direction: column;
-    height: 100vh; /* Ocupa toda a altura da viewport no celular */
-    max-height: 800px; /* Altura máxima para o "aparelho" */
+  width: 100%;
+  height: 100vh;
+  max-height: 800px;
+  background-color: var(--color-bg);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Estilos do Cabeçalho */
+/* === CABEÇALHO === */
 .header {
-    background-color: var(--secondary-color); /* Mesma cor de fundo do body */
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--text-color);
-    position: relative;
-    z-index: 10; /* Para garantir que fique acima de outros elementos se houver sobreposição */ /* Uma linha sutil no cabeçalho */
+  background-color: var(--color-bg);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-text);
+  position: relative;
+  z-index: 10;
 }
 
 .header-left, .header-right {
-    width: 40px; /* Para alinhar bem os elementos */
-    text-align: center;
+  width: 40px;
+  text-align: center;
 }
 
-.header-left i {
-    font-size: 28px;
-    color: var(--label-color);
+.header-left i,
+.person-circle {
+  font-size: 28px;
+  color: var(--color-text);
 }
 
 .header-center {
-    flex-grow: 1; /* Ocupa o espaço restante */
-    text-align: center;
+  flex-grow: 1;
+  text-align: center;
 }
 
 .logo {
-    font-family: 'Pacifico', cursive; 
-    font-size: 36px;
-    font-weight: normal;
-    color: var(--text-color); /* A cor roxa para o logo */
-    margin: 0;
+  font-family: 'Pacifico', cursive;
+  font-size: 36px;
+  color: var(--color-text);
+  margin: 0;
+}
+.profile-pic {
+  width: 100px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  padding: 0;
+  border: 1px solid var(--color-secondary);
+  background-color: #fff;
+  cursor: pointer;
+  margin: 20px auto;
+  margin-left: -2rem;
 }
 
-/* Conteúdo Principal */
+.person-circle {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  color: var(--color-primary);
+}
+
+
+/* Sidebar (Offcanvas) Styles */
+.offcanvas {
+  background-color: var(--color-bg);
+}
+
+.offcanvas-header {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.offcanvas-title {
+  font-family: var(--font-poppins);
+  color: var(--color-primary);
+}
+
+.offcanvas-body .nav-link {
+  color: var(--color-text);
+  font-size: 1.1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.offcanvas-body .nav-link.active,
+.offcanvas-body .nav-link:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+}
+
+/* === CONTEÚDO PRINCIPAL === */
 .main-content {
-    flex-grow: 1; /* Permite que o conteúdo principal ocupe o espaço restante */
-    padding: 20px;
-    overflow-y: auto; /* Permite rolagem se o conteúdo for muito longo */
-    background-color: var(--secondary-color); /* Mesma cor de fundo do container */
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: var(--color-bg);
 }
 
 .page-title {
-    font-size: 22px;
-    color: var(--text-color);
-    margin-bottom: 25px;
-    text-align: center;
-    font-weight: 600;
+  font-size: 22px;
+  color: var(--color-text);
+  margin-bottom: 25px;
+  text-align: center;
+  font-weight: 600;
 }
 
-/* Cartão do Formulário */
+/* === FORMULÁRIO === */
 .form-card {
-    padding: 25px 20px;
+  padding: 25px 20px;
 }
 
 .form-group {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-    color: var(--label-color);
-    font-size: 15px;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--color-text);
+  font-size: 15px;
 }
 
-.form-group input[type="text"],
-.form-group input[type="email"], /* Caso você adicione um email depois */
-.form-group input[type="password"] { /* Caso você adicione uma senha depois */
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 16px;
-    color: var(--text-color);
-    background-color: #fff; /* Fundo branco para os inputs */
+.form-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 16px;
+  color: var(--color-text);
+  background-color: #fff;
 }
 
 .form-group input::placeholder {
-    color: #a0a0a0;
+  color: #a0a0a0;
 }
 
 .form-group input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(106, 13, 173, 0.2); /* Sombra leve ao focar */
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(106, 13, 173, 0.2);
 }
 
-/* Estilos para o campo de upload de foto */
+/* === UPLOAD DE FOTO === */
 .file-upload-group {
-    margin-bottom: 30px; /* Mais espaço para o upload */
+  margin-bottom: 30px;
 }
 
 .file-upload-box {
-    border: 1px dashed var(--border-color); /* Borda tracejada */
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-    cursor: pointer;
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 120px; /* Altura mínima para a caixa de upload */
+  border: 1px dashed var(--border-color);
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #fff;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 120px;
 }
 
 .hidden-input {
-    display: none; /* Esconde o input file padrão */
+  display: none;
+}
+
+footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--color-text);
 }
 
 .upload-label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    color: var(--label-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  color: var(--color-text);
 }
 
 .upload-label i {
-    font-size: 40px;
-    color: var(--primary-color);
-    margin-top: 10px;
-    margin-bottom: 10px;
+  font-size: 40px;
+  color: var(--color-primary);
+  margin: 10px 0;
 }
 
 .upload-label span {
-    font-size: 14px;
-    margin-bottom: 5px;
+  font-size: 14px;
+  margin-bottom: 5px;
 }
 
 .image-preview {
-    max-width: 100%;
-    max-height: 100px; /* Ajuste conforme necessário */
-    border-radius: 5px;
-    margin-top: 15px;
-    object-fit: contain; /* Garante que a imagem se ajuste sem cortar */
-    border: 1px solid var(--border-color);
-    display: block; /* Para ocupar sua própria linha */
+  max-width: 100%;
+  max-height: 100px;
+  border-radius: 5px;
+  margin-top: 15px;
+  object-fit: contain;
+  border: 1px solid var(--border-color);
+  display: block;
 }
 
-/* Botão de Envio */
+/* === BOTÃO SUBMIT === */
 .btn-submit {
-    width: 100%;
-    padding: 15px;
-    background-color: var(--primary-color);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    box-shadow: 0 4px 10px rgba(106, 13, 173, 0.3);
+  width: 100%;
+  padding: 15px;
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.btn-submit:hover {
-    background-color: #5a0a9a; /* Um roxo um pouco mais escuro ao passar o mouse */
-}
-
-/* Ajustes Responsivos (Media Queries) */
+/* === RESPONSIVO === */
 @media (max-width: 768px) {
-    .container {
-        border-radius: 0; /* Remove bordas arredondadas em telas menores */
-        box-shadow: none; /* Remove sombra em telas menores */
-        height: 100vh; /* Ocupa toda a altura da tela */
-        max-height: unset; /* Remove altura máxima em telas menores */
-    }
+  .container {
+    border-radius: 0;
+    box-shadow: none;
+    height: 100vh;
+    max-height: unset;
+  }
 
-    body {
-        align-items: flex-start; /* Alinha no topo em telas menores */
-        /* background-color: #fff; /* Opcional: mude o fundo para branco em mobile */
-    }
+  body {
+    align-items: flex-start;
+  }
 }
-
-/* Importar a fonte 'Dancing Script' do Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');

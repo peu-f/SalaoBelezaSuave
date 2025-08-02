@@ -84,6 +84,18 @@
     background-color: #fff;
     transition: transform 0.2s;
   }
+  #cardimg {
+    width: 100%;
+    height: 200px;
+    border-radius: 1.1rem;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+  }
+  #cardimg img {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s;
+  }
   .btn-primary{
     background-color: var(--color-primary) !important; 
   }

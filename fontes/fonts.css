@@ -1,5 +1,3 @@
-/* fonts.css */
-
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600;700&display=swap');
 
 :root {
@@ -10,4 +8,7 @@
   --color-secondary: #e0aaff;
   --color-bg: #f8f0fb;
   --color-text: #2c3e50;
+  --border-color: #ccc;
+  --label-color: #666;
+  --card-background: #ffffff;
 }

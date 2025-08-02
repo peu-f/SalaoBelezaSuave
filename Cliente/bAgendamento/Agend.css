@@ -2,18 +2,17 @@
 :root {
     --primary-background: #f8f0fb;
     --primary-button: #7b2cbf;
-    --secondary-background: #ffffff;
+    --secondary-background: rgb(255, 255, 255);
     --main-text-icons: #2c3e50;
     --success-confirmations: #a3e4d7;
-    --white: #ffffff;
     --light-gray: #f0f0f0;
     --dark-gray: #666; /* For secondary text/placeholders */
     --card-border: #dcdcdc; /* Adicionado para consistência */
     --dark-gray-text: #555; /* Cor para textos secundários, como duração */
+    --white: #ffffff; /* Certifique-se que --white está definido, se usar no HTML */
 }
 
 body {
-    justify-content: center;
     margin: 0;
     font-family: 'Poppins', sans-serif;
     background-color: var(--primary-background);
@@ -23,8 +22,6 @@ body {
     color: var(--main-text-icons);
     padding-bottom: 70px; /* Espaço para a barra de navegação inferior */
 }
-
-/* Removido o .mobile-container e seus estilos */
 
 /* App Header */
 .app-header {
@@ -39,27 +36,8 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Ajustei para ter sombra leve */
 }
 
-.app-header .back-button {
-    position: absolute;
-    left: 20px;
-    top: 25px;
-    font-size: 2.5em;
-    color: var(--main-text-icons);
-    text-decoration: none;
-    line-height: 1;
-}
-
-.app-header .user-icon { /* Ícone de perfil no header */
-    position: absolute; /* Mantém a posição absoluta para o ícone de usuário */
-    left: 25px; /* Ajuste a posição conforme necessário */
-    top: 30px; /* Ajuste a posição conforme necessário */
-    width: 40px; /* Tamanho do ícone de perfil */
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--secondary-background); /* Adicionei uma borda para destacá-lo */
-}
-
+/* Removido .app-header .back-button pois não está no HTML atual */
+/* Removido .app-header .user-icon pois o .profile-pic o substitui */
 
 .app-header h1 {
     font-family: 'Pacifico', cursive;
@@ -75,137 +53,45 @@ body {
     margin-top: 0;
 }
 
-.custom-sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 280px; /* Largura da sua sidebar */
-    height: 100vh;
-    background-color: var(--secondary-background); /* Cor de fundo da sidebar */
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-    transform: translateX(-100%); /* Esconde a sidebar inicialmente */
-    transition: transform 0.3s ease-out; /* Animação ao abrir/fechar */
-    z-index: 1050; /* Z-index alto para ficar acima de outros elementos */
-    display: flex;
-    flex-direction: column;
-}
-
-.custom-sidebar.show {
-    transform: translateX(0); /* Mostra a sidebar */
-}
-
-.sidebar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    border-bottom: 1px solid var(--light-gray);
-}
-
-.sidebar-header h3 {
-    margin: 0;
-    font-size: 1.5em;
-    color: var(--main-text-icons);
-}
-
-.close-sidebar-button {
-    background: none;
-    border: none;
-    font-size: 1.8em;
-    cursor: pointer;
-    color: var(--main-text-icons);
-    display: flex; /* Para alinhar o SVG */
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
-}
-
-.close-sidebar-button:hover {
-    color: var(--primary-button);
-}
-
-.sidebar-body {
-    flex-grow: 1; /* Ocupa o espaço restante */
-    padding: 20px 0; /* Padding lateral zero, listas com padding */
-}
-
-.sidebar-body ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.sidebar-body li {
-    margin-bottom: 5px;
-}
-
-.sidebar-link {
-    display: block;
-    padding: 12px 20px;
-    text-decoration: none;
-    color: var(--main-text-icons);
-    font-size: 1.1em;
-    transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.sidebar-link:hover {
-    background-color: var(--light-gray);
-    color: var(--primary-button);
-}
-
-/* Overlay para escurecer o fundo */
-.custom-sidebar-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5); /* Cor escura semi-transparente */
-    opacity: 0; /* Começa invisível */
-    visibility: hidden; /* Garante que não interfira com cliques */
-    transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
-    z-index: 1040; /* Z-index menor que a sidebar */
-}
-
-.custom-sidebar-overlay.show {
-    opacity: 1; /* Fica visível */
-    visibility: visible; /* Fica clicável */
-}
-
-/* Ajustes para o profile-pic que agora aciona a sidebar */
 .profile-pic {
-    /* Mantenha seus estilos existentes para .profile-pic,
-       mas remova data-bs-toggle e data-bs-target do HTML se ainda estiverem lá */
-    /* Exemplo: */
-    position: absolute;
-    padding: 0; /* Ajuste para SVG interno */
+    position: absolute; /* Alterado de fixed para absolute para ser relativo ao header */
+    padding: 10px; /* Isso parece ser um padding interno ao botão. Se for para afastar da borda, use margin ou top/left */
     height: 40px;
-    width: 40px;
-    left: 20px;
-    top: 25px;
+    width: 40px; /* Adicionado largura para consistência */
+    left: 20px; /* Ajuste para a esquerda do header */
+    top: 25px; /* Ajuste para o topo do header */
     border-radius: 50%;
     overflow: hidden;
-    border: 2px solid var(--primary-button);
+    flex-shrink: 0;
+    padding: 0;
+    border: 2px solid var(--primary-button); /* Usando variável para a cor da borda */
     background-color: var(--white);
     cursor: pointer;
     transition: border-color 0.2s;
-    display: flex;
+    display: flex; /* Para centralizar o SVG */
     justify-content: center;
     align-items: center;
-    z-index: 1; /* Garante que o botão esteja visível e clicável */
 }
 
 .profile-pic:hover {
-    border-color: #6a0cad;
+    border-color: #6a0cad; /* Um tom ligeiramente mais escuro para hover */
 }
 
 .person-circle {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    color: var(--primary-button);
+    color: var(--primary-button); /* Usando variável para a cor do ícone */
 }
 
+.main-content {
+    flex-grow: 1; 
+    width: 100%;
+    max-width: 600px; 
+    margin: 20px auto 0; 
+    padding: 0 20px; 
+    box-sizing: border-box; 
+}
 /* Main Content Area */
 .main-content {
     flex-grow: 1;

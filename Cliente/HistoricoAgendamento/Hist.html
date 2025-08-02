@@ -6,6 +6,7 @@
     <title>Histórico de Agendamentos - Beleza Suave</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="Hist.css">
 </head>
@@ -18,7 +19,7 @@
         <div class="offcanvas-body">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#"><i class="bi bi-house-door-fill me-2"></i>Início</a>
+                    <a class="nav-link active" href="../aHome/home.html"><i class="bi bi-house-door-fill me-2"></i>Início</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../OpcoesSidebar/Perfil.html"><i class="bi bi-person-fill me-2"></i>Meu Perfil</a>
@@ -41,67 +42,68 @@
             </svg>
         </button>
         <h1>Beleza Suave</h1>
-        <h2 id="tab-header-title">Agendamentos</h2> </header>
+        <h2 id="tab-header-title">Agendamentos pendentes</h2>
+    </header>
 
     <main class="main-content">
         <div class="tabs-container">
-            <div class="tab-buttons">
-                <button class="tab-button active" data-tab="pending">
-                    <i class="bi bi-clock-fill"></i> 
-                </button>
-                <button class="tab-button" data-tab="done">
-                    <i class="bi bi-check-circle-fill"></i> 
-                </button>
-                <div class="tab-indicator"></div>
-            </div>
-            <!-- card -->
-            <div class="tab-content-wrapper"> <div class="tab-content-container">
-                    <div id="pending" class="tab-pane active">
-                        <div class="appointment-card">
-                            <img src="../../assets/Escova.jpeg" alt="Modelo" class="model-image">
-                            <div class="details">
-                                <h3>Escova Modeladora</h3>
-                                <p>Duração: 45 min</p>
-                                <p>Data: 06/05/2025</p>
-                                <p>Horário: 20h - 20:45h</p>
-                                <div class="actions">
-                                    <button class="cancel" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">Cancelar</button>
-                                    <button class="reschedule" style="color: rgb(255, 255, 255);" data-bs-toggle="modal" data-bs-target="#confirmRescheduleModal">Reagendar</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- card -->
-                        <div class="appointment-card">
-                            <img src="../../assets/manicure.jpeg" alt="Modelo" class="model-image">
-                            <div class="details">
-                                <h3>Manicure</h3>
-                                <p>Duração: 1h 15 min</p>
-                                <p>Data: 10/06/2025</p>
-                                <p>Horário: 15h - 16:15h</p>
-                                <div class="actions">
-                                    <button class="cancel" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">Cancelar</button>
-                                    <button class="reschedule" style="color: rgb(255, 255, 255);" data-bs-toggle="modal" data-bs-target="#confirmRescheduleModal">Reagendar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="done" class="tab-pane">
-                        <div class="appointment-card">
-                            <img src="../../assets/maquiagem.jpg" alt="Modelo" class="model-image">
-                            <div class="details">
-                                <h3>Maquiagem</h3>
-                                <p>Duração: 1h</p>
-                                <p>Data: 27/04/2025</p>
-                                <p>Horário: 18h - 19h</p>
-                                <div class="actions">
-                                    <button class="evaluate" style="color: rgb(255, 255, 255);" data-bs-toggle="modal" data-bs-target="#ratingModal">Avaliar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="tab-header text-center">
+    <button id="btn-tab-0" class="active" onclick="swiper.slideTo(0)"><i class="bi bi-clock-fill"></i></button>
+    <button id="btn-tab-1" onclick="swiper.slideTo(1)"><i class="bi bi-check-circle-fill"></i></button>
+  </div>
+            <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+
+      <!-- Aba 1 -->
+      <div class="swiper-slide" data-title="Agendamentos Pendentes">
+        <div class="post-card">
+            <img src="../../assets/Escova.jpeg" alt="Modelo" class="model-image"/>
+            <div class="details">
+                <h3>Escova Modeladora</h3>
+                <p>Duração: 45 min</p>
+                <p>Data: 06/05/2025</p>
+                <p>Horário: 20h - 20:45h</p>
+                <div class="actions">
+                    <button class="cancel" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">Cancelar</button>
+                    <button class="reschedule" style="color: rgb(255, 255, 255)" data-bs-toggle="modal" data-bs-target="#confirmRescheduleModal">Reagendar</button>
                 </div>
             </div>
         </div>
+        <div class="post-card">
+            <img src="../../assets/manicure.jpeg" alt="Modelo" class="model-image"/>
+            <div class="details">
+                <h3>Manicure</h3>
+                <p>Duração: 1h 15 min</p>
+                <p>Data: 10/06/2025</p>
+                <p>Horário: 15h - 16:15h</p>
+                <div class="actions">
+                    <button class="cancel" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">Cancelar</button>
+                    <button class="reschedule" style="color: rgb(255, 255, 255)" data-bs-toggle="modal" data-bs-target="#confirmRescheduleModal">Reagendar</button>
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <!-- Aba 2 -->
+      <div class="swiper-slide">
+        <div class="post-card">
+            <img src="../../assets/maquiagem.jpg" alt="Modelo" class="model-image"/>
+            <div class="details">
+                <h3>Maquiagem</h3>
+                <p>Duração: 1h</p>
+                <p>Data: 27/04/2025</p>
+                <p>Horário: 18h - 19h</p>
+                <div class="actions">
+                    <button class="cancel" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">Cancelar</button>
+                    <button class="reschedule" style="color: rgb(255, 255, 255)" data-bs-toggle="modal" data-bs-target="#confirmRescheduleModal">Reagendar</button>
+                </div>
+            </div>
+        </div>
+        <div class="post-card">🎬 Reel 2</div>
+      </div>
+
+    </div>
+  </div>
         <!-- MODAL -->
         <div class="modal fade" id="confirmCancelModal" tabindex="-1" aria-labelledby="confirmCancelModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -172,6 +174,7 @@
         <a href="../bServiços/Servicos.html" class="nav-item active"> <i class="bbi bi-clock-history"></i> <span>Agenda</span> </a>
     </nav>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="Hist.js"></script> 
 </body>
