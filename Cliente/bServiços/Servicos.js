@@ -37,18 +37,20 @@ document.addEventListener('DOMContentLoaded', function() {
         durationValue.textContent = `${selectedItem.duracao} MIN`;
         serviceDurationElement.style.display = 'inline-block';
         if (durationIcon) durationIcon.style.display = 'inline-block';
-
     } else if (selectedItem.tipo === 'oferta' && selectedItem.validade) {
         durationValue.textContent = `Válido até: ${new Date(selectedItem.validade).toLocaleDateString('pt-BR')}`;
         serviceDurationElement.style.display = 'inline-block';
         if (durationIcon) durationIcon.style.display = 'none';
-
     } else {
         serviceDurationElement.style.display = 'none';
     }
 
     const scheduleButton = document.getElementById('schedule-button');
     scheduleButton.onclick = function() {
-        window.location.href = `../bAgendamento/Agend.html?itemId=${selectedItem.id}`;
+        // --- LINHAS ADICIONADAS AQUI ---
+        // Salva o item completo no localStorage antes de redirecionar
+        localStorage.setItem('produtoSelecionado', JSON.stringify(selectedItem));
+        // ------------------------------
+        window.location.href = `../bAgendamento/Agend.html`;
     };
 });

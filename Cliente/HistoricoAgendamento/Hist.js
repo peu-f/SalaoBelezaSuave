@@ -14,3 +14,30 @@ const swiper = new Swiper(".mySwiper", {
         }
       }
     });
+
+    document.addEventListener('DOMContentLoaded', function(){
+      const agendamento = JSON.parse(localStorage.getItem('agendamento'), '[]')
+      const container = document.querySelector('.post-card')
+      container.innerHTML = '';
+
+      if (agendamento.length === 0) {
+          container.innerHTML = '<p class="text-center">Nenhum agendamento ainda.</p>';
+          return;
+      }
+  
+      // Para cada item na lista de 'servicos'
+      servicos.forEach(agendamento => {
+          let cardHTML = '';
+  
+          // Compara o tipo do serviço (usando '===')
+          if (agendamento.tipo === 'servico') {
+              cardHTML = criarCardAgendamento(agendamento);
+          } else if (agendamento.tipo === 'oferta') {
+              // oferta
+          }
+  
+          // Adiciona o HTML do novo card ao container
+          container.innerHTML += cardHTML;
+
+        });
+      });

@@ -12,7 +12,6 @@
     background-color: var(--color-bg);
     color: var(--color-text);
     font-family: var(--font-poppins);
-    /* Adiciona espaço embaixo para a barra de navegação */
     padding-bottom: 80px; 
   }
   
@@ -23,7 +22,7 @@
       padding: 0.75rem 1rem;
       background-color: #fff;
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      gap: 1rem; /* Adiciona um espaço entre os itens */
+      gap: 1rem; 
   }
   
   /* Tornando a foto de perfil um botão funcional */
@@ -121,7 +120,6 @@
   }
   
   .offcanvas-title {
-      font-family: var(--font-pacifico);
       color: var(--color-primary);
   }
   

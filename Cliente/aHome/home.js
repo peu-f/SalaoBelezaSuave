@@ -81,8 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (servico.tipo === 'servico') {
             cardHTML = criarCardServico(servico);
         } else if (servico.tipo === 'oferta') {
-            // Adicione aqui a função para criar o card de oferta se necessário
-            // cardHTML = criarCardOferta(servico); 
+            // oferta
         }
 
         // Adiciona o HTML do novo card ao container
@@ -90,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Função que cria o HTML do card de um serviço
+
 function criarCardServico(servico) {
     return `
         <div class="col-12 col-md-6 col-lg-4">
@@ -107,3 +106,20 @@ function criarCardServico(servico) {
         </div>
     `;
 }
+
+const searchInput = document.querySelector('.search-input'); 
+ 
+    const serviceContainer = document.querySelector('.services-container');
+    searchInput.addEventListener('input', (e) => {
+        const termoBusca = e.target.value.toUpperCase();
+        const serviceCards = serviceContainer.querySelectorAll('.card');
+        serviceCards.forEach(card => {
+            const cardTitleElement = card.querySelector('.card-title');
+
+            if (cardTitleElement) {
+                const tituloServico = cardTitleElement.textContent.toUpperCase();
+                const isMatch = tituloServico.includes(termoBusca);
+                card.style.display = isMatch ? '' : 'none';
+            }
+        });
+    });
