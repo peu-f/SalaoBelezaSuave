@@ -25,8 +25,10 @@ function validarForm() {
       tipoConta: 'cliente'
     };
 
-    localStorage.setItem('usuarioCadastrado', JSON.stringify(usuario));
-    window.location.href = "../aHome/home.html";
+    const usuarios = JSON.parse(localStorage.getItem('usuarioCadastrado') || '[]');
+    usuarios.push(usuario);
+    localStorage.setItem('usuarioCadastrado', JSON.stringify(usuarios));
+
 
     
   });

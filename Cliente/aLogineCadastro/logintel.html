@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login - Beleza Suave</title>
-  <link rel="stylesheet" href="login.css" />
-  <link rel="stylesheet" href="../../fontes/fonts.css">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Login - Beleza Suave</title>
+        <link rel="stylesheet" href="login.css" />
+        <link rel="stylesheet" href="../../fontes/fonts.css">
+        <script src="login.js"></script>
 </head>
 <body>
     <div class="Titulo">
@@ -18,8 +19,9 @@
       <h1 class="form-title">Bem-vindo(a) de volta!</h1>
       <p class="form-subtitle">Entre com sua conta</p>
 
-      <label for="login">E-mail</label>
-      <input type="email" id="login" placeholder="Digite seu e-mail" required />
+      <label for="login">Telefone</label>
+      <input type="tel" id="login" placeholder="Digite seu telefone" required maxlength="15"
+        oninput="mascararTelefone(this)"/>
 
       <label for="senha">Senha</label>
       <input type="password" id="senha" placeholder="Digite sua senha" required />
@@ -31,10 +33,9 @@
         <a href="cadastro.html">Cadastre-se</a>
       </p>
       <p class="form-footer">
-        Faça login com telefone
-        <a href="logintel.html"> aqui</a>
+        Faça login com E-mail
+        <a href="login.html"> aqui</a>
       </p>
-      
     </form>
   </div>
   <script src="login.js"></script>

@@ -15,18 +15,19 @@
         <h2>Detalhes</h2>
     </header>
 
-    <main class="content-wrapper"> <section class="service-details">
-            <div class="service-image-container" id="service-image">
-                <img src="../../assets/Escova.jpeg" alt="Escova modeladora">
+    <main class="content-wrapper">
+        <section class="service-details">
+            <div class="service-image-container" id="service-image-container">
+                <img id="service-detail-image" src="" alt="Imagem do serviço">
             </div>
             <div class="service-info">
-                <h3>Escova modeladora</h3>
-                <p>Deixa os fios alinhados e com movimento natural. Ideal para qualquer ocasião.</p>
+                <h3 id="service-detail-title"></h3>
+                <p id="service-detail-description"></p>
                 <div class="price-duration">
-                    <span class="price">R$ 30,00</span>
-                    <span class="duration">
-                        <span class="icon">&#x23F1;</span>
-                        45MIN
+                    <span class="price" id="service-detail-price"></span>
+                    <span class="duration" id="service-detail-duration">
+                        <span class="icon" id="duration-icon">&#x23F1;</span>
+                        <span id="duration-value"></span>
                     </span>
                 </div>
             </div>
@@ -55,9 +56,7 @@
     </main>
 
     <footer class="app-footer">
-        <button id="botao" class="schedule-button">Agendar
-            
-        </button>
+        <button id="schedule-button" class="schedule-button">Agendar</button>
     </footer>
     <script src="Servicos.js"></script>
 </body>

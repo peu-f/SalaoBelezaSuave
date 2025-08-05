@@ -18,6 +18,11 @@ function listarProfissionais() {
   const container = document.getElementById('listarProfissionais');
   container.innerHTML = ''; // Limpa o conteúdo anterior
 
+  if(profissionais.length === 0){
+    container.innerHTML = '<p class="text-center m-4">Nenhum profissional cadastrado ainda.<p/>'
+    return;
+  }
+
   profissionais.forEach(profissional => {
     const card = document.createElement('div');
     card.className = 'card h-100';

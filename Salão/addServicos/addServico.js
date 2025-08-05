@@ -1,7 +1,6 @@
 // Espera todo o HTML da página carregar antes de executar o script
 document.addEventListener('DOMContentLoaded', function() {
 
-    // --- LÓGICA PARA MOSTRAR/ESCONDER OS CAMPOS DO FORMULÁRIO ---
     
     // 1. Pega os elementos principais do HTML
     const tipoSelect = document.getElementById('tipo'); // Corrigido: getElementById
@@ -26,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // --- LÓGICA PARA PRÉ-VISUALIZAÇÃO DA IMAGEM ---
 
     document.getElementById('fotoServico').addEventListener('change', function (event) {
         const file = event.target.files[0];
@@ -40,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // --- LÓGICA PARA ENVIAR O FORMULÁRIO ---
 
     document.getElementById('serviceForm').addEventListener('submit', function (e) {
         e.preventDefault();
@@ -56,7 +53,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const reader = new FileReader();
         reader.onload = function (event) {
+        //criar ID
+            const newId = tipo + Date.now();
+
             const produto = {
+                id : newId,
                 tipo: tipo, 
                 imagem: event.target.result,
                 dataCadastro: new Date().toISOString()
