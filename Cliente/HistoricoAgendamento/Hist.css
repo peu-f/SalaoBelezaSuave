@@ -94,18 +94,23 @@ body {
 }
 
 .swiper {
-      width: 100%;
-      height: 100vh;
-    }
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    
+}
 
-    .swiper-slide {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: start;
-      padding: 2rem;
-    }
-
+.swiper-slide {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    justify-content: start;
+    box-sizing: border-box;
+    z-index: 1; /* Valor padrão para slides inativos */
+    transition: z-index 0.3s;
+}
     .tab-header {
       display: flex;
       justify-content: space-around;
@@ -116,6 +121,7 @@ body {
       position: sticky;
       top: 0;
       z-index: 10;
+      width: 100%;
     }
 
     .tab-header button {
@@ -132,19 +138,18 @@ body {
     }
 
     .post-card {
-      background-color: white;
-      border-radius: 10px;
-      display: flex;
-      justify-content: space-around;
-      padding: 1rem;
-      margin: 1rem 0;
-      width: 120%;
-      max-width: 600px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      border: 50px;
-}
-
-
+        background-color: white;
+        border-radius: 10px;
+        display: flex;
+        justify-content: flex-start;
+        padding: 1rem;
+        margin: 0.5rem 0; 
+        width: 100%; 
+        max-width: 700px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--card-border);
+        box-sizing: border-box;
+    }
 .model-image {
     width: 90px;
     height: 90px;
@@ -182,8 +187,6 @@ body {
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Mantendo os estilos específicos para .cancel, .reschedule, .evaluate
-   Mas você pode querer integrar classes do Bootstrap como btn-light, btn-primary, etc. */
 .actions .cancel {
     background-color: var(--light-gray);
     color: var(--dark-gray);
@@ -202,14 +205,14 @@ body {
     background-color: #6a0cad;
 }
 
-/* --- ESTILOS DO COMPONENTE DE AVALIAÇÃO POR ESTRELAS NO MODAL (ADICIONE ISSO) --- */
+/* --- ESTILOS DO COMPONENTE DE AVALIAÇÃO POR ESTRELAS NO MODAL  */
 .rating {
-    font-size: 2em; /* Tamanho das estrelas */
-    color: #ccc; /* Cor das estrelas não selecionadas */
+    font-size: 2em; 
+    color: #ccc; 
     cursor: pointer;
-    display: flex; /* Para alinhar as estrelas */
-    justify-content: center; /* Centraliza as estrelas */
-    gap: 5px; /* Espaçamento entre as estrelas */
+    display: flex; 
+    justify-content: center; 
+    gap: 5px; 
 }
 
 .rating .star {

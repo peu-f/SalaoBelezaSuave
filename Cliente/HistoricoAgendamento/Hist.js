@@ -1,5 +1,7 @@
 const swiper = new Swiper(".mySwiper", {
       simulateTouch: true,
+      loop: false,
+      slidesPerView: 1,
       grabCursor: true,
       on: {
         slideChange: () => {
@@ -15,29 +17,45 @@ const swiper = new Swiper(".mySwiper", {
       }
     });
 
-    document.addEventListener('DOMContentLoaded', function(){
-      const agendamento = JSON.parse(localStorage.getItem('agendamento'), '[]')
-      const container = document.querySelector('.post-card')
-      container.innerHTML = '';
-
-      if (agendamento.length === 0) {
-          container.innerHTML = '<p class="text-center">Nenhum agendamento ainda.</p>';
-          return;
-      }
-  
-      // Para cada item na lista de 'servicos'
-      servicos.forEach(agendamento => {
-          let cardHTML = '';
-  
-          // Compara o tipo do serviço (usando '===')
-          if (agendamento.tipo === 'servico') {
-              cardHTML = criarCardAgendamento(agendamento);
-          } else if (agendamento.tipo === 'oferta') {
-              // oferta
-          }
-  
-          // Adiciona o HTML do novo card ao container
-          container.innerHTML += cardHTML;
-
-        });
+    document.addEventListener('DOMContentLoaded', function () {
+      const agendamentos = JSON.parse(localStorage.getItem('agendamentos') || '[]');
+      const slides = document.querySelectorAll('.swiper-slide');
+    
+      // Limpa todos os slides antes de inserir os dados
+      slides.forEach(slide => {
+        slide.innerHTML = ''; // ou você pode manter um wrapper e fazer .querySelector('.post-card-container').innerHTML = '';
       });
+    
+      if (agendamentos.length === 0) {
+        slides.forEach(slide => {
+          slide.innerHTML = '<p class="text-center">Nenhum agendamento ainda.</p>';
+        });
+        return;
+      }
+    
+      // Distribui os agendamentos nos slides (exemplo: um slide por agendamento)
+      agendamentos.forEach((item, index) => {
+        const slideIndex = index % slides.length; // Distribuição circular caso tenha mais agendamentos que slides
+        slides[slideIndex].innerHTML += criarCardAgendamento(item);
+      });
+    });
+    
+    function criarCardAgendamento(agendamento) {
+      return `
+        <div class="post-card">
+          <img src="../../assets/Escova.jpeg" alt="Modelo" class="model-image"/>
+          <div class="details">
+            <h3>${agendamento.service}</h3>
+            <p>Duração: ${agendamento.duracao} min</p>
+            <p>Data: ${agendamento.date}</p>
+            <p>Hora: ${agendamento.time}</p>
+            <p>Profissional: ${agendamento.professionalName}</p>
+            <div class="actions">
+              <button class="cancel" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">Cancelar</button>
+              <button class="reschedule" style="color: rgb(255, 255, 255)" data-bs-toggle="modal" data-bs-target="#confirmRescheduleModal">Reagendar</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    

@@ -173,6 +173,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+
+    //Salvar
     function saveAppointment(appointmentData) {
         let allAppointments = loadAllAppointments();
         allAppointments.push(appointmentData);
@@ -215,6 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
             saveAppointment({
                 id: 'app_' + Date.now(),
                 service: selectedService.titulo,
+                duracao: selectedService.duracao,
                 date,
                 professionalId,
                 professionalName,
@@ -232,8 +235,5 @@ document.addEventListener('DOMContentLoaded', () => {
     appointmentDateInput.addEventListener('change', updateAvailableTimes);
     professionalSelect.addEventListener('change', updateAvailableTimes);
 
-    const agendamento = JSON.parse(localStorage.getItem('agendamento' || '[]'))//pao
-    agendamento.push(saveAppointment)
-    localStorage.setItem('agendamento', JSON.stringify(agendamento));
 
 });
