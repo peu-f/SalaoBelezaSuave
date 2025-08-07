@@ -11,7 +11,7 @@ const swiper = new Swiper(".mySwiper", {
           if (titleElement) {
             const currentSlide = swiper.slides[swiper.activeIndex];
             const newTitle = currentSlide.getAttribute('data-title');
-            titleElement.textContent = newTitle || `Agendamentos Feito`;
+            titleElement.textContent = newTitle || `Agendamentos Concluídos`;
           }
         }
       }
@@ -43,7 +43,7 @@ const swiper = new Swiper(".mySwiper", {
     function criarCardAgendamento(agendamento) {
       return `
         <div class="post-card">
-          <img src="../../assets/Escova.jpeg" alt="Modelo" class="model-image"/>
+          <img src="${agendamento.imagem}" alt="${agendamento.service}" class="model-image"/>
           <div class="details">
             <h3>${agendamento.service}</h3>
             <p>Duração: ${agendamento.duracao} min</p>

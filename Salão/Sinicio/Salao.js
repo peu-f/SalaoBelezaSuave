@@ -35,6 +35,6 @@ function listarProfissionais() {
          <a href="../GerenciarProfissionais/gp.html" type="button" class="btn btn-primary">Gerenciar</a>
       </div>`;
       container.appendChild(card);
-  });
+  });              
 }
 document.addEventListener("DOMContentLoaded", listarProfissionais);

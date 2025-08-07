@@ -1,93 +1,101 @@
 function logout() {
     // Limpa o que foi salvo localmente
-    localStorage.removeItem('usuarioCadastrado'); // ou clear()
-  
-    // Aqui já dá pra colocar chamada à API de logout quando tiver backend:
-    // fetch('/api/logout', { method: 'POST', credentials: 'include' })
-    //   .then(() => {
-    //     // redireciona depois que o servidor confirmar logout
-    //     window.location.href = '/login.html';
-    //   });
-  
-    // Por enquanto, só redireciona direto
+    localStorage.removeItem('usuarioCadastrado'); 
+
+    // Redireciona para a página de boas-vindas
     window.location.href = '../aInicio/boasVindas.html';
-  }
-
-  
-
-// Vai controlar o índice do slide atual
-let slideIndex = 1;
-
-// Pega os inputs radio do carrossel
-const radios = document.querySelectorAll('.sliders-input');
-
-// Função para ativar um slide específico (1 a 4)
-function showSlide(n) {
-  if (n > radios.length) slideIndex = 1;
-  else if (n < 1) slideIndex = radios.length;
-  else slideIndex = n;
-
-  radios[slideIndex - 1].checked = true;
 }
 
-// Passa para o próximo slide
-function nextSlide() {
-  showSlide(slideIndex + 1);
-}
-
-// Loop automático a cada 4 segundos
-let autoSlide = setInterval(nextSlide, 4000);
-
-// Se o usuário clicar em algum botão manual, reseta o timer
-radios.forEach((radio, index) => {
-  radio.addEventListener('change', () => {
-    slideIndex = index + 1;
-    clearInterval(autoSlide);
-    autoSlide = setInterval(nextSlide, 4000);
-  });
-});
-
-// Funções da sidebar que você já usa (para não quebrar seu código)
+// Funções da sidebar (mantidas)
 function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebar').classList.toggle('open');
 }
 
 function toggleSubmenu(id) {
-  const submenu = document.getElementById(id);
-  if (submenu.style.display === 'block') submenu.style.display = 'none';
-  else submenu.style.display = 'block';
+    const submenu = document.getElementById(id);
+    if (submenu.style.display === 'block') {
+        submenu.style.display = 'none';
+    } else {
+        submenu.style.display = 'block';
+    }
 }
 
+function criarSlideOferta(oferta, index) {
+    const activeClass = index === 0 ? 'active' : '';
+    return `
+        <div class="slide ${activeClass}" id="slide-${oferta.id}">
+            <a href="../bServiços/Servicos.html?id=${oferta.id}" class="oferta-link">
+                <img src="${oferta.imagem}" alt="${oferta.titulo}" />
+                <div class="oferta-info">
+                    <h3>${oferta.titulo}</h3>
+                    <p>Preço: R$ ${parseFloat(oferta.preco).toFixed(2)}</p>
+                    <p>Válido até: ${new Date(oferta.validade).toLocaleDateString()}</p>
+                    <p>Serviços Incluídos: ${oferta.servicosIncluidos.join(', ')}</p>
+                </div>
+            </a>
+        </div>
+    `;
+}
 
-//mostrar serviçoes reais
-// Espera todo o HTML da página carregar antes de executar o script
-document.addEventListener('DOMContentLoaded', function() {
+function carregarOfertasNoCarrossel() {
+    const ofertasContainer = document.getElementById('ofertas-carousel');
+    const radiosContainer = document.getElementById('radios-container');
+    const manualNavContainer = document.getElementById('manual-navigation');
+    
+    // Limpa o conteúdo existente para recarregar
+    ofertasContainer.innerHTML = '';
+    radiosContainer.innerHTML = '';
+    manualNavContainer.innerHTML = '';
 
-    // Use o nome correto que você salvou no localStorage
-    const servicos = JSON.parse(localStorage.getItem('produtos') || '[]');
-    const container = document.querySelector('.services-container'); 
-    container.innerHTML = '';
+    const todosProdutos = JSON.parse(localStorage.getItem('produtos')) || [];
+    const ofertas = todosProdutos.filter(p => p.tipo === 'oferta');
 
-    if (servicos.length === 0) {
-        container.innerHTML = '<p class="text-center">Nenhum serviço ou oferta cadastrado ainda.</p>';
-        return;
+    if (ofertas.length > 0) {
+        ofertas.forEach((oferta, index) => {
+            ofertasContainer.innerHTML += criarSlideOferta(oferta, index);
+            
+            const radioInput = document.createElement('input');
+            radioInput.type = 'radio';
+            radioInput.name = 'radio-btn';
+            radioInput.id = `radio${index + 1}`;
+            radioInput.classList.add('sliders-input');
+            if (index === 0) radioInput.checked = true;
+            radiosContainer.appendChild(radioInput);
+            
+            const manualLabel = document.createElement('label');
+            manualLabel.htmlFor = `radio${index + 1}`;
+            manualLabel.classList.add('manual-btn');
+            manualNavContainer.appendChild(manualLabel);
+        });
+
+        let slideIndex = 1;
+        const radios = document.querySelectorAll('.sliders-input');
+
+        let autoSlide = setInterval(() => {
+            slideIndex++;
+            if (slideIndex > ofertas.length) {
+                slideIndex = 1;
+            }
+            document.querySelector(`#radio${slideIndex}`).checked = true;
+        }, 4000);
+
+        radios.forEach((radio, index) => {
+            radio.addEventListener('change', () => {
+                slideIndex = index + 1;
+                clearInterval(autoSlide);
+                autoSlide = setInterval(() => {
+                    slideIndex++;
+                    if (slideIndex > ofertas.length) {
+                        slideIndex = 1;
+                    }
+                    document.querySelector(`#radio${slideIndex}`).checked = true;
+                }, 4000);
+            });
+        });
+    } else {
+        ofertasContainer.innerHTML = '<p class="text-center mt-3">Nenhuma oferta cadastrada ainda.</p>';
     }
-
-    // Para cada item na lista de 'servicos'
-    servicos.forEach(servico => {
-        let cardHTML = '';
-
-        // Compara o tipo do serviço (usando '===')
-        if (servico.tipo === 'servico') {
-            cardHTML = criarCardServico(servico);
-        } else if (servico.tipo === 'oferta') {
-            // oferta
-        }
-
-        // Adiciona o HTML do novo card ao container
-        container.innerHTML += cardHTML;
-    });
-});
+}
 
 
 function criarCardServico(servico) {
@@ -107,8 +115,30 @@ function criarCardServico(servico) {
     `;
 }
 
-const searchInput = document.querySelector('.search-input'); 
- 
+// Lógica principal
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Carrega o carrossel de ofertas
+    carregarOfertasNoCarrossel();
+
+    // Carrega os cards de serviços
+    const produtos = JSON.parse(localStorage.getItem('produtos')) || [];
+    const container = document.querySelector('.services-container'); 
+    container.innerHTML = '';
+
+    const servicos = produtos.filter(produto => produto.tipo === 'servico');
+
+    if (servicos.length > 0) {
+        servicos.forEach(servico => {
+            let cardHTML = criarCardServico(servico);
+            container.innerHTML += cardHTML;
+        });
+    } else {
+        container.innerHTML = '<p class="text-center">Nenhum serviço cadastrado ainda.</p>';
+    }
+    
+    // Lógica da barra de pesquisa
+    const searchInput = document.querySelector('.search-input'); 
     const serviceContainer = document.querySelector('.services-container');
     searchInput.addEventListener('input', (e) => {
         const termoBusca = e.target.value.toUpperCase();
@@ -123,3 +153,4 @@ const searchInput = document.querySelector('.search-input');
             }
         });
     });
+});

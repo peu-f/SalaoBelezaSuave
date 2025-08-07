@@ -3,9 +3,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
     // 1. Pega os elementos principais do HTML
-    const tipoSelect = document.getElementById('tipo'); // Corrigido: getElementById
+    const tipoSelect = document.getElementById('tipo'); 
     const servicoSection = document.getElementById('servicoSection');
     const ofertaSection = document.getElementById('ofertaSection');
+
+    //Função para carregar os serviços no select de ofertas
+
+    function carregarServicosParaOferta() {
+        const servicosIncluidosSelect = document.getElementById('servicosIncluidos');
+        servicosIncluidosSelect.innerHTML = '';
+
+        const todosProdutos = JSON.parse(localStorage.getItem('produtos')) || [];
+        const servicosSalvos = todosProdutos.filter(produto => produto.tipo === 'servico');
+
+        if (servicosSalvos.length > 0) {
+            servicosSalvos.forEach(servico => {
+                const option = document.createElement('option');
+                option.value = servico.titulo;
+                option.textContent = servico.titulo;
+                servicosIncluidosSelect.appendChild(option);
+            });
+        } else {
+            const option = document.createElement('option');
+            option.textContent = 'Nenhum serviço cadastrado';
+            option.disabled = true;
+            servicosIncluidosSelect.appendChild(option);
+        }
+    }
+
+    carregarServicosParaOferta();
 
     // 2. Adiciona um "ouvinte" que percebe quando o valor do select muda
     tipoSelect.addEventListener('change', function() {
@@ -90,6 +116,8 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('previewImage').style.display = 'none'; // Esconde a preview
             document.getElementById('fileName').textContent = 'Clique para adicionar uma imagem'; // Reseta o nome
             // window.location.href = 'servicos.html'; // Descomente se quiser redirecionar
+
+            carregarServicosParaOferta();
         };
 
         reader.readAsDataURL(imagem);

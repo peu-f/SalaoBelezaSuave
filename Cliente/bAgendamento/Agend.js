@@ -198,6 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const professionalId = selectedProfessionalOption.value;
         const professionalName = selectedProfessionalOption.textContent;
         const time = appointmentTimeSelect.value;
+        
 
         if (!date || !professionalId || !time) {
             alert('Por favor, preencha todos os campos do agendamento.');
@@ -213,16 +214,22 @@ document.addEventListener('DOMContentLoaded', () => {
             Valor: R$ ${selectedService.preco}
         `;
 
+        const cliente = JSON.parse(localStorage.getItem('usuarioCadastrado') || "[]")
+
         if (confirm(confirmationMessage)) {
             saveAppointment({
                 id: 'app_' + Date.now(),
+                clienteNome : cliente.nome,
+                clienteId: cliente.id,
                 service: selectedService.titulo,
                 duracao: selectedService.duracao,
                 date,
                 professionalId,
                 professionalName,
                 time,
+                imagem: selectedService.imagem,
                 price: `R$ ${selectedService.preco}`
+                
             });
         }
     });
