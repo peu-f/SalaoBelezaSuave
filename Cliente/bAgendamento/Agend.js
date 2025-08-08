@@ -184,6 +184,8 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = '../HistoricoAgendamento/Hist.html';
     }
 
+
+    
     confirmButton.addEventListener('click', () => {
         const storedServiceData = localStorage.getItem('produtoSelecionado');
         if (!storedServiceData) {
@@ -214,7 +216,8 @@ document.addEventListener('DOMContentLoaded', () => {
             Valor: R$ ${selectedService.preco}
         `;
 
-        const cliente = JSON.parse(localStorage.getItem('usuarioCadastrado') || "[]")
+        const cliente = JSON.parse(localStorage.getItem('usuarioCadastrado') || "{}")
+
 
         if (confirm(confirmationMessage)) {
             saveAppointment({

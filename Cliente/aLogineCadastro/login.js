@@ -52,9 +52,15 @@ function processarLogin(event) {
     alert(`Bem-vindo(a), ${usuario.nome || "cliente"}!`);
     window.location.href = "../aHome/home.html";
   } else if (profissional) {
+
+    localStorage.setItem("profissionalLogado", JSON.stringify(profissional));
+
     alert(`Bem-vindo(a), ${profissional.nome || "profissional"}!`);
     window.location.href = "../../Profissional/Atribuidos.html";
   } else if (salao) {
+
+
+
     alert(`Bem-vindo(a), ${salao.nome || "salão"}!`);
     window.location.href = "../../Salão/Sinicio/Salao.html";
   } else {
