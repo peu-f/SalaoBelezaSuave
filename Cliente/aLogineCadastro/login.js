@@ -49,12 +49,13 @@ function processarLogin(event) {
   const salao = encontrarUsuario(saloes, "salao");
 
   if (usuario) {
+    localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
     alert(`Bem-vindo(a), ${usuario.nome || "cliente"}!`);
     window.location.href = "../aHome/home.html";
+
   } else if (profissional) {
 
     localStorage.setItem("profissionalLogado", JSON.stringify(profissional));
-
     alert(`Bem-vindo(a), ${profissional.nome || "profissional"}!`);
     window.location.href = "../../Profissional/Atribuidos.html";
   } else if (salao) {

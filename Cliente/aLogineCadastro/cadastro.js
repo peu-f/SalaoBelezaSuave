@@ -1,4 +1,3 @@
-document.addEventListener("DOMContentLoaded", validarForm);
 
 function validarForm() {
   const form = document.getElementById('login'); // ou 'form-cadastro'
@@ -12,27 +11,37 @@ function validarForm() {
     const senha = document.getElementById('senha').value;
     const confirmarSenha = document.getElementById('confirm').value;
 
+                              
+    let usuarios = JSON.parse(localStorage.getItem('usuarioCadastrado') || '[]');
+    
+    const emailLimpo = email.trim().toLowerCase();
+    
     if (nome === '' || email === '' || senha === '' || senha !== confirmarSenha) {
       alert("Preencha todos os dados corretamente e verifique se as senhas coincidem");
       return;
     }
-    alert("Usuário cadastrado com sucesso!");
-    const usuario = { 
+else if (usuarios.some(u => u.email.trim().toLowerCase() === emailLimpo)) {
+  alert('Email já cadastrado em outra conta.');
+  return;
+}
+
+
+
+    const novoUsuario = { 
+      id: usuarios.length + 1,
       nome,
       email,
       telefone,
       senha,
       tipoConta: 'cliente'
     };
-
-    const usuarios = JSON.parse(localStorage.getItem('usuarioCadastrado') || '[]');
-    usuarios.push(usuario);
-    localStorage.setItem('usuarioCadastrado', JSON.stringify(usuarios));
-
-
     
+    usuarios.push(novoUsuario);
+    localStorage.setItem('usuarioCadastrado', JSON.stringify(usuarios));
+    alert("Usuário cadastrado com sucesso!");
   });
 }
+
 function mascararTelefone(input) {
   let value = input.value.replace(/\D/g, '');
 

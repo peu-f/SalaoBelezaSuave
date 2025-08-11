@@ -54,6 +54,7 @@ body {
 /* Removemos as regras antigas que não são mais necessárias */
 .subtitle, .textos {
     display: none;
+    
 }
 .main-content {
     padding: 0 15px;
@@ -118,7 +119,7 @@ body {
 .service-name {
     font-size: 1rem;
     font-weight: 600;
-    color: var(--text-color);
+    color: var(--color-text);
     margin-bottom: 5px;
 }
 
@@ -126,11 +127,11 @@ body {
     font-size: 0.8rem;
     color: var(--label-color);
     margin-bottom: 8px;
+    font-weight: 600;
 }
 
 .btn-edit  {
     background-color: var(--color-primary);
-    border: none;
     border-radius: 5px;
     padding: 6px 12px;
     color: #fdf6ec;
@@ -138,10 +139,7 @@ body {
     align-self: flex-start;
     width: 100%;
 }
-.offer-card {
-    background-color: var(--card-background); /* Usa a cor secundária como fundo */
-    border: 2px solid var(--color-primary);
-}
+
 
 .offer-badge {
     background-color: var(--color-primary);
@@ -157,17 +155,15 @@ body {
 .offer-validity {
     font-size: 0.75rem;
     font-style: italic;
-    color: var(--text-color);
+    color: var(--color-text);
     margin-bottom: 10px;
 }
 
-.offer-card .btn-edit {
-    background-color: var(--color-primary);
+.offer-card {
+    background-color: var(--card-background);
     color: var(--color-bg);
     font-weight: bold;
 }
-
-
 /* Sidebar (Offcanvas) Styles */
 .offcanvas {
   background-color: var(--color-bg);

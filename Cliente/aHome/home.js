@@ -1,104 +1,100 @@
-function logout() {
-    // Limpa o que foi salvo localmente
-    localStorage.removeItem('usuarioCadastrado'); 
+// Espera todo o HTML da página carregar antes de executar o script
+document.addEventListener('DOMContentLoaded', function() {
 
-    // Redireciona para a página de boas-vindas
-    window.location.href = '../aInicio/boasVindas.html';
-}
-
-// Funções da sidebar (mantidas)
-function toggleSidebar() {
-    document.getElementById('sidebar').classList.toggle('open');
-}
-
-function toggleSubmenu(id) {
-    const submenu = document.getElementById(id);
-    if (submenu.style.display === 'block') {
-        submenu.style.display = 'none';
-    } else {
-        submenu.style.display = 'block';
-    }
-}
-
-function criarSlideOferta(oferta, index) {
-    const activeClass = index === 0 ? 'active' : '';
-    return `
-        <div class="slide ${activeClass}" id="slide-${oferta.id}">
-            <a href="../bServiços/Servicos.html?id=${oferta.id}" class="oferta-link">
-                <img src="${oferta.imagem}" alt="${oferta.titulo}" />
-                <div class="oferta-info">
-                    <h3>${oferta.titulo}</h3>
-                    <p>Preço: R$ ${parseFloat(oferta.preco).toFixed(2)}</p>
-                    <p>Válido até: ${new Date(oferta.validade).toLocaleDateString()}</p>
-                    <p>Serviços Incluídos: ${oferta.servicosIncluidos.join(', ')}</p>
-                </div>
-            </a>
-        </div>
-    `;
-}
-
-function carregarOfertasNoCarrossel() {
-    const ofertasContainer = document.getElementById('ofertas-carousel');
-    const radiosContainer = document.getElementById('radios-container');
-    const manualNavContainer = document.getElementById('manual-navigation');
+    // --- 1. ELEMENTOS PRINCIPAIS DA PÁGINA ---
+    const container = document.querySelector('.services-container');
+    const searchInput = document.querySelector('.search-input');
     
-    // Limpa o conteúdo existente para recarregar
-    ofertasContainer.innerHTML = '';
-    radiosContainer.innerHTML = '';
-    manualNavContainer.innerHTML = '';
-
+    // Elementos do filtro customizado
+    const filterWrapper = document.querySelector('.input-group');
+    const filterDisplay = document.getElementById('filter-display');
+    const filterSelect = document.getElementById('filter-select');
+    
+    // --- 2. DADOS DO LOCALSTORAGE ---
+    // ATENÇÃO: Verifique se a chave 'produtos' é a correta. Nos exemplos anteriores era 'produtosBelezaSuave'.
     const todosProdutos = JSON.parse(localStorage.getItem('produtos')) || [];
-    const ofertas = todosProdutos.filter(p => p.tipo === 'oferta');
 
-    if (ofertas.length > 0) {
-        ofertas.forEach((oferta, index) => {
-            ofertasContainer.innerHTML += criarSlideOferta(oferta, index);
-            
-            const radioInput = document.createElement('input');
-            radioInput.type = 'radio';
-            radioInput.name = 'radio-btn';
-            radioInput.id = `radio${index + 1}`;
-            radioInput.classList.add('sliders-input');
-            if (index === 0) radioInput.checked = true;
-            radiosContainer.appendChild(radioInput);
-            
-            const manualLabel = document.createElement('label');
-            manualLabel.htmlFor = `radio${index + 1}`;
-            manualLabel.classList.add('manual-btn');
-            manualNavContainer.appendChild(manualLabel);
-        });
+    // ===============================================================
+    // FUNÇÃO PARA APLICAR OS FILTROS E A BUSCA
+    // ===============================================================
+    function aplicarFiltros() {
+        const filtroSelecionado = filterSelect.value;
+        const termoBusca = searchInput.value.toLowerCase();
 
-        let slideIndex = 1;
-        const radios = document.querySelectorAll('.sliders-input');
+        let produtosFiltrados = todosProdutos;
 
-        let autoSlide = setInterval(() => {
-            slideIndex++;
-            if (slideIndex > ofertas.length) {
-                slideIndex = 1;
-            }
-            document.querySelector(`#radio${slideIndex}`).checked = true;
-        }, 4000);
+        // Etapa 1: Aplica o filtro do dropdown (serviço/oferta)
+        if (filtroSelecionado) { // Se um filtro foi selecionado (não está vazio)
+            produtosFiltrados = produtosFiltrados.filter(p => p.tipo === filtroSelecionado);
+        }
 
-        radios.forEach((radio, index) => {
-            radio.addEventListener('change', () => {
-                slideIndex = index + 1;
-                clearInterval(autoSlide);
-                autoSlide = setInterval(() => {
-                    slideIndex++;
-                    if (slideIndex > ofertas.length) {
-                        slideIndex = 1;
-                    }
-                    document.querySelector(`#radio${slideIndex}`).checked = true;
-                }, 4000);
-            });
-        });
-    } else {
-        ofertasContainer.innerHTML = '<p class="text-center mt-3">Nenhuma oferta cadastrada ainda.</p>';
+        // Etapa 2: Aplica o filtro da barra de busca sobre o resultado anterior
+        if (termoBusca) {
+            produtosFiltrados = produtosFiltrados.filter(p => 
+                p.titulo.toLowerCase().includes(termoBusca)
+            );
+        }
+
+        renderizarCards(produtosFiltrados);
     }
-}
 
+    // ===============================================================
+    // FUNÇÃO QUE DESENHA OS CARDS NA TELA
+    // ===============================================================
+    function renderizarCards(listaDeProdutos) {
+        container.innerHTML = ''; 
+
+        if (listaDeProdutos.length === 0) {
+            container.innerHTML = '<p class="text-center">Nenhum item encontrado.</p>';
+            return;
+        }
+
+        listaDeProdutos.forEach(produto => {
+            let cardHTML = '';
+            if (produto.tipo === 'servico') {
+                cardHTML = criarCardServico(produto);
+            } else if (produto.tipo === 'oferta') {
+                cardHTML = criarCardOferta(produto);
+            }
+            container.innerHTML += cardHTML;
+        });
+    }
+    
+    // --- 3. CONFIGURAÇÃO DOS "OUVINTES" (GATILHOS) ---
+    
+    // Gatilho para a barra de pesquisa
+    searchInput.addEventListener('input', aplicarFiltros);
+    
+    // Gatilho para o dropdown customizado
+    filterWrapper.addEventListener('click', function(event) {
+        if (event.target.classList.contains('dropdown-item')) {
+            event.preventDefault();
+            
+            const selectedValue = event.target.getAttribute('data-value');
+            const selectedText = event.target.textContent;
+
+            // Atualiza os campos visuais e o select escondido
+            filterDisplay.value = (selectedValue === "") ? "" : selectedText;
+            filterDisplay.placeholder = (selectedValue === "") ? "Filtrar por..." : selectedText;
+            filterSelect.value = selectedValue;
+            
+            // Chama a função principal de filtro
+            aplicarFiltros();
+        }
+    });
+
+    // --- 4. CARGA INICIAL ---
+    // Desenha todos os cards na tela pela primeira vez
+    renderizarCards(todosProdutos);
+});
+
+
+// ======================================================
+// FUNÇÕES QUE CRIAM O HTML DOS CARDS
+// ======================================================
 
 function criarCardServico(servico) {
+    const servicoId = servico.id || encodeURIComponent(servico.dataCadastro);
     return `
         <div class="col-12 col-md-6 col-lg-4">
             <div class="card h-100">
@@ -108,49 +104,36 @@ function criarCardServico(servico) {
                     </div>
                     <h3 class="card-title">${servico.titulo}</h3>
                     <p class="card-text">${servico.descricao}</p>
-                    <a href="../bServiços/Servicos.html?id=${servico.id}" class="btn btn-primary">Ver Detalhes</a>
+                    <a href="../bServiços/Servicos.html?id=${servicoId}" class="btn btn-primary">Ver Detalhes</a>
                 </div>
             </div>
         </div>
     `;
 }
 
-// Lógica principal
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // Carrega o carrossel de ofertas
-    carregarOfertasNoCarrossel();
+function criarCardOferta(oferta) {
+    const ofertaId = oferta.id || encodeURIComponent(oferta.dataCadastro);
+    const validadeFormatada = new Date(oferta.validade).toLocaleDateString('pt-BR', { timeZone: 'UTC' });
 
-    // Carrega os cards de serviços
-    const produtos = JSON.parse(localStorage.getItem('produtos')) || [];
-    const container = document.querySelector('.services-container'); 
-    container.innerHTML = '';
+    return `
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 offer-card">
+                <div class="card-body">
+                    <span class="offer-badge">OFERTA</span>
+                    <div class="Container" id="cardimg">
+                        <img src="${oferta.imagem}" alt="${oferta.titulo}">
+                    </div>
+                    <h3 class="card-title">${oferta.titulo}</h3>
+                    <p class="card-text">${oferta.descricao}</p>
+                    <p class="offer-validity">Válido até: ${validadeFormatada}</p>
+                    <a href="../bServiços/Servicos.html?id=${ofertaId}" class="btn btn-primary">Ver Oferta</a>
+                </div>
+            </div>
+        </div>
+    `;
+}
 
-    const servicos = produtos.filter(produto => produto.tipo === 'servico');
-
-    if (servicos.length > 0) {
-        servicos.forEach(servico => {
-            let cardHTML = criarCardServico(servico);
-            container.innerHTML += cardHTML;
-        });
-    } else {
-        container.innerHTML = '<p class="text-center">Nenhum serviço cadastrado ainda.</p>';
-    }
-    
-    // Lógica da barra de pesquisa
-    const searchInput = document.querySelector('.search-input'); 
-    const serviceContainer = document.querySelector('.services-container');
-    searchInput.addEventListener('input', (e) => {
-        const termoBusca = e.target.value.toUpperCase();
-        const serviceCards = serviceContainer.querySelectorAll('.card');
-        serviceCards.forEach(card => {
-            const cardTitleElement = card.querySelector('.card-title');
-
-            if (cardTitleElement) {
-                const tituloServico = cardTitleElement.textContent.toUpperCase();
-                const isMatch = tituloServico.includes(termoBusca);
-                card.style.display = isMatch ? '' : 'none';
-            }
-        });
-    });
-});
+function logout() {
+    localStorage.removeItem('usuarioCadastrado'); 
+    window.location.href = '../aInicio/boasVindas.html';
+}

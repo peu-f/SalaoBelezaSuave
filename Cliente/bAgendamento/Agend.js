@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
             Valor: R$ ${selectedService.preco}
         `;
 
-        const cliente = JSON.parse(localStorage.getItem('usuarioCadastrado') || "{}")
+        const cliente = JSON.parse(localStorage.getItem('usuarioLogado') || "{}")
 
 
         if (confirm(confirmationMessage)) {

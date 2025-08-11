@@ -1,115 +1,231 @@
 :root {
-    --font-poppins: 'Poppins', sans-serif;
-    --font-pacifico: 'Pacifico', cursive;
-  
-    --color-primary: #7b2cbf;
-    --color-secondary: #e0aaff;
-    --color-bg: #f8f0fb;
-    --color-text: #2c2c2c;
-  }
-  
-  body {
-    background-color: var(--color-bg);
-    color: var(--color-text);
-    font-family: var(--font-poppins);
-    padding-bottom: 80px; 
-  }
-  
-  /* Header Styles */
-  .main-header {
-      display: flex;
-      align-items: center;
-      padding: 0.75rem 1rem;
-      background-color: #fff;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      gap: 1rem; 
-  }
-  
-  /* Tornando a foto de perfil um botão funcional */
-  .profile-pic {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    overflow: hidden;
-    flex-shrink: 0;
-    padding: 0;
-    border: 2px solid var(--color-secondary);
+--font-poppins: 'Poppins', sans-serif;
+--font-pacifico: 'Pacifico', cursive;
+
+--color-primary: #7b2cbf;
+--color-secondary: #e0aaff;
+--color-bg: #f8f0fb;
+--color-text: #2c2c2c;
+}
+
+body {
+margin: 0;
+font-family: 'Poppins', sans-serif;
+background-color: var(--primary-background);
+display: flex;
+flex-direction: column; /* Organiza os elementos verticalmente */
+min-height: 100vh;
+color: var(--color-text);
+padding-bottom: 70px; 
+}
+
+/* Header Styles */ 
+.main-header {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
     background-color: #fff;
-    cursor: pointer;
-    transition: border-color 0.2s;
-  }
-  
-  .profile-pic:hover {
-      border-color: var(--color-primary);
-  }
-  
-  .person-circle {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      color: var(--color-primary);
-  }
-  
-  .search-bar-container {
-      position: relative;
-      flex-grow: 1;
-  }
-  
-  .search-input {
-      padding-left: 2.5rem;
-      border-radius: 20px;
-      background-color: var(--color-bg);
-      border-color: var(--color-secondary);
-  }
-  
-  .search-icon {
-      position: absolute;
-      left: 0.9rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--color-text);
-      opacity: 0.6;
-  }
-  /* Fim do Header Styles */
-  
-  .screen-section {
-      margin-top: 2rem;
-  }
-  
-  .card {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    gap: 1rem; 
+}
+
+/* Tornando a foto de perfil um botão funcional */
+.profile-pic {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+overflow: hidden;
+flex-shrink: 0;
+padding: 0;
+border: 2px solid var(--color-secondary);
+background-color: #fff;
+cursor: pointer;
+transition: border-color 0.2s;
+}
+
+.profile-pic:hover {
+    border-color: var(--color-primary);
+}
+
+.person-circle {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    color: var(--color-primary);
+}
+
+.search-bar-container {
+    position: relative;
+    flex-grow: 1;
+    max-width: 35rem;
+    width: 100%;
+}
+
+.search-input {
+    padding-left: 2.5rem;
+    border-radius: 20px;
+    background-color: var(--color-bg);
+    border-color: var(--color-secondary);
+    width: 100%;
+}
+
+.search-icon {
+    position: absolute;
+    left: 0.9rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text);
+    opacity: 0.6;
+}
+/* Mantém classes padrão e só adiciona personalização */
+.custom-filter {
+  border-radius: 50px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  max-width: 30rem;
+    width: 100%;
+    margin-left: 1rem;
+}
+
+.custom-filter .form-control {
+  border: none;
+  border-radius: 50px 0 0 50px;
+  padding: 10px 15px;
+}
+
+.custom-filter .form-control:focus {
+  box-shadow: none;
+}
+
+.filter-btn {
+  border: none;
+  border-radius: 0 50px 50px 0;
+  background-color: #7b2cbf;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.filter-btn:hover {
+  background-color: #5a1f8c;
+}
+
+.dropdown-menu {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+
+/* Fim do Header Styles */
+
+.screen-section {
+    margin-top: 2rem;
+}
+
+.card {
     border: none;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     transition: transform 0.2s;
-  }
-  #cardimg {
+}
+#cardimg {
+width: 100%;
+height: 200px;
+border-radius: 1.1rem;
+overflow: hidden;
+margin-bottom: 0.5rem;
+}
+#cardimg img {
+width: 100%;
+height: 100%;
+transition: transform 0.3s;
+}
+.btn-primary{
+background-color: var(--color-primary) !important; 
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#filter{
+width: 2rem;
+margin-right: 7%;
+border-radius: 50%;
+
+}
+/* Container principal do dropdown */
+.custom-select-wrapper {
+    position: relative;
+    display: inline-block;
     width: 100%;
-    height: 200px;
-    border-radius: 1.1rem;
-    overflow: hidden;
-    margin-bottom: 0.5rem;
-  }
-  #cardimg img {
-    width: 100%;
-    height: 100%;
-    transition: transform 0.3s;
-  }
-  .btn-primary{
-    background-color: var(--color-primary) !important; 
-  }
-  
-  .card-body {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-  }
+}
+
+/* O botão que o usuário vê */
+.custom-select-trigger {
+    display: flex;
+    align-items: center;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #6c757d; /* Cor do placeholder do Bootstrap */
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    cursor: pointer;
+}
+
+.custom-select-trigger i {
+    margin-right: 8px;
+}
+
+/* Container das opções que abre/fecha */
+.custom-select-options {
+    display: none; /* Começa escondido */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-top: none;
+    border-radius: 0 0 0.375rem 0.375rem;
+    z-index: 10;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* Mostra as opções quando a classe 'open' é adicionada via JS */
+.custom-select-wrapper.open .custom-select-options {
+    display: block;
+}
+
+/* Cada item da lista */
+.custom-option {
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+}
+
+.custom-option:hover {
+    background-color: #f8f9fa;
+}
   
   .card-title {
     color: var(--color-text);
     font-weight: 600;
   }
-  
+  .offer-badge {
+    background-color: var(--color-primary);
+    color: white;
+    font-weight: bold;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    align-self: flex-start; /* Alinha o selo à esquerda */
+    margin-bottom: 8px;
+}
   /* Sidebar (Offcanvas) Styles */
   .offcanvas {
       background-color: var(--color-bg);
@@ -140,122 +256,48 @@
   
   /* Bottom Navigation Bar Styles */
   .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 60px;
-      background-color: #ffffff;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
-  }
-  
-  .bottom-nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      color: var(--color-text);
-      flex-grow: 1;
-  }
-  
-  .bottom-nav-item i {
-      font-size: 1.5rem;
-  }
-  
-  .bottom-nav-item span {
-      font-size: 0.75rem;
-  }
-  
-  .bottom-nav-item.active {
-      color: var(--color-primary);
-  }
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px 0;
+    background-color: var(--card-background);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+}
 
-  .slider {
-    margin: 10% auto 0 auto;
-    margin-top: 0%;
-    width: 100%;
-    max-width: 800px;
-    height: auto;
-    overflow: hidden;
-    position: relative;
-    aspect-ratio: 2 / 1; /* ajusta altura conforme largura */
-  }
-  
-  .sliders {
-    width: 400%;
-    height: 100%;
+.bottom-nav .nav-item {
     display: flex;
-    transition: margin-left 0.5s ease-in-out;
-  }
-  
-  .sliders-input {
-    display: none;
-  }
-  
-  .slide {
-    width: 25%;
-    position: relative;
-  
-  }
-  
-  .slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  /* NAVEGAÇÃO MANUAL */
-  .manual-navigation {
-    position: absolute;
-    width: 100%;
-    bottom: 20px;
-    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    z-index: 2;
-  }
-  
-  .manual-btn {
-    border: 2px solid black;
-    border-radius: 50%;
-    width: 12px;
-    height: 12px;
-    cursor: pointer;
-    transition: 0.3s;
-    background-color: transparent;
-  }
-  
-  .manual-btn:not(:last-child) {
-    margin-right: 40px;
-  }
-  
-  .manual-btn:hover {
-    background-color: #ccc;
-  }
-  
-  #radio1:checked ~ .manual-navigation label[for="radio1"],
-  #radio2:checked ~ .manual-navigation label[for="radio2"],
-  #radio3:checked ~ .manual-navigation label[for="radio3"],
-  #radio4:checked ~ .manual-navigation label[for="radio4"] {
-    background-color: white;
-  }
-  
-  #radio1:checked ~ .sliders {
-    margin-left: 0;
-  }
-  #radio2:checked ~ .sliders {
-    margin-left: -100%;
-  }
-  #radio3:checked ~ .sliders {
-    margin-left: -200%;
-  }
-  #radio4:checked ~ .sliders {
-    margin-left: -300%;
-  }
-  
-  
-  
+    text-decoration: none;
+    color: var(--color-text);
+    flex-grow: 1;
+    padding: 5px;
+    transition: color 0.3s ease;
+}
+
+.bottom-nav .nav-item i {
+    font-size: 1.6em;
+    margin-bottom: 4px;
+}
+
+.bottom-nav .nav-item span {
+    font-size: 0.8em;
+    font-weight: 500;
+}
+
+.bottom-nav .nav-item.active {
+    color: var(--color-primary);
+}
+
+.bottom-nav .nav-item:hover {
+    color: var(--color-primary);
+}

@@ -9,55 +9,49 @@
     <link rel="stylesheet" href="../../fontes/fonts.css">
 </head>
 <body>
-    <header class="app-header">
-        <a href="../aHome/home.html" class="back-button" >&#x2039;</a>
-        <h1>Beleza Suave</h1>
-        <h2>Detalhes</h2>
-    </header>
+    <div class="mobile-container">
+        <header class="app-header">
+            <a href="../aHome/home.html" class="back-button">&#x2039;</a>
+            <h1>Detalhes</h1>
+        </header>
 
-    <main class="content-wrapper">
-        <section class="service-details">
-            <div class="service-image-container" id="service-image-container">
-                <img id="service-detail-image" src="" alt="Imagem do serviço">
+        <main class="content-wrapper">
+            <div class="service-image-header">
+                <img id="service-detail-image" src="https://i.imgur.com/r6nB54d.jpg" alt="Imagem do serviço">
             </div>
-            <div class="service-info">
-                <h3 id="service-detail-title"></h3>
-                <p id="service-detail-description"></p>
-                <div class="price-duration">
-                    <span class="price" id="service-detail-price"></span>
-                    <span class="duration" id="service-detail-duration">
-                        <span class="icon" id="duration-icon">&#x23F1;</span>
-                        <span id="duration-value"></span>
-                    </span>
-                </div>
-            </div>
-        </section>
 
-        <section class="reviews-section">
-            <div class="review-card">
-                <div class="reviewer-info">
-                    <img class="profile-icon" src="../../assets/homeimg.png">
-                    <span>Joana</span>
-                </div>
-                <div class="review-text">
-                    <a href="#" class="prev-review">&#x2039;</a>
-                    <p>Serviço muito bom, adorei!</p>
-                    <a href="#" class="next-review">&#x203A;</a>
-                </div>
-                <div class="stars">
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
-                </div>
-            </div>
-        </section>
-    </main>
+            <div class="card-content">
+                <section class="service-details">
+                    <h3 id="service-detail-title">Escova Modeladora</h3>
+                    
+                    <div class="price-duration-underlined">
+                        <span id="service-detail-price">R$ 60,00</span>
+                        <span>•</span>
+                        <span id="service-detail-duration">45 min</span>
+                    </div>
 
-    <footer class="app-footer">
-        <button id="schedule-button" class="schedule-button">Agendar</button>
-    </footer>
+                    <p id="service-detail-description">Deixa os fios alinhados e com movimento natural. Ideal para qualquer ocasião e tipo de cabelo, proporcionando um acabamento profissional e duradouro.</p>
+                </section>
+
+                <section class="reviews-section">
+                    <h4>Avaliação média dos clientes</h4>
+                    <div class="review-card">
+                        <div class="stars">
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                            <span class="star">&#9733;</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <button id="schedule-button" class="schedule-button" >Agendar</button>
+        </footer>
+    </div>
     <script src="Servicos.js"></script>
-</body>
+    </body>
 </html>

@@ -6,10 +6,10 @@
     --main-text-icons: #2c3e50;
     --success-confirmations: #a3e4d7;
     --light-gray: #f0f0f0;
-    --dark-gray: #666; /* For secondary text/placeholders */
-    --card-border: #dcdcdc; /* Adicionado para consistência */
-    --dark-gray-text: #555; /* Cor para textos secundários, como duração */
-    --white: #ffffff; /* Certifique-se que --white está definido, se usar no HTML */
+    --dark-gray: #666; 
+    --card-border: #dcdcdc; 
+    --dark-gray-text: #555; 
+    --white: #ffffff; 
 }
 
 body {
@@ -127,6 +127,7 @@ body {
     align-items: center;
     gap: 15px;
     width: 100%; 
+    max-width: 300px;
     background-color: var(--secondary-background);
     border-radius: 15px;
     padding: 15px;
@@ -236,7 +237,8 @@ body {
 .confirm-button-container {
     text-align: center;
     padding: 20px 0; /* Ajustado padding */
-    margin-top: auto; /* Empurra o botão para o fundo */
+    margin-top: auto;
+    margin-right: 10%; /* Empurra o botão para o fundo */
 }
 
 .confirm-button {
@@ -249,8 +251,7 @@ body {
     font-weight: 600;
     cursor: pointer;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    width: 80%;
+    width: 85%;
     max-width: 300px;
 }
 
@@ -265,11 +266,11 @@ body {
 
 /* Bottom Navigation */
 .bottom-nav {
-    position: fixed; /* Fixa a barra de navegação no final da tela */
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 70px; /* Ajuste a altura conforme necessário */
+    height: 70px; 
     display: flex;
     justify-content: space-around;
     align-items: center;
