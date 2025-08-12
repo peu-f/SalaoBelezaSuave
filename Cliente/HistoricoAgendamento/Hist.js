@@ -460,11 +460,14 @@ function obterAvaliacoes() {
 
 // Função para debug das avaliações
 function debugAvaliacoes() {
+  const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || '{}');
   console.log('=== DEBUG AVALIAÇÕES ===');
   const avaliacoes = obterAvaliacoes();
   console.log('Total de avaliações:', avaliacoes.length);
   avaliacoes.forEach((av, i) => {
     console.log(`Avaliação ${i + 1}:`, {
+      clienteId: usuarioLogado.id,
+      clienteNome: usuarioLogado.nome,
       rating: av.rating,
       comment: av.comment,
       data: av.dataFormatada,

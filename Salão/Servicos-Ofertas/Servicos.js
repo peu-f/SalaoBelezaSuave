@@ -59,3 +59,17 @@ function createOfferCardHTML(produto) {
         </section>
     `;
 }
+function logout() {
+    // Limpa o que foi salvo localmente
+    localStorage.removeItem('saloes');  // ou clear()
+  
+    // Aqui já dá pra colocar chamada à API de logout quando tiver backend:
+    // fetch('/api/logout', { method: 'POST', credentials: 'include' })
+    //   .then(() => {
+    //     // redireciona depois que o servidor confirmar logout
+    //     window.location.href = '/login.html';
+    //   });
+  
+    // Por enquanto, só redireciona direto
+    window.location.href = '../../cliente/aInicio/boasVindas.html';
+  }

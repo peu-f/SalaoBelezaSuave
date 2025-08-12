@@ -123,3 +123,8 @@ document.addEventListener('DOMContentLoaded', function() {
         reader.readAsDataURL(imagem);
     });
 });
+function logout() {
+    // Limpa o que foi salvo localmente
+    localStorage.removeItem('saloes');  // ou clear()
+    window.location.href = '../../cliente/aInicio/boasVindas.html';
+  }

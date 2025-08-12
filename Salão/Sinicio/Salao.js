@@ -1,6 +1,6 @@
 function logout() {
     // Limpa o que foi salvo localmente
-    localStorage.removeItem('usuarioCadastrado'); // ou clear()
+    localStorage.removeItem('saloes');  // ou clear()
   
     // Aqui já dá pra colocar chamada à API de logout quando tiver backend:
     // fetch('/api/logout', { method: 'POST', credentials: 'include' })
@@ -10,7 +10,7 @@ function logout() {
     //   });
   
     // Por enquanto, só redireciona direto
-    window.location.href = '../aInicio/boasVindas.html';
+    window.location.href = '../../cliente/aInicio/boasVindas.html';
   }
 
 function listarProfissionais() {

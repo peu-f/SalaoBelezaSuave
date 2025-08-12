@@ -3,11 +3,12 @@ const fotoInput = document.getElementById('fotoPerfil');
 const previewImage = document.getElementById('previewImage');
 const fileName = document.getElementById('fileName');
 
-// Função global para logout, se necessário em outras páginas
+
 function logout() {
-    alert('Você foi desconectado!');
-    window.location.href = '../login.html'; // Redireciona para a página de login
-}
+        // Limpa o que foi salvo localmente
+        localStorage.removeItem('saloes'); 
+        window.location.href = '../../cliente/aInicio/boasVindas.html';
+      } // Redireciona para a página de login
 
 // Preview de imagem reaproveitável
 function mostrarPreviewImagem(file) {
