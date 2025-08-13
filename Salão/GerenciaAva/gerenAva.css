@@ -2,7 +2,6 @@ body {
     background-color: var(--color-bg);
     color: var(--color-text);
     font-family: var(--font-poppins);
-    padding-bottom: 80px; 
   }
   
     /* Header Styles */
@@ -23,7 +22,6 @@ body {
   height: 40px;
   border-radius: 50%;
   overflow: hidden;
-  flex-shrink: 0;
   padding: 0;
   border: 2px solid var(--color-secondary);
   background-color: #fff;
@@ -45,9 +43,9 @@ body {
   
 .card {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  justify-content: center;
   padding: 1rem;
   border: none;
   border-radius: 12px;
@@ -80,7 +78,7 @@ body {
   margin-bottom: 0.25rem;
   width: 100%;
 }
-.card-body button{
+.btn{
 background-color: var(--color-primary);
   border: none;
   padding: 0.5rem;
@@ -96,6 +94,23 @@ background-color: var(--color-primary);
   color: red;
   border: 1px solid;
   width: 70%;
+}
+.rating {
+  font-size: 2em; 
+  color: #ccc; 
+  cursor: pointer;
+  display: flex; 
+  justify-content: center; 
+  gap: 5px; 
+}
+
+.rating .star {
+  transition: color 0.2s ease;
+}
+
+/* Estilo para garantir que as estrelas à direita da hover não fiquem douradas */
+.rating .star:not(.selected):hover ~ .star {
+  color: #ccc;
 }
 .buttons{
   display: flex;

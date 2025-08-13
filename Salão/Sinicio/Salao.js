@@ -32,7 +32,7 @@ function listarProfissionais() {
         <h5 class="card-title">${profissional.nome}</h5>
         <p class="card-text">Especialidade: ${profissional.especialidade}</p>
         <p class="card-text">Horário: ${profissional.horaInicio} - ${profissional.horaFim}</p>
-         <a href="../GerenciarProfissionais/gp.html" type="button" class="btn btn-primary">Gerenciar</a>
+         <a href="../GerenciarProfissionais/gp.html?email=${profissional.email}" type="button" class="btn btn-primary">Gerenciar</a>
       </div>`;
       container.appendChild(card);
   });              

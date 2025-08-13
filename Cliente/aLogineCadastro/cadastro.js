@@ -38,6 +38,7 @@ else if (usuarios.some(u => u.email.trim().toLowerCase() === emailLimpo)) {
     
     usuarios.push(novoUsuario);
     localStorage.setItem('usuarioCadastrado', JSON.stringify(usuarios));
+    localStorage.setItem('usuarioLogadoId', novoUsuario.id);
     alert("Usuário cadastrado com sucesso!");
   });
 }

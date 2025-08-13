@@ -1,6 +1,7 @@
 let agendamentoParaCancelar = null;
 let agendamentoParaAvaliar = null; // Variável global para avaliação
 let swiperInstance = null;
+let selectedRating = 0; // Variável global para rating
 
 function criarCardAgendamento(agendamento = {}, isConcluido = false, index = 0) {
   const imagem = agendamento.imagem || '../../assets/maquiagem.jpg';
@@ -273,13 +274,120 @@ function debugAgendamentos() {
   console.log('=== FIM DEBUG ===');
 }
 
+// Função para salvar avaliação diretamente no agendamento
+function salvarAvaliacaoNoAgendamento(avaliacao) {
+  console.log('=== SALVANDO AVALIAÇÃO NO AGENDAMENTO ===');
+  
+  const agendamentos = JSON.parse(localStorage.getItem('agendamentos') || '[]');
+  const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || '{}');
+  
+  console.log('Total agendamentos:', agendamentos.length);
+  console.log('Usuário logado para salvar:', usuarioLogado);
+  console.log('Avaliação recebida:', avaliacao);
+  
+  // Filtrar agendamentos do cliente
+  const agendamentosDoCliente = agendamentos.filter(ag => 
+    ag.clienteId === usuarioLogado.id || ag.clienteNome === usuarioLogado.nome
+  );
+  
+  console.log('Agendamentos do cliente filtrados:', agendamentosDoCliente);
+  
+  // Encontrar o agendamento correto
+  const indexLocal = parseInt(avaliacao.agendamentoIndex);
+  console.log('Index local do agendamento:', indexLocal);
+  
+  if (indexLocal < agendamentosDoCliente.length) {
+    const agendamentoParaAvaliarObj = agendamentosDoCliente[indexLocal];
+    console.log('Agendamento selecionado:', agendamentoParaAvaliarObj);
+    
+    // Encontrar índice no array completo
+    const indexGlobal = agendamentos.findIndex(ag => ag.id === agendamentoParaAvaliarObj.id);
+    console.log('Index global encontrado:', indexGlobal);
+    
+    if (indexGlobal !== -1) {
+      // Adicionar avaliação ao agendamento
+      agendamentos[indexGlobal].avaliacao = {
+        serviceName: agendamentos[indexGlobal].service, // Nome do serviço
+        clienteId: usuarioLogado.id,
+        clienteNome: usuarioLogado.nome,
+        rating: avaliacao.rating,
+        comment: avaliacao.comment,
+        data: avaliacao.data,
+        dataFormatada: avaliacao.dataFormatada,
+        avaliado: true
+      };
+      
+      console.log('Agendamento atualizado:', agendamentos[indexGlobal]);
+      
+      // Salvar agendamentos atualizados
+      localStorage.setItem('agendamentos', JSON.stringify(agendamentos));
+      
+      // Verificar se salvou corretamente
+      const verificacao = JSON.parse(localStorage.getItem('agendamentos'));
+      console.log('Verificação pós-save:', verificacao[indexGlobal]);
+      
+      return true;
+    } else {
+      console.error('Agendamento não encontrado no array global');
+      return false;
+    }
+  } else {
+    console.error('Index inválido para agendamentos do cliente');
+    return false;
+  }
+}
+
+// Função para verificar todas as avaliações salvas
+function verificarAvaliacoesSalvas() {
+  console.log('=== VERIFICAÇÃO DE AVALIAÇÕES ===');
+  
+  const avaliacoes = JSON.parse(localStorage.getItem('avaliacoes') || '[]');
+  console.log('Avaliações no localStorage:', avaliacoes);
+  
+  const agendamentos = JSON.parse(localStorage.getItem('agendamentos') || '[]');
+  const agendamentosComAvaliacao = agendamentos.filter(ag => ag.avaliacao);
+  console.log('Agendamentos com avaliação:', agendamentosComAvaliacao);
+  
+  return { avaliacoes, agendamentosComAvaliacao };
+}
+
+// Funções para o sistema de estrelas
+function highlightStars(rating) {
+  const stars = document.querySelectorAll('.star');
+  stars.forEach((star, index) => {
+    if (index < rating) {
+      star.classList.remove('bi-star');
+      star.classList.add('bi-star-fill');
+      star.style.color = '#ffc107';
+    } else {
+      star.classList.remove('bi-star-fill');
+      star.classList.add('bi-star');
+      star.style.color = '#dee2e6';
+    }
+  });
+}
+
+function resetRating() {
+  selectedRating = 0;
+  const commentField = document.getElementById('ratingComment');
+  if (commentField) commentField.value = '';
+  highlightStars(0);
+}
+
+// Função de logout
+function logout() {
+  localStorage.removeItem('usuarioLogado');
+  alert('Você foi desconectado!');
+  window.location.href = '../aInicio/boasVindas.html';
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   console.log('DOM carregado, inicializando aplicação...');
   
   debugAgendamentos();
   renderAgendamentos();
 
-  // Event listener para cancelamento e avaliação
+  // Event listener único para cliques (CORRIGIDO - SEM DUPLICAÇÃO)
   document.addEventListener('click', function (e) {
     // Para cancelamento
     if (e.target && e.target.classList.contains('cancel')) {
@@ -301,12 +409,27 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
     
-    // Para avaliação - captura qual agendamento está sendo avaliado
+    // Para avaliação - CORRIGIDO
     if (e.target && e.target.textContent.trim() === 'Avaliar') {
       const card = e.target.closest('[data-index]');
       if (card) {
-        agendamentoParaAvaliar = card.dataset.index;
-        console.log('Agendamento selecionado para avaliação:', agendamentoParaAvaliar);
+        agendamentoParaAvaliar = parseInt(card.dataset.index);
+        console.log('=== AGENDAMENTO SELECIONADO PARA AVALIAÇÃO ===');
+        console.log('Index do card:', card.dataset.index);
+        console.log('Agendamento para avaliar definido como:', agendamentoParaAvaliar);
+        
+        // Verificar se o agendamento existe
+        const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || '{}');
+        const agendamentos = JSON.parse(localStorage.getItem('agendamentos') || '[]');
+        const agendamentosDoCliente = agendamentos.filter(ag => 
+          ag.clienteId === usuarioLogado.id || ag.clienteNome === usuarioLogado.nome
+        );
+        
+        if (agendamentoParaAvaliar < agendamentosDoCliente.length) {
+          console.log('Agendamento encontrado:', agendamentosDoCliente[agendamentoParaAvaliar]);
+        } else {
+          console.error('Agendamento não encontrado no index:', agendamentoParaAvaliar);
+        }
       }
     }
   });
@@ -334,7 +457,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Sistema de avaliação por estrelas
   const stars = document.querySelectorAll('.star');
-  let selectedRating = 0;
 
   stars.forEach((star, index) => {
     star.addEventListener('mouseover', function() {
@@ -351,12 +473,35 @@ document.addEventListener('DOMContentLoaded', function () {
   const submitRatingBtn = document.getElementById('submitRatingBtn');
   if (submitRatingBtn) {
     submitRatingBtn.addEventListener('click', function() {
-      if (selectedRating > 0) {
+      console.log('=== INÍCIO DEBUG AVALIAÇÃO ===');
+      console.log('Rating selecionado:', selectedRating);
+      console.log('Agendamento para avaliar:', agendamentoParaAvaliar);
+      
+      if (selectedRating > 0 && agendamentoParaAvaliar !== null) {
         const comment = document.getElementById('ratingComment').value;
+        const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || '{}');
         
-        // Criar objeto da avaliação
+        console.log('Usuário logado:', usuarioLogado);
+        console.log('Comentário:', comment);
+        
+        // Primeiro, obter o nome do serviço
+        const agendamentos = JSON.parse(localStorage.getItem('agendamentos') || '[]');
+        const agendamentosDoCliente = agendamentos.filter(ag => 
+          ag.clienteId === usuarioLogado.id || ag.clienteNome === usuarioLogado.nome
+        );
+        
+        let serviceName = '';
+        if (agendamentoParaAvaliar < agendamentosDoCliente.length) {
+          serviceName = agendamentosDoCliente[agendamentoParaAvaliar].service || '';
+          console.log('Nome do serviço obtido:', serviceName);
+        }
+        
+        // Criar objeto da avaliação com o nome do serviço
         const novaAvaliacao = {
           agendamentoIndex: agendamentoParaAvaliar,
+          clienteId: usuarioLogado.id,
+          clienteNome: usuarioLogado.nome,
+          serviceName: serviceName, // Agora será preenchido corretamente
           rating: selectedRating,
           comment: comment,
           data: new Date().toISOString(),
@@ -364,122 +509,44 @@ document.addEventListener('DOMContentLoaded', function () {
           id: Date.now() // ID único baseado no timestamp
         };
         
+        console.log('Nova avaliação criada:', novaAvaliacao);
+        
         // Recuperar avaliações existentes ou criar array vazio
         const avaliacoesExistentes = JSON.parse(localStorage.getItem('avaliacoes') || '[]');
+        console.log('Avaliações existentes antes:', avaliacoesExistentes);
         
         // Adicionar nova avaliação ao array
         avaliacoesExistentes.push(novaAvaliacao);
         
         // Salvar no localStorage
         localStorage.setItem('avaliacoes', JSON.stringify(avaliacoesExistentes));
+        console.log('Avaliações após salvar:', JSON.parse(localStorage.getItem('avaliacoes')));
         
         // Também salvar a avaliação no próprio agendamento
-        salvarAvaliacaoNoAgendamento(novaAvaliacao);
-        
-        console.log('Avaliação enviada:', novaAvaliacao);
-        console.log('Todas as avaliações:', avaliacoesExistentes);
+        const sucessoAgendamento = salvarAvaliacaoNoAgendamento(novaAvaliacao);
+        console.log('Sucesso ao salvar no agendamento:', sucessoAgendamento);
         
         const modal = bootstrap.Modal.getInstance(document.getElementById('ratingModal'));
         if (modal) modal.hide();
-        
         resetRating();
         alert('Avaliação enviada com sucesso!');
         
         // Limpar referência
         agendamentoParaAvaliar = null;
         
+        console.log('=== FIM DEBUG AVALIAÇÃO ===');
+        
       } else {
-        alert('Por favor, selecione uma avaliação.');
+        if (selectedRating === 0) {
+          alert('Por favor, selecione uma avaliação (estrelas).');
+        }
+        if (agendamentoParaAvaliar === null) {
+          alert('Erro: Agendamento não identificado. Tente fechar e abrir a avaliação novamente.');
+        }
       }
     });
-  }
-
-  function highlightStars(rating) {
-    stars.forEach((star, index) => {
-      if (index < rating) {
-        star.classList.remove('bi-star');
-        star.classList.add('bi-star-fill');
-        star.style.color = '#ffc107';
-      } else {
-        star.classList.remove('bi-star-fill');
-        star.classList.add('bi-star');
-        star.style.color = '#dee2e6';
-      }
-    });
-  }
-
-  function resetRating() {
-    selectedRating = 0;
-    const commentField = document.getElementById('ratingComment');
-    if (commentField) commentField.value = '';
-    highlightStars(0);
   }
 
   // Atualiza a visualização periodicamente
   setInterval(atualizarVisualizacao, 10000);
 });
-
-// Função para salvar avaliação diretamente no agendamento
-function salvarAvaliacaoNoAgendamento(avaliacao) {
-  const agendamentos = JSON.parse(localStorage.getItem('agendamentos') || '[]');
-  const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || '{}');
-  
-  // Filtrar agendamentos do cliente
-  const agendamentosDoCliente = agendamentos.filter(ag => 
-    ag.clienteId === usuarioLogado.id || ag.clienteNome === usuarioLogado.nome
-  );
-  
-  // Encontrar o agendamento correto
-  const indexLocal = parseInt(avaliacao.agendamentoIndex);
-  if (indexLocal < agendamentosDoCliente.length) {
-    const agendamentoParaAvaliarObj = agendamentosDoCliente[indexLocal];
-    
-    // Encontrar índice no array completo
-    const indexGlobal = agendamentos.findIndex(ag => ag.id === agendamentoParaAvaliarObj.id);
-    
-    if (indexGlobal !== -1) {
-      // Adicionar avaliação ao agendamento
-      agendamentos[indexGlobal].avaliacao = {
-        rating: avaliacao.rating,
-        comment: avaliacao.comment,
-        data: avaliacao.data,
-        avaliado: true
-      };
-      
-      // Salvar agendamentos atualizados
-      localStorage.setItem('agendamentos', JSON.stringify(agendamentos));
-      console.log('Avaliação salva no agendamento:', agendamentos[indexGlobal]);
-    }
-  }
-}
-
-// Função para recuperar todas as avaliações
-function obterAvaliacoes() {
-  return JSON.parse(localStorage.getItem('avaliacoes') || '[]');
-}
-
-// Função para debug das avaliações
-function debugAvaliacoes() {
-  const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || '{}');
-  console.log('=== DEBUG AVALIAÇÕES ===');
-  const avaliacoes = obterAvaliacoes();
-  console.log('Total de avaliações:', avaliacoes.length);
-  avaliacoes.forEach((av, i) => {
-    console.log(`Avaliação ${i + 1}:`, {
-      clienteId: usuarioLogado.id,
-      clienteNome: usuarioLogado.nome,
-      rating: av.rating,
-      comment: av.comment,
-      data: av.dataFormatada,
-      agendamento: av.agendamentoIndex
-    });
-  });
-  console.log('=== FIM DEBUG AVALIAÇÕES ===');
-}
-
-// Função de logout
-function logout() {
-  localStorage.removeItem('usuarioLogado');
-  alert('Você foi desconectado!');
-  window.location.href = '../aInicio/boasVindas.html';
-}

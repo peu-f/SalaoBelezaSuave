@@ -12,32 +12,32 @@
 <body>
     <div class="header text-center">
         <a class="back-button" onclick="history.back()">&#x2039;</a>
-        <h1 class="w-100">
-        Beleza Suave</h1>
+        <h1 class="w-100">Beleza Suave</h1>
         <h4>Perfil</h4>
     </div>
-        <div class="container text-center">
-            <div name="user" class="container" user-profile">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16" id="user-icon">
+    <div class="container text-center">
+        <div name="user" class="container user-profile">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16" id="user-icon">
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                 <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                </svg>
-
-                <h2>Nome do Usuário</h2>
+            </svg>
+            <h2>Nome do Usuário</h2> </div>
+    </div>
+    <div class="container col-12 text-center">
+        <div class="user-info">
+            <h3 class="p-3 fw-bold">Informações do Usuário</h3>
+            <div id="infos" class="w-100">
+                <span>Email: <p>user@gmail.com</p></span>
+                <span>Telefone: <p>(99) 99999-9999</p></span>
+                <span>Senha: <p>**************</p></span>
             </div>
         </div>
-        <div class="container col-12 text-center">
-            <div class="user-info">
-                <h3 class="p-3 fw-bold">Informações do Usuário</h3>
-                <div id="infos" class=" w-100">
-                    <span>Email: <p>user@gmail.com</p></span>
-                    <span>Telefone: <p>(99) 99999-9999</p></span>
-                    <span>Senha: <p>**************</p></span>
-                </div>
-            </div>
-                
-                <button id="button-edit" class="btn btn-primary">Alterar Informações 
-                    <i class="bi bi-pencil-square p-1"></i>
-                </button>
+        <button id="button-edit" class="btn btn-primary">Alterar Informações 
+            <i class="bi bi-pencil-square p-1"></i>
+        </button>
+    </div>
+
+    <script src="perfil.js"></script>
+
 </body>
 </html>
