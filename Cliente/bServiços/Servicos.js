@@ -28,21 +28,6 @@ function calcularMediaAvaliacoes() {
     };
 }
 
-// Função para criar estrelas compatíveis com o HTML da página
-function criarEstrelasParaPagina(rating) {
-    let estrelasHTML = '';
-    for (let i = 1; i <= 5; i++) {
-        if (i <= Math.round(rating)) {
-            // Estrela preenchida (dourada)
-            estrelasHTML += `<span class="star filled">&#9733;</span>`;
-        } else {
-            // Estrela vazia (cinza)
-            estrelasHTML += `<span class="star">&#9733;</span>`;
-        }
-    }
-    return estrelasHTML;
-}
-
 // Função para exibir a média na página do serviço
 function exibirMediaAvaliacoes() {
     const dadosMedia = calcularMediaAvaliacoes();
@@ -72,7 +57,7 @@ function exibirMediaAvaliacoes() {
         
         infoMedia.innerHTML = `
             <div class="rating-details">
-                <span class="rating-number">${mediaFormatada}</span>
+                <span class="rating-number" style="color: ${getCorPorNota(dadosMedia.media)};">${mediaFormatada}</span>
                 <span class="rating-count">(${dadosMedia.total} avaliação${dadosMedia.total > 1 ? 'ões' : ''})</span>
             </div>
         `;
@@ -96,6 +81,73 @@ function exibirMediaAvaliacoes() {
     }
 }
 
+// Função auxiliar para obter cor baseada na nota
+function getCorPorNota(rating) {
+    const notaArredondada = Math.round(rating);
+    
+    if (notaArredondada <= 2) {
+        return '#dc3545'; // vermelho
+    } else if (notaArredondada === 3) {
+        return '#fd7e14'; // laranja
+    } else if (notaArredondada === 4) {
+        return '#ffc107'; // dourado
+    } else {
+        return '#28a745'; // verde
+    }
+}
+
+// Função para criar estrelas compatíveis com o HTML da página
+function criarEstrelasParaPagina(rating) {
+    const notaArredondada = Math.round(rating);
+    let cor = '';
+    
+    // Define cor baseada na nota
+    if (notaArredondada <= 2) {
+        cor = '#dc3545'; // vermelho para notas baixas (1-2)
+    } else if (notaArredondada === 3) {
+        cor = '#fd7e14'; // laranja para nota média (3)
+    } else if (notaArredondada === 4) {
+        cor = '#ffc107'; // dourado para nota boa (4)
+    } else {
+        cor = '#28a745'; // verde para nota excelente (5)
+    }
+    
+    let estrelasHTML = '';
+    // Mostra apenas o número de estrelas correspondente à nota
+    for (let i = 1; i <= notaArredondada; i++) {
+        estrelasHTML += `<span class="star filled" style="color: ${cor};">&#9733;</span>`;
+    }
+    
+    return estrelasHTML;
+}
+
+// Para usar na página do serviço - adicione no seu DOMContentLoaded:
+document.addEventListener('DOMContentLoaded', function() {
+    // ... seu código existente ...
+    
+    // Adicione esta linha para mostrar a média
+    exibirMediaAvaliacoes();
+});
+
+// Para atualizar a média após uma nova avaliação ser publicada
+// (adicione no final da função publicarAvaliacao)
+function publicarAvaliacao(index) {
+    const avaliacoes = JSON.parse(localStorage.getItem('avaliacoes') || '[]');
+    
+    if (index < avaliacoes.length) {
+        // Marcar como publicada
+        avaliacoes[index].publicada = true;
+        localStorage.setItem('avaliacoes', JSON.stringify(avaliacoes));
+        
+        alert('Avaliação publicada com sucesso!');
+        listarAvaliacoes(); // Recarrega a lista
+        
+        // Atualiza a média se estivermos na página do serviço
+        if (typeof exibirMediaAvaliacoes === 'function') {
+            exibirMediaAvaliacoes();
+        }
+    }
+}
 // SEU CÓDIGO ORIGINAL COM A CHAMADA ADICIONADA:
 document.addEventListener('DOMContentLoaded', function() {     
     const urlParams = new URLSearchParams(window.location.search);     

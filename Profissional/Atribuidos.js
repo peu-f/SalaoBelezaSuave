@@ -4,6 +4,20 @@ function logout() {
     window.location.href = '../../Cliente/aInicio/boasVindas.html';
 }
 
+//mostrar user
+document.addEventListener("DOMContentLoaded", () =>{
+const profissionalLogado = JSON.parse(localStorage.getItem("profissionalLogado"));
+const nomeUsuario = document.getElementById("username");
+
+if (profissionalLogado && profissionalLogado.nome && nomeUsuario) {
+  nomeUsuario.textContent = `${profissionalLogado.nome}`;
+} else {
+  // Se não tiver usuário logado, força logout ou redireciona
+  
+  
+}
+})
+
 // Função para marcar agendamento como concluído - ATUALIZADA
 function marcarComoConcluido(agendamentoId) {
     const agendamentos = JSON.parse(localStorage.getItem('agendamentos') || '[]');

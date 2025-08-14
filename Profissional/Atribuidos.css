@@ -17,6 +17,10 @@ body {
   font-family: 'Pacifico', cursive;
   font-size: 2rem;
   text-align: center;
+  font-size: 1.4rem;
+}
+.main-header p{
+  font-size: 1rem;
 }
 
 .profile-pic {
@@ -36,7 +40,26 @@ body {
   object-fit: cover;
   color: var(--color-primary);
 }
+/* Mantenha seus estilos existentes e adicione: */
 
+.user-container {
+  width: 40px; /* Mesma largura do botão esquerdo para equilíbrio */
+  flex-shrink: 0;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  width: 27%;
+  flex-direction: row;
+}
+
+.user {
+  white-space: nowrap; 
+  margin-left: auto;
+  font-size: 0.9rem;
+  padding: 10%;
+  padding-top: 40%;  
+  
+}
 /* Cards - Mobile First */
 .card {
   display: flex;

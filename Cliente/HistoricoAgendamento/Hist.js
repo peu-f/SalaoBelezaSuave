@@ -11,10 +11,14 @@ function criarCardAgendamento(agendamento = {}, isConcluido = false, index = 0) 
   const date = agendamento.date || '';
   const time = agendamento.time || '';
 
+  const jaAvaliado = agendamento.avaliacao && agendamento.avaliacao.avaliado;
+
   const botoes = isConcluido
-    ? `<button class="reschedule" style="color:#fff" data-bs-toggle="modal" data-bs-target="#ratingModal">Avaliar</button>`
-    : `<button class="cancel" data-index="${index}" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">Cancelar</button>
-       <button class="reschedule" style="color:#fff" data-bs-toggle="modal" data-bs-target="#confirmRescheduleModal">Reagendar</button>`;
+  ? jaAvaliado
+  ? `<button class="reschedule" disabled style="background-color:var(--border-color); opacity:0.6; cursor:not-allowed">Avaliado</button>`
+  : `<button class="reschedule" style="color:#fff" data-bs-toggle="modal" data-bs-target="#ratingModal">Avaliar</button>`
+: `<button class="cancel" data-index="${index}" data-bs-toggle="modal" data-bs-target="#confirmCancelModal">Cancelar</button>
+   <button class="reschedule" style="color:#fff" data-bs-toggle="modal" data-bs-target="#confirmRescheduleModal">Reagendar</button>`;
 
   const cardClass = isConcluido ? 'post-card' : 'post-card';
 
@@ -544,6 +548,7 @@ document.addEventListener('DOMContentLoaded', function () {
           alert('Erro: Agendamento não identificado. Tente fechar e abrir a avaliação novamente.');
         }
       }
+      
     });
   }
 
