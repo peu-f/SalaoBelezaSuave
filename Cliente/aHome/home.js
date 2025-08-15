@@ -17,26 +17,26 @@ document.addEventListener('DOMContentLoaded', function() {
     // ===============================================================
     // FUNÇÃO PARA APLICAR OS FILTROS E A BUSCA
     // ===============================================================
-    function aplicarFiltros() {
-        const filtroSelecionado = filterSelect.value;
-        const termoBusca = searchInput.value.toLowerCase();
+    // function aplicarFiltros() {
+    //     const filtroSelecionado = filterSelect.value;
+    //     const termoBusca = searchInput.value.toLowerCase();
 
-        let produtosFiltrados = todosProdutos;
+    //     let produtosFiltrados = todosProdutos;
 
-        // Etapa 1: Aplica o filtro do dropdown (serviço/oferta)
-        if (filtroSelecionado) { // Se um filtro foi selecionado (não está vazio)
-            produtosFiltrados = produtosFiltrados.filter(p => p.tipo === filtroSelecionado);
-        }
+    //     // Etapa 1: Aplica o filtro do dropdown (serviço/oferta)
+    //     if (filtroSelecionado) { // Se um filtro foi selecionado (não está vazio)
+    //         produtosFiltrados = produtosFiltrados.filter(p => p.tipo === filtroSelecionado);
+    //     }
 
-        // Etapa 2: Aplica o filtro da barra de busca sobre o resultado anterior
-        if (termoBusca) {
-            produtosFiltrados = produtosFiltrados.filter(p => 
-                p.titulo.toLowerCase().includes(termoBusca)
-            );
-        }
+    //     // Etapa 2: Aplica o filtro da barra de busca sobre o resultado anterior
+    //     if (termoBusca) {
+    //         produtosFiltrados = produtosFiltrados.filter(p => 
+    //             p.titulo.toLowerCase().includes(termoBusca)
+    //         );
+    //     }
 
-        renderizarCards(produtosFiltrados);
-    }
+    //     renderizarCards(produtosFiltrados);
+    // }
 
     // ===============================================================
     // FUNÇÃO QUE DESENHA OS CARDS NA TELA
@@ -63,25 +63,25 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- 3. CONFIGURAÇÃO DOS "OUVINTES" (GATILHOS) ---
     
     // Gatilho para a barra de pesquisa
-    searchInput.addEventListener('input', aplicarFiltros);
+    // searchInput.addEventListener('input', aplicarFiltros);
     
     // Gatilho para o dropdown customizado
-    filterWrapper.addEventListener('click', function(event) {
-        if (event.target.classList.contains('dropdown-item')) {
-            event.preventDefault();
+    // filterWrapper.addEventListener('click', function(event) {
+    //     if (event.target.classList.contains('dropdown-item')) {
+    //         event.preventDefault();
             
-            const selectedValue = event.target.getAttribute('data-value');
-            const selectedText = event.target.textContent;
+    //         const selectedValue = event.target.getAttribute('data-value');
+    //         const selectedText = event.target.textContent;
 
-            // Atualiza os campos visuais e o select escondido
-            filterDisplay.value = (selectedValue === "") ? "" : selectedText;
-            filterDisplay.placeholder = (selectedValue === "") ? "Filtrar por..." : selectedText;
-            filterSelect.value = selectedValue;
+    //         // Atualiza os campos visuais e o select escondido
+    //         filterDisplay.value = (selectedValue === "") ? "" : selectedText;
+    //         filterDisplay.placeholder = (selectedValue === "") ? "Filtrar por..." : selectedText;
+    //         filterSelect.value = selectedValue;
             
-            // Chama a função principal de filtro
-            aplicarFiltros();
-        }
-    });
+    //         // Chama a função principal de filtro
+    //         aplicarFiltros();
+    //     }
+    // });
 
     // --- 4. CARGA INICIAL ---
     // Desenha todos os cards na tela pela primeira vez

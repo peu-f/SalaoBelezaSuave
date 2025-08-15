@@ -150,10 +150,20 @@ document.addEventListener('DOMContentLoaded', () => {
         // Gera todos os horários possíveis com a duração do serviço
         const allPossibleTimesForProfessional = generateTimeSlots(startHour, startMinute, endHour, endMinute, appointmentDurationMinutes);
 
+        // Obtém o ID do agendamento a ser substituído (se existir)
+        const urlParams = new URLSearchParams(window.location.search);
+        const reagendandoId = urlParams.get('reagendandoId');
+
         // Filtra os horários já agendados
         const allAppointments = loadAllAppointments();
         const occupiedTimes = allAppointments
-            .filter(app => app.date === selectedDate && app.professionalId === selectedProfessionalId)
+            .filter(app => {
+                // Se for reagendamento, não considere o horário do agendamento original como ocupado
+                if (reagendandoId && app.id === reagendandoId) {
+                    return false;
+                }
+                return app.date === selectedDate && app.professionalId === selectedProfessionalId;
+            })
             .map(app => app.time);
 
         // Popula o dropdown apenas com os horários disponíveis
@@ -174,17 +184,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    //Salvar
-    function saveAppointment(appointmentData) {
+    // FUNÇÃO PRINCIPAL DE SALVAR/REAGENDAR
+    function saveOrUpdateAppointment(appointmentData) {
         let allAppointments = loadAllAppointments();
+        
+        // Verifica se há um ID de reagendamento na URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const reagendandoId = urlParams.get('reagendandoId');
+
+        if (reagendandoId) {
+            // Se for reagendamento, encontra o agendamento antigo e o remove
+            const indexParaRemover = allAppointments.findIndex(app => app.id === reagendandoId);
+            if (indexParaRemover !== -1) {
+                allAppointments.splice(indexParaRemover, 1);
+            }
+            appointmentData.id = reagendandoId; // Mantém o mesmo ID para o novo agendamento
+        } else {
+            appointmentData.id = 'app_' + Date.now(); // Cria um novo ID se não for reagendamento
+        }
+
         allAppointments.push(appointmentData);
         localStorage.setItem('agendamentos', JSON.stringify(allAppointments));
 
         alert('Agendamento confirmado com sucesso!');
         window.location.href = '../HistoricoAgendamento/Hist.html';
     }
-
-
     
     confirmButton.addEventListener('click', () => {
         const storedServiceData = localStorage.getItem('produtoSelecionado');
@@ -201,7 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const professionalName = selectedProfessionalOption.textContent;
         const time = appointmentTimeSelect.value;
         
-
         if (!date || !professionalId || !time) {
             alert('Por favor, preencha todos os campos do agendamento.');
             return;
@@ -218,11 +241,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const cliente = JSON.parse(localStorage.getItem('usuarioLogado') || "{}")
 
-
         if (confirm(confirmationMessage)) {
-            saveAppointment({
-                id: 'app_' + Date.now(),
-                clienteNome : cliente.nome,
+            const appointmentData = {
+                clienteNome: cliente.nome,
                 clienteId: cliente.id,
                 service: selectedService.titulo,
                 duracao: selectedService.duracao,
@@ -232,8 +253,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 time,
                 imagem: selectedService.imagem,
                 price: `R$ ${selectedService.preco}`
-                
-            });
+            };
+
+            saveOrUpdateAppointment(appointmentData);
         }
     });
 
@@ -244,6 +266,4 @@ document.addEventListener('DOMContentLoaded', () => {
     
     appointmentDateInput.addEventListener('change', updateAvailableTimes);
     professionalSelect.addEventListener('change', updateAvailableTimes);
-
-
 });

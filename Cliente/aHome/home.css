@@ -77,42 +77,6 @@ transition: border-color 0.2s;
     color: var(--color-text);
     opacity: 0.6;
 }
-/* Mantém classes padrão e só adiciona personalização */
-.custom-filter {
-  border-radius: 50px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  max-width: 30rem;
-    width: 100%;
-    margin-left: 1rem;
-}
-
-.custom-filter .form-control {
-  border: none;
-  border-radius: 50px 0 0 50px;
-  padding: 10px 15px;
-}
-
-.custom-filter .form-control:focus {
-  box-shadow: none;
-}
-
-.filter-btn {
-  border: none;
-  border-radius: 0 50px 50px 0;
-  background-color: #7b2cbf;
-  color: white;
-  transition: background-color 0.3s ease;
-}
-
-.filter-btn:hover {
-  background-color: #5a1f8c;
-}
-
-.dropdown-menu {
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
 
 
 /* Fim do Header Styles */
@@ -227,32 +191,6 @@ border-radius: 50%;
     margin-bottom: 8px;
 }
   /* Sidebar (Offcanvas) Styles */
-  .offcanvas {
-      background-color: var(--color-bg);
-  }
-  
-  .offcanvas-header {
-      border-bottom: 1px solid var(--color-secondary);
-  }
-  
-  .offcanvas-title {
-      color: var(--color-primary);
-  }
-  
-  .offcanvas-body .nav-link {
-      color: var(--color-text);
-      font-size: 1.1rem;
-      padding: 0.8rem 1rem;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-  }
-  
-  .offcanvas-body .nav-link.active,
-  .offcanvas-body .nav-link:hover {
-      background-color: var(--color-secondary);
-      color: var(--color-primary);
-  }
   
   /* Bottom Navigation Bar Styles */
   .bottom-nav {

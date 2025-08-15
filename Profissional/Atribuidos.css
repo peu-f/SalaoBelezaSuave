@@ -57,7 +57,8 @@ body {
   margin-left: auto;
   font-size: 0.9rem;
   padding: 10%;
-  padding-top: 40%;  
+  padding-top: 40%; 
+  overflow: hidden;
   
 }
 /* Cards - Mobile First */

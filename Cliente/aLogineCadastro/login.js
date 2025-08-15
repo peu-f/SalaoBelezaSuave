@@ -57,7 +57,8 @@ function processarLogin(event) {
 
     localStorage.setItem("profissionalLogado", JSON.stringify(profissional));
     alert(`Bem-vindo(a), ${profissional.nome || "profissional"}!`);
-    window.location.href = "../../Profissional/Atribuidos.html";
+    window.location.href = '../../Profissional/Atribuidos.html';
+
   } else if (salao) {
 
 

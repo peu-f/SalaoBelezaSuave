@@ -33,6 +33,7 @@ body {
 }
 
 .back-button {
+  cursor: pointer;
   font-size: 4em;
   color: #2c3e50;
   text-decoration: none;
