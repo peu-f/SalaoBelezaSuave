@@ -40,14 +40,6 @@
     
     <!--A foto de perfil se tornou um button, que é o gatilho-->
    <header class="main-header w-100 d-flex justify-content-between align-items-center px-3">
-  <button class="profile-pic btn" type="button" data-bs-toggle="offcanvas"
-    data-bs-target="#sidebar" aria-controls="sidebar">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="person-circle" viewBox="0 0 16 16">
-      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
-      <path fill-rule="evenodd"
-        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
-    </svg>
-  </button>
   <h1 class="text-center m-0 flex-grow-1">Beleza Suave</h1>
   <!-- Espaço fantasma só pra equilibrar visualmente o botão do lado esquerdo -->
   <div style="width: 40px;"></div>
@@ -55,14 +47,18 @@
 
         <!--data-bs-toggle="offcanvas": Este atributo diz ao Bootstrap: "Quando este botão for clicado, ative a funcionalidade de offcanvas".-->
         <!--data-bs-target="#sidebar": Este diz qual elemento offcanvas deve ser aberto. Ele aponta para o elemento que tem o id="sidebar".-->
-
-
         <!--Cards-->
         <main class="container">
   <section id="listarProfissionais" class="screen-section">
     <!-- os cards virão via JavaScript -->
   </section>
 </main>
+
+  <div class="add container text-center my-3 w-100">
+    <button class="btn btn-primary w-100" id="button-add" onclick="window.location.href='../AdicionarProfissionais/addprofissionais.html'">
+      <i class="addp bi bi-person-fill-add p-2"></i>Adicionar Novo profissional
+    </button>
+  </div>
 
    <nav class="bottom-nav">
   <a href="Salao.html" class="bottom-nav-item active">
@@ -80,7 +76,7 @@
     <span>Serviços</span>
   </a>
 
-  <a href="../addServicos/addServico.html" class="bottom-nav-item">
+  <a onclick="logout()" class="bottom-nav-item">
     <i class="bi bi-box-arrow-left"></i>
     <span>Saír</span>
   </a>

@@ -16,32 +16,14 @@
   font-family: 'Pacifico', cursive;
   font-size: 2rem;
   text-align: center;
+  padding-left: 3rem;
 }
 
-.profile-pic {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-  flex-shrink: 0;
-  padding: 0;
-  border: 2px solid var(--color-secondary);
-  background-color: #fff;
-  
-}
+/* Fim do Header Styles */
 
-.person-circle {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  color: var(--color-primary);
+.screen-section {
+  margin-top: 2rem;
 }
-
-  /* Fim do Header Styles */
-  
-  .screen-section {
-      margin-top: 2rem;
-  }
   
 .card {
   display: flex;
@@ -90,36 +72,22 @@ background-color: var(--color-primary);
   font-weight: 500;
   width: 100%;
 }
-  
-  /* Sidebar (Offcanvas) Styles */
-  .offcanvas {
-      background-color: var(--color-bg);
+.add button{
+  background-color: var(--color-primary);
+  padding: 0.5rem;
+  border-radius: 3px;
+  color: var(--color-bg);
+  cursor: pointer;
+  font-weight: 500;
+  border-color: var(--color-primary);
+  border-radius: 10px;
+  font-size: 1.2rem;
+}
+.addp {
+  font-size: 1.5rem;
+    color: var(--color-bg);
   }
-  
-  .offcanvas-header {
-      border-bottom: 1px solid var(--color-secondary);
-  }
-  
-  .offcanvas-title {
-      font-family: var(--font-pacifico);
-      color: var(--color-primary);
-  }
-  
-  .offcanvas-body .nav-link {
-      color: var(--color-text);
-      font-size: 1.1rem;
-      padding: 0.8rem 1rem;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-  }
-  
-  .offcanvas-body .nav-link.active,
-  .offcanvas-body .nav-link:hover {
-      background-color: var(--color-secondary);
-      color: var(--color-primary);
-  }
-  
+
   /* Bottom Navigation Bar Styles */
   .bottom-nav {
       position: fixed;

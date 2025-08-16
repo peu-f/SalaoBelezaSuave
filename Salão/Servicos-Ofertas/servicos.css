@@ -23,29 +23,9 @@ body {
     font-size: 2rem; /* Tamanho ajustado */
     color: var(--color-text);
     margin: 0; /* Remove margens desnecessárias */
+    padding-left: 5.5rem;
 }
 
-/* Botão de perfil (sem alterações, mas mantido para contexto) */
-.profile-pic {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    overflow: hidden;
-    flex-shrink: 0;
-    padding: 0;
-    border: 2px solid var(--color-primary);
-    background-color: #fff;
-    cursor: pointer;
-}
-
-.person-circle {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    color: var(--color-primary);
-}
-
-/* Espaço vazio para alinhar o título ao centro corretamente */
 .header-spacer {
     width: 40px; /* Mesma largura do botão de perfil */
     height: 70px;
@@ -58,23 +38,6 @@ body {
 }
 .main-content {
     padding: 0 15px;
-}
-.profile-pic {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-  flex-shrink: 0;
-  padding: 0;
-  border: 2px solid var(--color-secondary);
-  background-color: #fff;
-}
-
-.person-circle {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  color: var(--color-primary);
 }
 
 
@@ -164,35 +127,22 @@ body {
     color: var(--color-bg);
     font-weight: bold;
 }
-/* Sidebar (Offcanvas) Styles */
-.offcanvas {
-  background-color: var(--color-bg);
-}
 
-.offcanvas-header {
-  border-bottom: 1px solid var(--border-color);
+.add button{
+  background-color: var(--color-primary);
+  padding: 0.5rem;
+  border-radius: 10px;
+  color: var(--color-bg);
+  cursor: pointer;
+  font-weight: 500;
+  border-color: var(--color-primary);
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  
 }
-
-.offcanvas-title {
-  font-family: var(--font-poppins);
-  color: var(--color-primary);
+.add i{
+    font-size: 1.5rem;
 }
-
-.offcanvas-body .nav-link {
-  color: var(--color-text);
-  font-size: 1.1rem;
-  padding: 0.8rem 1rem;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-}
-
-.offcanvas-body .nav-link.active,
-.offcanvas-body .nav-link:hover {
-  background-color: var(--color-secondary);
-  color: var(--color-primary);
-}
-
 
 /* --- Barra de Navegação Inferior --- */
 .bottom-nav {

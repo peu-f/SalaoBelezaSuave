@@ -1,8 +1,8 @@
 function carregarPerfil() {
 
-    const usuarioLogadoId = localStorage.getItem('usuarioLogadoId');
-    const usuarios = JSON.parse(localStorage.getItem('usuarioCadastrado')) || [];
-    const usuarioAtual = usuarios.find(usuario => usuario.id == usuarioLogadoId);
+    const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado')) || '[]';
+    const usuarios = JSON.parse(localStorage.getItem('usuarioCadastrado')) || '[]'
+    const usuarioAtual = usuarios.find(usuario => usuario.id == usuarioLogado.id);
 
     if (usuarioAtual) {
         document.querySelector('.container.user-profile h2').textContent = usuarioAtual.nome;
@@ -16,6 +16,11 @@ function carregarPerfil() {
     } else {
         alert('Usuário não logado ou não encontrado.');
     }
+}
+
+function logout() {
+    localStorage.removeItem('usuarioLogado');
+    window.location.href = '../aInicio/boasVindas.html';
 }
 
 window.onload = carregarPerfil;

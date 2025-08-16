@@ -14,6 +14,7 @@ body {
   align-items: center;
   min-height: 100vh;
   overflow-x: hidden;
+  margin-bottom: 80px;
 }
 
 .container {
@@ -38,8 +39,18 @@ body {
   position: relative;
   z-index: 10;
 }
+.back-button{
+    cursor: pointer;
+    position: absolute;
+    font-size: 4em;
+    color: #2c3e50;
+    text-decoration: none;
+    line-height: 1;
+    left: 1rem;
+    top: 0rem;
+}
 
-.header-left, .header-right {
+.header-right {
   width: 40px;
   text-align: center;
 }
@@ -60,56 +71,6 @@ body {
   font-size: 36px;
   color: var(--color-text);
   margin: 0;
-}
-.profile-pic {
-  width: 100px;
-  height: 60px;
-  border-radius: 50%;
-  overflow: hidden;
-  flex-shrink: 0;
-  padding: 0;
-  border: 1px solid var(--color-secondary);
-  background-color: #fff;
-  cursor: pointer;
-  margin: 20px auto;
-  margin-left: -2rem;
-}
-
-.person-circle {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  color: var(--color-primary);
-}
-
-
-/* Sidebar (Offcanvas) Styles */
-.offcanvas {
-  background-color: var(--color-bg);
-}
-
-.offcanvas-header {
-  border-bottom: 1px solid var(--border-color);
-}
-
-.offcanvas-title {
-  font-family: var(--font-poppins);
-  color: var(--color-primary);
-}
-
-.offcanvas-body .nav-link {
-  color: var(--color-text);
-  font-size: 1.1rem;
-  padding: 0.8rem 1rem;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-}
-
-.offcanvas-body .nav-link.active,
-.offcanvas-body .nav-link:hover {
-  background-color: var(--color-secondary);
-  color: var(--color-primary);
 }
 
 /* === CONTEÚDO PRINCIPAL === */
@@ -236,6 +197,42 @@ footer {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+.bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: #ffffff;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+  }
+  
+  .bottom-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: var(--color-text);
+      flex-grow: 1;
+  }
+  
+  .bottom-nav-item i {
+      font-size: 1.5rem;
+  }
+  
+  .bottom-nav-item span {
+      font-size: 0.75rem;
+  }
+  
+  .bottom-nav-item.active {
+      color: var(--color-primary);
+  }
+
 
 /* === RESPONSIVO === */
 @media (max-width: 768px) {
