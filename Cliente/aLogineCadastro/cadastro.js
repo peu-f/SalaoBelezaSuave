@@ -40,6 +40,7 @@ else if (usuarios.some(u => u.email.trim().toLowerCase() === emailLimpo)) {
     localStorage.setItem('usuarioCadastrado', JSON.stringify(usuarios));
     localStorage.setItem('usuarioLogadoId', novoUsuario.id);
     alert("Usuário cadastrado com sucesso!");
+    window.location.href = 'login.html'; 
   });
 }
 

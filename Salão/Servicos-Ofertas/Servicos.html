@@ -11,99 +11,98 @@
     <link rel="stylesheet" href="../../fontes/fonts.css">
 </head>
 <body>
-        <!--A side abr foi feita utilizando o componente Offcanvas do bootstrap, sem script-->
-    <!-- <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="sidebarLabel">Menu</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-<div class="offcanvas-body">
-<ul class="navbar-nav">
-    <li class="nav-item">
-        <a class="nav-link" href="../Sinicio/Salao.html"><i class="bi bi-house-door-fill me-2"></i>Inicio</a>
-    </li>
-    <li class="nav-item">
-            <a href="../AdicionarProfissionais/addprofissionais.html" class="nav-link"><i class="bi bi-person-add me-2"></i>Adicionar Profissionais</a>
-        </li>
-        <li class="nav-item">
-            <a href="../GerenciaAva/gerenAva.html" class="nav-link"><i class="bi bi-chat-heart me-2"></i>Gerenciar Avaliações</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" onclick="logout()"><i class="bi bi-box-arrow-right me-2"></i>Sair</a>
-    </li>
-</ul>
-</div>
-</div> -->
-    <header class="main-headerw-100 d-flex justify-content-between align-items-center px-3">
-  <!-- <button class="profile-pic btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="person-circle" viewBox="0 0 16 16">
-                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-            </svg>
-        </button> -->
-
+    <header class="main-header">
+        <div class="header-spacer" style="width: 40px;"></div>
         <h1 id="title">Beleza Suave</h1>
-
-        <div class="header-spacer"></div>
+        <div class="header-spacer" style="width: 40px;"></div>
     </header>
     
     <main class="main-content">
-        <div class="services-container">
-            <section class="service-card">
-                <div class="service-details">
-                    <h3 class="service-name">Manicure Completa</h3>
-                    <p class="service-description">Cuidado completo para suas unhas, com cutilagem e esmaltação.</p>
-                    <p class="service-info">Duração: 60 min | Preço: R$ 35,00</p>
-                    <button class="btn-edit">Editar</button>
-                </div>
-                <div class="service-image-container">
-                    <img src="https://i.imgur.com/example.png" alt="Manicure" class="service-image">
-                </div>
-            </section>
-
-    <section class="service-card offer-card">
-        <div class="service-details">
-        <span class="offer-badge">OFERTA</span>
-        <h3 class="service-name">Pacote Beleza Completa</h3>
-        <p class="service-description">Um dia de rainha com os nossos melhores tratamentos inclusos.</p>
-        <p class="service-info">Preço: R$ 150,00</p>
-        <p class="offer-validity">Válido até: 31/12/2025</p>
-        <button class="btn-edit">Editar</button>
+        <!-- Container dos Serviços (CORRIGIDO - removido container duplicado) -->
+        <div class="services-container" id="servicesContainer">
+            <!-- Serviços serão carregados aqui -->
         </div>
-        <div class="service-image-container">
-        <img src="https://i.imgur.com/example3.png" alt="Pacote de Beleza" class="service-image">
-        </div>
-    </section>
 
+        <!-- Modal de Edição -->
+        <div class="modal fade" id="editModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Editar Serviço</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editForm">
+                            <input type="hidden" id="editIndex">
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Nome do Serviço</label>
+                                <input type="text" class="form-control" id="editTitulo" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Descrição</label>
+                                <textarea class="form-control" id="editDescricao" rows="3" required></textarea>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Preço (R$)</label>
+                                <input type="number" class="form-control" id="editPreco" step="0.01" required>
+                            </div>
+                            
+                            <div class="mb-3" id="duracaoField">
+                                <label class="form-label">Duração (minutos)</label>
+                                <input type="number" class="form-control" id="editDuracao">
+                            </div>
+                            
+                            <div class="mb-3" id="validadeField" style="display:none;">
+                                <label class="form-label">Válido até</label>
+                                <input type="date" class="form-control" id="editValidade">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Imagem</label>
+                                <input type="file" class="form-control" id="editImagem" accept="image/*">
+                                <div id="imagePreview" class="mt-2"></div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="salvarEdicao()">Salvar</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
+
     <div class="add container text-center w-100">
-    <button class="btn btn-primary w-100" id="button-add" onclick="window.location.href='../addServicos/addServico.html'">
-      <i class="bi bi-patch-plus-fill p-2"></i>Adicionar serviço/Oferta
-    </button>
-  </div>
+        <button class="btn btn-primary w-100" id="button-add" onclick="window.location.href='../addServicos/addServico.html'">
+            <i class="bi bi-patch-plus-fill p-2"></i>Adicionar serviço/Oferta
+        </button>
+    </div>
 
     <nav class="bottom-nav">
-  <a href="../Sinicio/Salao.html" class="bottom-nav-item ">
-    <i class="bi bi-person-vcard"></i>
-    <span>Profissionais</span>
-  </a>
+        <a href="../Sinicio/Salao.html" class="bottom-nav-item">
+            <i class="bi bi-person-vcard"></i>
+            <span>Profissionais</span>
+        </a>
 
-  <a href="../GerenciaAva/gerenAva.html" class="bottom-nav-item">
-    <i class="bi bi-chat-dots"></i>
-    <span>Avaliações</span>
-  </a>
+        <a href="../GerenciaAva/gerenAva.html" class="bottom-nav-item">
+            <i class="bi bi-chat-dots"></i>
+            <span>Avaliações</span>
+        </a>
 
-  <a href="../Servicos-Ofertas/Servicos.html" class="bottom-nav-item active">
-    <i class="bi bi-book"></i>
-    <span>Serviços</span>
-  </a>
+        <a href="../Servicos-Ofertas/Servicos.html" class="bottom-nav-item active">
+            <i class="bi bi-book"></i>
+            <span>Serviços</span>
+        </a>
 
-  <a onclick="logout()" class="bottom-nav-item">
-    <i class="bi bi-box-arrow-left"></i>
-    <span>Saír</span>
-  </a>
-</nav>
+        <a onclick="logout()" class="bottom-nav-item">
+            <i class="bi bi-box-arrow-left"></i>
+            <span>Saír</span>
+        </a>
+    </nav>
     <script src="Servicos.js"></script>
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
