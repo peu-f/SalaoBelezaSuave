@@ -27,6 +27,9 @@ function calcularMediaAvaliacoes() {
         temAvaliacoes: true
     };
 }
+document.addEventListener('DOMContentLoaded', function() { 
+
+})
 
 // Função para exibir a média na página do serviço
 function exibirMediaAvaliacoes() {
@@ -156,9 +159,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const serviceImage = document.getElementById('service-detail-image');     
     const serviceTitle = document.getElementById('service-detail-title');     
     const serviceDescription = document.getElementById('service-detail-description');     
-    const servicePrice = document.getElementById('service-detail-price');     
-    const durationIcon = document.getElementById('duration-icon');     
-    const durationValue = document.getElementById('duration-value'); // pode ser null     
+    const servicePrice = document.getElementById('service-detail-price');          
+    const durationValue = document.getElementById('service-detail-duration');    
     const serviceDurationElement = document.getElementById('service-detail-duration');      
 
     if (!itemId) {         
@@ -184,14 +186,17 @@ document.addEventListener('DOMContentLoaded', function() {
     if (serviceDescription) serviceDescription.textContent = selectedItem.descricao || '';     
     if (servicePrice) servicePrice.textContent = `R$ ${parseFloat(selectedItem.preco).toFixed(2).replace('.', ',')}`;      
 
+    // CORREÇÃO AQUI: Garantir que a duração seja atualizada corretamente
     if (selectedItem.tipo === 'servico' && selectedItem.duracao) {         
-        if (durationValue) durationValue.textContent = `${selectedItem.duracao} MIN`;         
-        if (serviceDurationElement) serviceDurationElement.style.display = 'inline-block';         
-        if (durationIcon) durationIcon.style.display = 'inline-block';     
+        if (durationValue) {
+            durationValue.textContent = `${selectedItem.duracao} MIN`;
+            console.log('Duração definida:', selectedItem.duracao); // Para debug
+        }             
     } else if (selectedItem.tipo === 'oferta' && selectedItem.validade) {         
-        if (durationValue) durationValue.textContent = `Válido até: ${new Date(selectedItem.validade).toLocaleDateString('pt-BR')}`;         
+        if (durationValue) {
+            durationValue.textContent = `Válido até: ${new Date(selectedItem.validade).toLocaleDateString('pt-BR')}`;
+        }
         if (serviceDurationElement) serviceDurationElement.style.display = 'inline-block';         
-        if (durationIcon) durationIcon.style.display = 'none';     
     } else {         
         if (serviceDurationElement) serviceDurationElement.style.display = 'none';     
     }      

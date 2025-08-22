@@ -56,6 +56,30 @@ form.addEventListener('submit', function (e) {
         return;
     }
 
+
+    let usuarios = JSON.parse(localStorage.getItem('usuarioCadastrado') || '[]');
+    const profissionais = JSON.parse(localStorage.getItem("profissionais") || "[]");
+    
+    const emailLimpo = email.trim().toLowerCase();
+    
+    
+if (usuarios.some(u => u.email.trim().toLowerCase() === emailLimpo)) {
+  alert('Email já cadastrado em outra conta.');
+  return;
+}
+    if (usuarios.some(u => u.telefone === telefone)) {
+      alert('Telefone já cadastrado em outra conta.');
+      return
+    }
+if (profissionais.some(p => p.telefone === telefone)) {
+      alert('Telefone já cadastrado em outra conta profissional.');
+      return;
+    }
+if (profissionais.some(p => p.email.trim().toLowerCase() === emailLimpo)) {
+      alert('Email já cadastrado em outra conta profissional.');  
+      return;
+}
+
     // Lê a imagem como Base64 (se houver) e salva o profissional
     if (file) {
         const reader = new FileReader();

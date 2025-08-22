@@ -13,6 +13,7 @@ function validarForm() {
 
                               
     let usuarios = JSON.parse(localStorage.getItem('usuarioCadastrado') || '[]');
+    const profissionais = JSON.parse(localStorage.getItem("profissionais") || "[]");
     
     const emailLimpo = email.trim().toLowerCase();
     
@@ -24,7 +25,18 @@ else if (usuarios.some(u => u.email.trim().toLowerCase() === emailLimpo)) {
   alert('Email já cadastrado em outra conta.');
   return;
 }
-
+    else if (usuarios.some(u => u.telefone === telefone)) {
+      alert('Telefone já cadastrado em outra conta.');
+      return
+    }
+else if (profissionais.some(p => p.telefone === telefone)) {
+      alert('Telefone já cadastrado em outra conta profissional.');
+      return;
+    }
+else if (profissionais.some(p => p.email.trim().toLowerCase() === emailLimpo)) {
+      alert('Email já cadastrado em outra conta profissional.');  
+      return;
+}
 
 
     const novoUsuario = { 

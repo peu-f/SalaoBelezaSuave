@@ -196,6 +196,7 @@ footer {
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-bottom: 2rem;
 }
 .bottom-nav {
       position: fixed;

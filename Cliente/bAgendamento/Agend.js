@@ -84,6 +84,19 @@ document.addEventListener('DOMContentLoaded', () => {
     appointmentDateInput.value = `${year}-${month}-${day}`;
     appointmentDateInput.min = `${year}-${month}-${day}`;
 
+    // Converte horário "HH:MM" para minutos desde 00:00
+    function timeToMinutes(timeStr) {
+        const [hours, minutes] = timeStr.split(':').map(Number);
+        return hours * 60 + minutes;
+    }
+
+    // Converte minutos desde 00:00 para formato "HH:MM"
+    function minutesToTime(totalMinutes) {
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = totalMinutes % 60;
+        return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+    }
+
     // Gera horários possíveis com base em um intervalo
     function generateTimeSlots(startHour, startMinute, endHour, endMinute, intervalMinutes) {
         const times = [];
@@ -102,6 +115,38 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         return times;
+    }
+
+    // Nova função: Verifica se um horário está disponível considerando intervalos de 10 minutos
+    function isTimeSlotAvailable(proposedTime, serviceDuration, existingAppointments) {
+        const proposedStartMinutes = timeToMinutes(proposedTime);
+        const proposedEndMinutes = proposedStartMinutes + parseInt(serviceDuration);
+        const INTERVALO_MINUTOS = 10; // Intervalo obrigatório entre atendimentos
+
+        // Verifica conflito com cada agendamento existente
+        for (const appointment of existingAppointments) {
+            const existingStartMinutes = timeToMinutes(appointment.time);
+            const existingEndMinutes = existingStartMinutes + parseInt(appointment.duracao);
+
+            // Verifica se há sobreposição considerando os intervalos
+            // O novo agendamento não pode começar antes do fim do anterior + intervalo
+            // O novo agendamento não pode terminar depois do início do próximo - intervalo
+            
+            const proposedStartWithBuffer = proposedStartMinutes;
+            const proposedEndWithBuffer = proposedEndMinutes + INTERVALO_MINUTOS;
+            const existingStartWithBuffer = existingStartMinutes;
+            const existingEndWithBuffer = existingEndMinutes + INTERVALO_MINUTOS;
+
+            // Verifica conflitos em ambas as direções
+            const conflictoBefore = (proposedStartMinutes < existingEndWithBuffer && proposedEndMinutes > existingStartMinutes);
+            const conflitoAfter = (existingStartMinutes < proposedEndWithBuffer && existingEndMinutes > proposedStartMinutes);
+
+            if (conflictoBefore || conflitoAfter) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     // Atualiza os horários disponíveis com base na data e profissional
@@ -147,27 +192,39 @@ document.addEventListener('DOMContentLoaded', () => {
         const endHour = parseInt(endHourStr, 10);
         const endMinute = parseInt(endMinuteStr, 10);
 
-        // Gera todos os horários possíveis com a duração do serviço
-        const allPossibleTimesForProfessional = generateTimeSlots(startHour, startMinute, endHour, endMinute, appointmentDurationMinutes);
+        // Gera horários possíveis em intervalos menores (15 minutos) para mais flexibilidade
+        const allPossibleTimesForProfessional = generateTimeSlots(startHour, startMinute, endHour, endMinute, 15);
 
         // Obtém o ID do agendamento a ser substituído (se existir)
         const urlParams = new URLSearchParams(window.location.search);
         const reagendandoId = urlParams.get('reagendandoId');
 
-        // Filtra os horários já agendados
+        // Obtém todos os agendamentos do dia para o profissional selecionado
         const allAppointments = loadAllAppointments();
-        const occupiedTimes = allAppointments
-            .filter(app => {
-                // Se for reagendamento, não considere o horário do agendamento original como ocupado
-                if (reagendandoId && app.id === reagendandoId) {
-                    return false;
-                }
-                return app.date === selectedDate && app.professionalId === selectedProfessionalId;
-            })
-            .map(app => app.time);
+        const existingAppointments = allAppointments.filter(app => {
+            // Se for reagendamento, não considere o horário do agendamento original
+            if (reagendandoId && app.id === reagendandoId) {
+                return false;
+            }
+            return app.date === selectedDate && app.professionalId === selectedProfessionalId;
+        });
+
+        // Filtra horários disponíveis considerando a duração do serviço e intervalo de 10 minutos
+        const availableTimes = allPossibleTimesForProfessional.filter(time => {
+            // Verifica se o horário + duração do serviço não ultrapassa o horário de fim do profissional
+            const timeInMinutes = timeToMinutes(time);
+            const serviceEndTime = timeInMinutes + appointmentDurationMinutes;
+            const professionalEndTime = endHour * 60 + endMinute;
+            
+            if (serviceEndTime > professionalEndTime) {
+                return false;
+            }
+
+            // Verifica se o horário está disponível considerando os intervalos
+            return isTimeSlotAvailable(time, appointmentDurationMinutes, existingAppointments);
+        });
 
         // Popula o dropdown apenas com os horários disponíveis
-        const availableTimes = allPossibleTimesForProfessional.filter(time => !occupiedTimes.includes(time));
         if (availableTimes.length === 0) {
             const noTimesOption = document.createElement('option');
             noTimesOption.textContent = "Nenhum horário disponível para esta data/profissional.";
@@ -181,8 +238,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 appointmentTimeSelect.appendChild(option);
             });
         }
-    }
 
+        console.log(`Horários disponíveis para ${selectedDate}:`, availableTimes);
+        console.log(`Agendamentos existentes:`, existingAppointments);
+    }
 
     // FUNÇÃO PRINCIPAL DE SALVAR/REAGENDAR
     function saveOrUpdateAppointment(appointmentData) {
