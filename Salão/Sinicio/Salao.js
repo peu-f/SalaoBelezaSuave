@@ -27,14 +27,17 @@ function listarProfissionais() {
     const card = document.createElement('div');
     card.className = 'card h-100';
     card.innerHTML = `
-      <img id="cardimg" src="${profissional.fotoPerfil || '../../assets/default-avatar.png'}" class="card-img-top" alt="${profissional.nome}">
+    <div class="card-img">
+      <img id="cardimg" src="${profissional.fotoPerfil || '../../assets/person-badge.svg'}" class="card-img-top" alt="${profissional.nome}">
+      </div>
       <div class="card-body">
-        <h5 class="card-title">${profissional.nome}</h5>
+        <h5 class="card-title"><strong>${profissional.nome}</strong></h5>
         <p class="card-text">Especialidade: ${profissional.especialidade}</p>
         <p class="card-text">Horário: ${profissional.horaInicio} - ${profissional.horaFim}</p>
          <a href="../GerenciarProfissionais/gp.html?email=${profissional.email}" type="button" class="btn btn-primary">Gerenciar</a>
       </div>`;
       container.appendChild(card);
-  });              
+     
+  });
 }
 document.addEventListener("DOMContentLoaded", listarProfissionais);

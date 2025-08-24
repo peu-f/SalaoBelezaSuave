@@ -39,12 +39,18 @@
   margin-bottom: 1rem;
 }
 
+.card-img{
+  width: 100px;
+  height: 170px;
+  border-radius: 5%;
+  
+}
 #cardimg {
   width: 100px;
   height: 100%;
-  border-radius: 10%;
+  border-radius: 5%;
   object-fit: cover;
-  flex-shrink: 0;
+  
 }
 .card-body {
   flex: 1;

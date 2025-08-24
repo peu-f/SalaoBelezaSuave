@@ -10,64 +10,38 @@
     <link rel="stylesheet" href="../../fontes/fonts.css">
 </head>
 <body>
-    <!--A foto de perfil se tornou um button, que é o gatilho-->
     <header class="main-header">
-        
-        <!--data-bs-toggle="offcanvas": Este atributo diz ao Bootstrap: "Quando este botão for clicado, ative a funcionalidade de offcanvas".-->
-        <!--data-bs-target="#sidebar": Este diz qual elemento offcanvas deve ser aberto. Ele aponta para o elemento que tem o id="sidebar".-->
-
-
         <div class="search-bar-container">
             <i class="bi bi-search search-icon"></i>
             <input type="text" class="form-control search-input" placeholder="Buscar serviços...">
         </div>
-
-        
-            <!-- filtro -->
-<!-- <div class="input-group custom-filter">
-    <select name="filter" id="filter-select" class="d-none">
-        <option value=""></option>
-        <option value="servico">Serviços</option>
-        <option value="oferta">Ofertas</option>
-    </select>
-
-    <input type="text" id="filter-display" class="form-control" placeholder="Filtrar" readonly>
-
-    <button class="btn filter-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="bi bi-funnel"></i>
-    </button>
-
-    <ul class="dropdown-menu dropdown-menu-end">
-        <li><a class="dropdown-item" href="#" data-value="servico">Serviços</a></li>
-        <li><a class="dropdown-item" href="#" data-value="oferta">Ofertas</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#" data-value="">Limpar Filtro</a></li>
-    </ul>
-</div> -->
-
-        </header>
+    </header>
     
-
-        <!--Cards-->
     <main class="main-content">
-    <div class="services-container row gy-4" >
-        </div>
-</main>
+        <div class="services-container row gy-4">
+            <!-- Exemplo de cards para demonstrar -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100">
+                    
+            </div>
+            
+            
+    </main>
 
     <nav class="bottom-nav">
-            <a href="../aHome/home.html" class="nav-item active"> 
-                <i class="bi bi-house-door-fill"></i> 
-                <span>Início</span> 
-            </a>
-            <a href="../Perfil/Perfil.html" class="nav-item ">
-                <i class="bi bi-person-circle"></i>
-                <span>Perfil</span>
-            </a>
-            <a href="../HistoricoAgendamento/Hist.html" class="nav-item "> 
-                <i class="bi bi-clock-history"></i> 
-                <span>Agenda</span> 
-            </a>
-        </nav>
+        <a href="../aHome/home.html" class="nav-item active"> 
+            <i class="bi bi-house-door-fill"></i> 
+            <span>Início</span> 
+        </a>
+        <a href="../Perfil/Perfil.html" class="nav-item">
+            <i class="bi bi-person-circle"></i>
+            <span>Perfil</span>
+        </a>
+        <a href="../HistoricoAgendamento/Hist.html" class="nav-item"> 
+            <i class="bi bi-clock-history"></i> 
+            <span>Agenda</span> 
+        </a>
+    </nav>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="home.js"></script>
