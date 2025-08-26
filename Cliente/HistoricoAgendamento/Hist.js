@@ -245,6 +245,7 @@ function salvarAvaliacaoNoAgendamento(avaliacao) {
         if (indexGlobal !== -1) {
             agendamentos[indexGlobal].avaliacao = {
                 serviceName: agendamentos[indexGlobal].service,
+                professionalName: agendamentos[indexGlobal].professionalName, // Adiciona o nome do profissional
                 clienteId: usuarioLogado.id,
                 clienteNome: usuarioLogado.nome,
                 rating: avaliacao.rating,
@@ -420,54 +421,58 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Event listener para envio de avaliação
     const submitRatingBtn = document.getElementById('submitRatingBtn');
-    if (submitRatingBtn) {
-        submitRatingBtn.addEventListener('click', function() {
-            if (selectedRating > 0 && agendamentoParaAvaliar !== null) {
-                const comment = document.getElementById('ratingComment').value;
-                const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || '{}');
-                
-                const agendamentos = JSON.parse(localStorage.getItem('agendamentos') || '[]');
-                const agendamentosDoCliente = agendamentos.filter(ag => 
-                    ag.clienteId === usuarioLogado.id || ag.clienteNome === usuarioLogado.nome
-                );
-                
-                let serviceName = '';
-                if (agendamentoParaAvaliar < agendamentosDoCliente.length) {
-                    serviceName = agendamentosDoCliente[agendamentoParaAvaliar].service || '';
-                }
-                
-                const novaAvaliacao = {
-                    agendamentoIndex: agendamentoParaAvaliar,
-                    clienteId: usuarioLogado.id,
-                    clienteNome: usuarioLogado.nome,
-                    serviceName: serviceName,
-                    rating: selectedRating,
-                    comment: comment,
-                    data: new Date().toISOString(),
-                    dataFormatada: new Date().toLocaleDateString('pt-BR'),
-                    id: Date.now()
-                };
-                
-                const avaliacoesExistentes = JSON.parse(localStorage.getItem('avaliacoes') || '[]');
-                avaliacoesExistentes.push(novaAvaliacao);
-                localStorage.setItem('avaliacoes', JSON.stringify(avaliacoesExistentes));
-                
-                salvarAvaliacaoNoAgendamento(novaAvaliacao);
-                
-                const modal = bootstrap.Modal.getInstance(document.getElementById('ratingModal'));
-                if (modal) modal.hide();
-                resetRating();
-                alert('Avaliação enviada com sucesso!');
-                agendamentoParaAvaliar = null;
-                
-            } else {
-                if (selectedRating === 0) {
-                    alert('Por favor, selecione uma avaliação (estrelas).');
-                }
-                if (agendamentoParaAvaliar === null) {
-                    alert('Erro: Agendamento não identificado. Tente fechar e abrir a avaliação novamente.');
-                }
+if (submitRatingBtn) {
+    submitRatingBtn.addEventListener('click', function() {
+        if (selectedRating > 0 && agendamentoParaAvaliar !== null) {
+            const comment = document.getElementById('ratingComment').value;
+            const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado') || '{}');
+            
+            const agendamentos = JSON.parse(localStorage.getItem('agendamentos') || '[]');
+            const agendamentosDoCliente = agendamentos.filter(ag => 
+                ag.clienteId === usuarioLogado.id || ag.clienteNome === usuarioLogado.nome
+            );
+            
+            let serviceName = '';
+            let professionalName = ''; // Nova variável para o nome do profissional
+            if (agendamentoParaAvaliar < agendamentosDoCliente.length) {
+                const agendamento = agendamentosDoCliente[agendamentoParaAvaliar];
+                serviceName = agendamento.service || '';
+                professionalName = agendamento.professionalName || ''; // Captura o nome do profissional
             }
-        });
-    }
+            
+            const novaAvaliacao = {
+                agendamentoIndex: agendamentoParaAvaliar,
+                clienteId: usuarioLogado.id,
+                clienteNome: usuarioLogado.nome,
+                serviceName: serviceName,
+                professionalName: professionalName, // Adiciona o nome do profissional
+                rating: selectedRating,
+                comment: comment,
+                data: new Date().toISOString(),
+                dataFormatada: new Date().toLocaleDateString('pt-BR'),
+                id: Date.now()
+            };
+            
+            const avaliacoesExistentes = JSON.parse(localStorage.getItem('avaliacoes') || '[]');
+            avaliacoesExistentes.push(novaAvaliacao);
+            localStorage.setItem('avaliacoes', JSON.stringify(avaliacoesExistentes));
+            
+            salvarAvaliacaoNoAgendamento(novaAvaliacao);
+            
+            const modal = bootstrap.Modal.getInstance(document.getElementById('ratingModal'));
+            if (modal) modal.hide();
+            resetRating();
+            alert('Avaliação enviada com sucesso!');
+            agendamentoParaAvaliar = null;
+            
+        } else {
+            if (selectedRating === 0) {
+                alert('Por favor, selecione uma avaliação (estrelas).');
+            }
+            if (agendamentoParaAvaliar === null) {
+                alert('Erro: Agendamento não identificado. Tente fechar e abrir a avaliação novamente.');
+            }
+        }
+    });
+}
 });

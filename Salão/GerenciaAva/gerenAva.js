@@ -154,6 +154,7 @@ function logout() {
             <h5 class="card-title">${avaliacao.clienteNome || 'Cliente'} - ID: ${avaliacao.clienteId || 'N/A'}</h5>
             <p class="card-text">Serviço: ${avaliacao.serviceName || 'Serviço não informado'}</p>
             <p class="card-text">"${avaliacao.comment || 'Sem comentário'}"</p>
+            <p class="card-text">Profissional: ${avaliacao.professionalName || 'Profisssional não encontrado'}</p>
             <p class="card-text">${avaliacao.dataFormatada || 'Data não informada'}</p>
             <div class="rating m-4">
                 ${criarEstrelasAvaliacao(avaliacao.rating || 0)}
