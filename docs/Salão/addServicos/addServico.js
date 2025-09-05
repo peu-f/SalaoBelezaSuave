@@ -126,5 +126,5 @@ document.addEventListener('DOMContentLoaded', function() {
 function logout() {
     // Limpa o que foi salvo localmente
     localStorage.removeItem('saloes');  // ou clear()
-    window.location.href = '../../cliente/aInicio/boasVindas.html';
+    window.location.href = '../../index.html';
   }

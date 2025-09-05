@@ -10,7 +10,7 @@ function logout() {
     //   });
   
     // Por enquanto, só redireciona direto
-    window.location.href = '../../Cliente/aInicio/boasVindas.html';
+    window.location.href = '../../index.html';
   }
   
   function calcularMediaAvaliacoes() {

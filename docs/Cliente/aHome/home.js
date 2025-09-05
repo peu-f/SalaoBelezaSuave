@@ -135,5 +135,5 @@ function criarCardOferta(oferta) {
 
 function logout() {
     localStorage.removeItem('usuarioCadastrado'); 
-    window.location.href = '../aInicio/boasVindas.html';
+    window.location.href = '../../../index.html';
 }

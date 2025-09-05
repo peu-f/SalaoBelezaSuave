@@ -290,7 +290,7 @@ function resetRating() {
 function logout() {
     localStorage.removeItem('usuarioLogado');
     alert('Você foi desconectado!');
-    window.location.href = '../aInicio/boasVindas.html';
+    window.location.href = '../../index.html';
 }
 
 /**

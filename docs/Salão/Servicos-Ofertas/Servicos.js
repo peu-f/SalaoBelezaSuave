@@ -178,7 +178,7 @@
         // Logout
         function logout() {
             localStorage.removeItem('saloes');
-            window.location.href = '../../cliente/aInicio/boasVindas.html';
+            window.location.href = '../../index.html';
         }
 
         // FUNÇÃO PARA TESTAR - Adicionar alguns produtos de exemplo

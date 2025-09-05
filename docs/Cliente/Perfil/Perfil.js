@@ -20,7 +20,7 @@ function carregarPerfil() {
 
 function logout() {
     localStorage.removeItem('usuarioLogado');
-    window.location.href = '../aInicio/boasVindas.html';
+    window.location.href = '../../index.html';
 }
 
 window.onload = carregarPerfil;

@@ -10,7 +10,7 @@ function logout() {
     //   });
   
     // Por enquanto, só redireciona direto
-    window.location.href = '../../cliente/aInicio/boasVindas.html';
+    window.location.href = '../../index.html';
   }
 
 function listarProfissionais() {

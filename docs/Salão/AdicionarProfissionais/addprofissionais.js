@@ -7,7 +7,7 @@ const fileName = document.getElementById('fileName');
 function logout() {
         // Limpa o que foi salvo localmente
         localStorage.removeItem('saloes'); 
-        window.location.href = '../../cliente/aInicio/boasVindas.html';
+        window.location.href = '../../index.html';
       } // Redireciona para a página de login
 
 // Preview de imagem reaproveitável
