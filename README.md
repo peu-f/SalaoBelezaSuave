@@ -8,7 +8,8 @@ A aplicação opera com base em três papéis (atores) fundamentais, cada um com
 
 a. Gerente do Salão
 O Gerente possui o nível máximo de acesso e é responsável pela configuração e administração geral do sistema. Suas principais funcionalidades incluem:
-Gestão de Serviços: Cadastrar, editar e remover os serviços oferecidos pelo salão, incluindo descrições detalhadas para visualização dos clientes.
+Gestão de Serviços: 
+Cadastrar, editar e remover os serviços oferecidos pelo salão, incluindo descrições detalhadas para visualização dos clientes.
 Gestão de Ofertas: Criar pacotes de ofertas especiais, agrupando serviços já existentes. É mandatório que cada oferta contenha no mínimo um serviço.
 Gestão de Profissionais:
 Cadastrar novos profissionais na plataforma, incluindo suas informações pessoais e de contato.
@@ -17,8 +18,10 @@ Criar as contas de acesso (login e senha) para que os profissionais possam acess
 
 b. Profissional (Cabeleireiro, Manicure, etc.)
 O Profissional acessa o sistema com uma conta criada pelo Gerente. Seu foco é a visualização e execução dos serviços agendados.
-Consulta de Agenda: Visualizar todos os agendamentos marcados para seu perfil, organizados por data e horário.
-Conclusão de Serviços: Marcar os agendamentos como "concluídos" após a realização do serviço.
+Consulta de Agenda: 
+Visualizar todos os agendamentos marcados para seu perfil, organizados por data e horário.
+Conclusão de Serviços: 
+Marcar os agendamentos como "concluídos" após a realização do serviço.
 
 c. Cliente
 O Cliente é o consumidor final e o foco da experiência de agendamento. Através da interface, ele possui autonomia para marcar seus horários.
