@@ -8,128 +8,167 @@ body {
 
 /* Header Styles */
 .main-header {
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 1rem;
   background-color: var(--color-bg);
-  height: 60px;
+  display: grid;
+  grid-template-columns: 48px 1fr 220px;
+  gap: 0.5rem;
+  align-items: center;
 }
 
 .main-header h1 {
   font-family: 'Pacifico', cursive;
-  font-size: 2rem;
-  text-align: center;
   font-size: 1.4rem;
+  text-align: center;
+  margin: 0;
 }
 .main-header p{
-  font-size: 1rem;
+  font-size: 0.95rem;
+  margin: 0;
 }
 
 .profile-pic {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   overflow: hidden;
-  flex-shrink: 0;
   padding: 0;
   border: 2px solid var(--color-secondary);
   background-color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .person-circle {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 26px;
+  height: 26px;
   color: var(--color-primary);
 }
 /* Mantenha seus estilos existentes e adicione: */
 
 .user-container {
-  width: 40px; /* Mesma largura do botão esquerdo para equilíbrio */
-  flex-shrink: 0;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
-  width: 27%;
-  flex-direction: row;
+  padding-left: 0.5rem;
 }
 
 .user {
-  white-space: nowrap; 
-  margin-left: auto;
-  font-size: 0.9rem;
-  padding: 10%;
-  padding-top: 40%; 
+  white-space: nowrap;
+  font-size: 0.95rem;
   overflow: hidden;
-  
+  text-overflow: ellipsis;
 }
 .text-primary{
   color: var(--color-text);
 }
 /* Cards - Mobile First */
+/* Cards - Estrutura base (desktop organizado) */
 .card {
   display: flex;
-  flex-direction: column; /* empilha no mobile */
-  align-items: flex-start;
-  gap: 0.75rem;
-  padding: 1rem;
+  flex-direction: column; /* imagem em cima, infos embaixo */
+  padding: 0;
   border: none;
   border-radius: 12px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
   background-color: #fff;
   margin-bottom: 1rem;
-  width: 100%; /* ocupa toda a largura */
-  box-sizing: border-box;
-  height: auto; /* altura automática pra conteúdo */
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* evita estouro visual */
 }
 
-#cardimg {
-  width: 100%; /* full largura no mobile */
-  max-width: 100%;
-  height: auto;
-  border-radius: 12px;
+/* Imagem do card */
+.card img.card-img-top {
+  width: 100%;
+  height: 220px;
   object-fit: cover;
-  flex-shrink: 0;
+  border-radius: 12px 12px 0 0;
 }
 
+/* Conteúdo */
 .card-body {
   width: 100%;
-  padding: 0;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex-grow: 1;
 }
 
+/* Título */
 .card-title {
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+  font-size: 1.1rem;
   font-weight: 600;
 }
 
+/* Textos */
 .card-text {
-  font-size: 0.9rem;
-  margin-bottom: 0.25rem;
-  width: 100%;
+  font-size: 0.95rem;
+  margin: 0;
   color: #555;
 }
 
-.card-body button {
+/* Botão sempre no final */
+.card-body .mt-auto {
+  margin-top: auto;
+}
+
+/* Botão */
+.card-body .btn {
   background-color: var(--color-primary);
   border: none;
-  padding: 0.5rem;
+  padding: 0.5rem 0.75rem;
   border-radius: 8px;
   color: var(--color-bg);
   cursor: pointer;
   font-weight: 500;
-  width: 100%;
-  display: inline-block;
-  text-align: center;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.25s ease;
 }
 
-.card-body a:hover {
+.card-body .btn:hover {
   background-color: var(--color-secondary);
 }
+
 
 /* Sidebar (Offcanvas) Styles */
 .offcanvas {
   background-color: var(--color-bg);
+}
+
+/* Ajustes para telas maiores: cards lado a lado com imagem fixa e conteúdo bem alinhado */
+@media (min-width: 768px) {
+  .card {
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 160px;
+    overflow: hidden;
+  }
+
+  .card img.card-img-top {
+    width: 36%;
+    height: 100%;
+    border-radius: 12px 0 0 12px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .card-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 64%;
+  }
+
+  .card-body .mt-auto {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .card-title { font-size: 1.15rem; }
 }
 
 .offcanvas-header {
@@ -155,20 +194,23 @@ body {
   background-color: var(--color-secondary);
   color: var(--color-primary);
 }
-/* Agora para telas maiores (tablet+), deixa o card lado a lado */
-@media (min-width: 768px) {
-  .card {
-    flex-direction: row; /* volta a ficar horizontal */
-    height: 160px;
-  }
+/* (Removido bloco duplicado de estilos para telas maiores) */
+.card {
+  display: flex !important;
+  flex-direction: column !important;
+}
 
-  #cardimg {
-    max-width: 30%;
-    height: 100%;
-    border-radius: 12px;
-  }
+/* Imagem SEMPRE no topo */
+.card > img.card-img-top {
+  width: 100% !important;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+}
 
-  .card-body {
-    padding-left: 1rem;
-  }
+/* Corpo sempre abaixo da imagem */
+.card-body {
+  width: 100% !important;
+  display: flex;
+  flex-direction: column;
 }

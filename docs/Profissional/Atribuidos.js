@@ -1,7 +1,7 @@
 function logout() {
     localStorage.removeItem('profissionalLogado');
     alert('Você foi desconectado!');
-    window.location.href = '../../index.html';
+    window.location.href = '../index.html';
 }
 
 //mostrar user
